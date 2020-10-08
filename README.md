@@ -28,3 +28,4 @@ o	Of de klant bezoekers verwacht</br>
 Wensen</br>
 •	Een passend logo </br>
 •	Een kleurschema met geel of groen, die vrolijk is maar tegelijkertijd ook rustig</br>
+==============================================================================================================================================================================================================
