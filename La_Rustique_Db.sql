@@ -5,10 +5,11 @@ CREATE DATABASE La_Rustique_Db;
 USE La_Rustique_Db;
 
 CREATE TABLE Accounts (
-  AccountNr INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  AccountNr INT NOT NULL AUTO_INCREMENT,
   ANaam VARCHAR(20),
   AWachtwoord VARCHAR(60),
-  AAdmin VARCHAR(3)
+  AAdmin VARCHAR(3),
+  PRIMARY KEY (AccountNr)
 );
 
 /*Gebruikers accounts*/
@@ -26,8 +27,9 @@ CREATE TABLE Accounts (
 /*Eind gebruikers accounts*/
 
 CREATE TABLE Plaatsen (
-  PlaatsNr INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  PlaatsFormaat VARCHAR(10)
+  PlaatsNr INT NOT NULL AUTO_INCREMENT,
+  PlaatsFormaat VARCHAR(10),
+  PRIMARY KEY (PlaatsNr)
 );
 
 /*100 plaatsen, 50 kleine en 50 grote*/
@@ -334,25 +336,31 @@ CREATE TABLE Plaatsen (
 /*Eind Plaatsen*/
 
 CREATE TABLE Klanten (
-  KlantNr INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  KlantNr INT NOT NULL AUTO_INCREMENT,
   KNaam VARCHAR(50),
   KTel VARCHAR(25),
-  KEmail VARCHAR(50)
+  KEmail VARCHAR(50),
+  PRIMARY KEY (KlantNr)
 );
 
-INSERT INTO Klanten (KNaam, KTel, KEmail)
-VALUES ('Freddy Tootsierol', '06506535384', 'Freddysemail@dot.com');
+/*Voorbeeld klanten*/
+  INSERT INTO Klanten (KNaam, KTel, KEmail)
+  VALUES ('Freddy Tootsierol', '06506535384', 'Freddysemail@dot.com');
 
-INSERT INTO Klanten (KNaam, KTel, KEmail)
-VALUES ('Jebadiah Kerman', '+31 858 975 54', 'Kerbalspace@email.com');
+  INSERT INTO Klanten (KNaam, KTel, KEmail)
+  VALUES ('Jebadiah Kerman', '+31 858 975 54', 'Kerbalspace@email.com');
+/*Eind voorbeeld klanten*/
 
 CREATE TABLE Reservaties (
-  ReservatieNr INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  PlaatsNr INT FOREIGN KEY REFERENCES Plaatsen(PlaatsNr),
-  KlantNr INT FOREIGN KEY REFERENCES Klanten(KlantNr),
+  ReservatieNr INT NOT NULL AUTO_INCREMENT,
+  PlaatsNr INT, 
+  KlantNr INT, 
   AankomstDatum DATE NOT NULL,
   VertrekDatum DATE NOT NULL,
-  AantalNachten INT
+  AantalNachten INT,
+  PRIMARY KEY (ReservatieNr),
+  FOREIGN KEY (PlaatsNr) REFERENCES Plaatsen(PlaatsNr),
+  FOREIGN KEY (KlantNr) REFERENCES Klanten(KlantNr)
 );
 
 /*Voorbeeld reservaties*/
@@ -367,9 +375,10 @@ CREATE TABLE Reservaties (
 /*Eind voorbeeld reservaties*/
 
 CREATE TABLE Categorieen (
-  CategorieNr INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  CategorieNr INT NOT NULL AUTO_INCREMENT,
   CategorieNaam VARCHAR(60),
-  Prijs FLOAT
+  Prijs FLOAT,
+  PRIMARY KEY (CategorieNr)
 );
 
 /*Alle categorieen (oftewel alle nodige tarieven)*/
@@ -417,9 +426,11 @@ CREATE TABLE Categorieen (
 /*Eind alle Categorieen*/
 
 CREATE TABLE Reservatie_Regels (
-  ReservatieNr INT FOREIGN KEY REFERENCES Reservaties(ReservatieNr),
-  CategorieNr INT FOREIGN KEY REFERENCES Categorieen(CategorieNr),
-  Aantal INT 
+  ReservatieNr INT,
+  CategorieNr INT,
+  Aantal INT,
+  FOREIGN KEY (ReservatieNr) REFERENCES Reservaties(ReservatieNr),
+  FOREIGN KEY (CategorieNr) REFERENCES Categorieen(CategorieNr)  
 );
 
 /*Voorbeeld reservatie regels*/
