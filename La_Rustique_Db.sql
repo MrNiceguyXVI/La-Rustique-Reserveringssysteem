@@ -40,7 +40,43 @@ CREATE TABLE Plaatsen (
   VALUES ('KLEIN');
 
   INSERT INTO Plaatsen (PlaatsFormaat)
+  VALUES ('GROOT');
+
+  INSERT INTO Plaatsen (PlaatsFormaat)
+  VALUES ('GROOT');
+
+  INSERT INTO Plaatsen (PlaatsFormaat)
+  VALUES ('GROOT');
+
+  INSERT INTO Plaatsen (PlaatsFormaat)
+  VALUES ('GROOT');
+
+  INSERT INTO Plaatsen (PlaatsFormaat)
   VALUES ('KLEIN');
+
+  INSERT INTO Plaatsen (PlaatsFormaat)
+  VALUES ('KLEIN');
+
+  INSERT INTO Plaatsen (PlaatsFormaat)
+  VALUES ('GROOT');
+
+  INSERT INTO Plaatsen (PlaatsFormaat)
+  VALUES ('KLEIN');
+
+  INSERT INTO Plaatsen (PlaatsFormaat)
+  VALUES ('KLEIN');
+
+  INSERT INTO Plaatsen (PlaatsFormaat)
+  VALUES ('KLEIN');
+
+  INSERT INTO Plaatsen (PlaatsFormaat)
+  VALUES ('GROOT');
+
+  INSERT INTO Plaatsen (PlaatsFormaat)
+  VALUES ('GROOT');
+
+  INSERT INTO Plaatsen (PlaatsFormaat)
+  VALUES ('GROOT');
 
   INSERT INTO Plaatsen (PlaatsFormaat)
   VALUES ('KLEIN');
@@ -67,7 +103,10 @@ CREATE TABLE Plaatsen (
   VALUES ('KLEIN');
 
   INSERT INTO Plaatsen (PlaatsFormaat)
-  VALUES ('KLEIN');
+  VALUES ('GROOT');
+
+  INSERT INTO Plaatsen (PlaatsFormaat)
+  VALUES ('GROOT');
 
   INSERT INTO Plaatsen (PlaatsFormaat)
   VALUES ('KLEIN');
@@ -76,82 +115,7 @@ CREATE TABLE Plaatsen (
   VALUES ('KLEIN');
 
   INSERT INTO Plaatsen (PlaatsFormaat)
-  VALUES ('KLEIN');
-
-  INSERT INTO Plaatsen (PlaatsFormaat)
-  VALUES ('KLEIN');
-
-  INSERT INTO Plaatsen (PlaatsFormaat)
-  VALUES ('KLEIN');
-
-  INSERT INTO Plaatsen (PlaatsFormaat)
-  VALUES ('KLEIN');
-
-  INSERT INTO Plaatsen (PlaatsFormaat)
-  VALUES ('KLEIN');
-
-  INSERT INTO Plaatsen (PlaatsFormaat)
-  VALUES ('KLEIN');
-
-  INSERT INTO Plaatsen (PlaatsFormaat)
-  VALUES ('KLEIN');
-
-  INSERT INTO Plaatsen (PlaatsFormaat)
-  VALUES ('KLEIN');
-
-  INSERT INTO Plaatsen (PlaatsFormaat)
-  VALUES ('KLEIN');
-
-  INSERT INTO Plaatsen (PlaatsFormaat)
-  VALUES ('KLEIN');
-
-  INSERT INTO Plaatsen (PlaatsFormaat)
-  VALUES ('KLEIN');
-
-  INSERT INTO Plaatsen (PlaatsFormaat)
-  VALUES ('KLEIN');
-
-  INSERT INTO Plaatsen (PlaatsFormaat)
-  VALUES ('KLEIN');
-
-  INSERT INTO Plaatsen (PlaatsFormaat)
-  VALUES ('KLEIN');
-
-  INSERT INTO Plaatsen (PlaatsFormaat)
-  VALUES ('KLEIN');
-
-  INSERT INTO Plaatsen (PlaatsFormaat)
-  VALUES ('KLEIN');
-
-  INSERT INTO Plaatsen (PlaatsFormaat)
-  VALUES ('KLEIN');
-
-  INSERT INTO Plaatsen (PlaatsFormaat)
-  VALUES ('KLEIN');
-
-  INSERT INTO Plaatsen (PlaatsFormaat)
-  VALUES ('KLEIN');
-
-  INSERT INTO Plaatsen (PlaatsFormaat)
-  VALUES ('KLEIN');
-
-  INSERT INTO Plaatsen (PlaatsFormaat)
-  VALUES ('KLEIN');
-
-  INSERT INTO Plaatsen (PlaatsFormaat)
-  VALUES ('KLEIN');
-
-  INSERT INTO Plaatsen (PlaatsFormaat)
-  VALUES ('KLEIN');
-
-  INSERT INTO Plaatsen (PlaatsFormaat)
-  VALUES ('KLEIN');
-
-  INSERT INTO Plaatsen (PlaatsFormaat)
-  VALUES ('KLEIN');
-
-  INSERT INTO Plaatsen (PlaatsFormaat)
-  VALUES ('KLEIN');
+  VALUES ('GROOT');
 
   INSERT INTO Plaatsen (PlaatsFormaat)
   VALUES ('KLEIN');
@@ -190,7 +154,34 @@ CREATE TABLE Plaatsen (
   VALUES ('GROOT');
 
   INSERT INTO Plaatsen (PlaatsFormaat)
+  VALUES ('KLEIN');
+
+  INSERT INTO Plaatsen (PlaatsFormaat)
   VALUES ('GROOT');
+
+  INSERT INTO Plaatsen (PlaatsFormaat)
+  VALUES ('KLEIN');
+
+  INSERT INTO Plaatsen (PlaatsFormaat)
+  VALUES ('KLEIN');
+
+  INSERT INTO Plaatsen (PlaatsFormaat)
+  VALUES ('KLEIN');
+
+  INSERT INTO Plaatsen (PlaatsFormaat)
+  VALUES ('KLEIN');
+
+  INSERT INTO Plaatsen (PlaatsFormaat)
+  VALUES ('KLEIN');
+
+  INSERT INTO Plaatsen (PlaatsFormaat)
+  VALUES ('KLEIN');
+
+  INSERT INTO Plaatsen (PlaatsFormaat)
+  VALUES ('KLEIN');
+
+  INSERT INTO Plaatsen (PlaatsFormaat)
+  VALUES ('KLEIN');
 
   INSERT INTO Plaatsen (PlaatsFormaat)
   VALUES ('GROOT');
@@ -226,7 +217,76 @@ CREATE TABLE Plaatsen (
   VALUES ('GROOT');
 
   INSERT INTO Plaatsen (PlaatsFormaat)
+  VALUES ('KLEIN');
+
+  INSERT INTO Plaatsen (PlaatsFormaat)
+  VALUES ('KLEIN');
+
+  INSERT INTO Plaatsen (PlaatsFormaat)
+  VALUES ('KLEIN');
+
+  INSERT INTO Plaatsen (PlaatsFormaat)
   VALUES ('GROOT');
+
+  INSERT INTO Plaatsen (PlaatsFormaat)
+  VALUES ('GROOT');
+
+  INSERT INTO Plaatsen (PlaatsFormaat)
+  VALUES ('GROOT');
+  
+  INSERT INTO Plaatsen (PlaatsFormaat)
+  VALUES ('KLEIN');
+
+  INSERT INTO Plaatsen (PlaatsFormaat)
+  VALUES ('KLEIN');
+
+  INSERT INTO Plaatsen (PlaatsFormaat)
+  VALUES ('GROOT');
+
+  INSERT INTO Plaatsen (PlaatsFormaat)
+  VALUES ('GROOT');
+
+  INSERT INTO Plaatsen (PlaatsFormaat)
+  VALUES ('KLEIN');
+
+  INSERT INTO Plaatsen (PlaatsFormaat)
+  VALUES ('GROOT');
+
+  INSERT INTO Plaatsen (PlaatsFormaat)
+  VALUES ('GROOT');
+
+  INSERT INTO Plaatsen (PlaatsFormaat)
+  VALUES ('KLEIN');
+
+  INSERT INTO Plaatsen (PlaatsFormaat)
+  VALUES ('GROOT');
+
+  INSERT INTO Plaatsen (PlaatsFormaat)
+  VALUES ('GROOT');
+
+  INSERT INTO Plaatsen (PlaatsFormaat)
+  VALUES ('KLEIN');
+
+  INSERT INTO Plaatsen (PlaatsFormaat)
+  VALUES ('KLEIN');
+
+  INSERT INTO Plaatsen (PlaatsFormaat)
+  VALUES ('GROOT');
+
+  INSERT INTO Plaatsen (PlaatsFormaat)
+  VALUES ('GROOT');
+
+  INSERT INTO Plaatsen (PlaatsFormaat)
+  VALUES ('GROOT');
+
+  INSERT INTO Plaatsen (PlaatsFormaat)
+  VALUES ('GROOT');
+
+  INSERT INTO Plaatsen (PlaatsFormaat)
+  VALUES ('KLEIN');
+
+  INSERT INTO Plaatsen (PlaatsFormaat)
+  VALUES ('KLEIN');
 
   INSERT INTO Plaatsen (PlaatsFormaat)
   VALUES ('GROOT');
@@ -262,73 +322,13 @@ CREATE TABLE Plaatsen (
   VALUES ('GROOT');
 
   INSERT INTO Plaatsen (PlaatsFormaat)
-  VALUES ('GROOT');
+  VALUES ('KLEIN');
 
   INSERT INTO Plaatsen (PlaatsFormaat)
-  VALUES ('GROOT');
+  VALUES ('KLEIN');
 
   INSERT INTO Plaatsen (PlaatsFormaat)
-  VALUES ('GROOT');
-
-  INSERT INTO Plaatsen (PlaatsFormaat)
-  VALUES ('GROOT');
-
-  INSERT INTO Plaatsen (PlaatsFormaat)
-  VALUES ('GROOT');
-
-  INSERT INTO Plaatsen (PlaatsFormaat)
-  VALUES ('GROOT');
-
-  INSERT INTO Plaatsen (PlaatsFormaat)
-  VALUES ('GROOT');
-
-  INSERT INTO Plaatsen (PlaatsFormaat)
-  VALUES ('GROOT');
-
-  INSERT INTO Plaatsen (PlaatsFormaat)
-  VALUES ('GROOT');
-
-  INSERT INTO Plaatsen (PlaatsFormaat)
-  VALUES ('GROOT');
-
-  INSERT INTO Plaatsen (PlaatsFormaat)
-  VALUES ('GROOT');
-
-  INSERT INTO Plaatsen (PlaatsFormaat)
-  VALUES ('GROOT');
-
-  INSERT INTO Plaatsen (PlaatsFormaat)
-  VALUES ('GROOT');
-
-  INSERT INTO Plaatsen (PlaatsFormaat)
-  VALUES ('GROOT');
-
-  INSERT INTO Plaatsen (PlaatsFormaat)
-  VALUES ('GROOT');
-
-  INSERT INTO Plaatsen (PlaatsFormaat)
-  VALUES ('GROOT');
-
-  INSERT INTO Plaatsen (PlaatsFormaat)
-  VALUES ('GROOT');
-
-  INSERT INTO Plaatsen (PlaatsFormaat)
-  VALUES ('GROOT');
-
-  INSERT INTO Plaatsen (PlaatsFormaat)
-  VALUES ('GROOT');
-
-  INSERT INTO Plaatsen (PlaatsFormaat)
-  VALUES ('GROOT');
-
-  INSERT INTO Plaatsen (PlaatsFormaat)
-  VALUES ('GROOT');
-
-  INSERT INTO Plaatsen (PlaatsFormaat)
-  VALUES ('GROOT');
-
-  INSERT INTO Plaatsen (PlaatsFormaat)
-  VALUES ('GROOT');
+  VALUES ('KLEIN');
 
   INSERT INTO Plaatsen (PlaatsFormaat)
   VALUES ('GROOT');

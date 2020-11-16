@@ -7029,3 +7029,60 @@
 
 })));
 //# sourceMappingURL=bootstrap.bundle.js.map
+
+//own written functions
+function home(){
+  window.location.href = "http://localhost/La-Rustique-Reserveringssysteem/Menu.php";
+}
+
+function menuHide(){
+  document.getElementById('menu').classList.toggle("collapse");         //toggles the collapse class to make the menu disappear and reappear
+  document.getElementById('selectedpage').classList.toggle("col-12");   //toggles the col-12 class to make sure all the space is being used
+}
+
+function addUser(){  
+  document.getElementById("PageTitle").innerHTML = "Gebruiker Registreren";
+}
+
+function logOut(){
+  //To be added
+}
+
+function titleReservatie(){
+  document.getElementById("PageTitle").innerHTML = "Reserveren";
+}
+
+function titleReservatieOverzicht(){
+  document.getElementById("PageTitle").innerHTML = "Overzicht Reservaties";
+}
+
+function titlePlekken(){
+  document.getElementById("PageTitle").innerHTML = "Overzicht Plekken";
+}
+
+function titleFacturen(){
+  document.getElementById("PageTitle").innerHTML = "Facturen";
+}
+
+function titleOmzet(){
+  var d =  new Date();  
+  var month =  new Array();
+  month[0] = "Januari";
+  month[1] = "Februari";
+  month[2] = "Maart";
+  month[3] = "April";
+  month[4] = "Mei";
+  month[5] = "Juni";
+  month[6] = "Juli";
+  month[7] = "Augustus";
+  month[8] = "September";
+  month[9] = "Oktober";
+  month[10] = "November";
+  month[11] = "December";
+  var m = month[d.getMonth()];
+  document.getElementById("PageTitle").innerHTML = "Omzet van " + m;
+}
+
+function titleRegistratie(){
+  document.getElementById("PageTitle").innerHTML = "Gebruiker Registreren";
+}

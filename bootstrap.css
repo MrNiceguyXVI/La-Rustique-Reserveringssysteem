@@ -5493,33 +5493,31 @@ a.badge-dark:focus, a.badge-dark.focus {
   flex-direction: column;
   padding-left: 0;
   margin-bottom: 0;
-  border-radius: 0.25rem;
 }
-
+/*I made changes to this*/
 .list-group-item-action {
   width: 100%;
-  color: #495057;
+  color: #FFF;
   text-align: inherit;
 }
 
 .list-group-item-action:hover, .list-group-item-action:focus {
   z-index: 1;
-  color: #495057;
+  color: #28a745;
   text-decoration: none;
-  background-color: #f8f9fa;
+  background-color: #f8f9fa00;
 }
 
 .list-group-item-action:active {
-  color: #212529;
-  background-color: #e9ecef;
+  color: #28a745;
+  background-color: #e9ecef00;
 }
 
 .list-group-item {
   position: relative;
   display: block;
   padding: 0.75rem 1.25rem;
-  background-color: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.125);
+  background-color: rgba(255, 255, 255, 0);
 }
 
 .list-group-item:first-child {
@@ -5538,13 +5536,13 @@ a.badge-dark:focus, a.badge-dark.focus {
   background-color: #fff;
 }
 
+
 .list-group-item.active {
   z-index: 2;
-  color: #fff;
-  background-color: #007bff;
-  border-color: #007bff;
+  color: #28a745;
+  background-color: #007bff00;
 }
-
+/**/
 .list-group-item + .list-group-item {
   border-top-width: 0;
 }
@@ -10259,3 +10257,59 @@ a.text-dark:hover, a.text-dark:focus {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
+
+/*Self added*/
+.btn-menu {
+  color: #212529;
+  background-color: #f8f9fa00;
+  border-color: #f8f9fa00;
+}
+
+.btn-menu:hover {
+  color: #28a745;
+  background-color: #e2e6ea00;
+  border-color: #dae0e500;
+}
+
+.btn-menu:focus, .btn-menu.focus {
+  background-color: #e2e6ea00;
+  box-shadow: 0 0 0 0rem rgba(216, 217, 219, 0);
+}
+
+.btn-addUser {
+  color: #28a745;
+  background-color: #f8f9fa00;
+  border-color: #f8f9fa00;
+}
+
+.btn-addUser:hover {
+  color: #34ce57;
+  background-color: #e2e6ea00;
+  border-color: #dae0e500;
+}
+
+.btn-addUser:focus, .btn-addUser.focus {
+  background-color: #e2e6ea00;
+  box-shadow: 0 0 0 0rem rgba(216, 217, 219, 0);
+}
+
+.btn-logOut {
+  color: #d32535;
+  background-color: #f8f9fa00;
+  border-color: #f8f9fa00;
+}
+
+.btn-logOut:hover {
+  color: #dc3545;
+  background-color: #e2e6ea00;
+  border-color: #dae0e500;
+}
+
+.btn-logOut:focus, .btn-logOut.focus {
+  background-color: #e2e6ea00;
+  box-shadow: 0 0 0 0rem rgba(216, 217, 219, 0);
+}
+
+.pointer{
+  cursor:pointer;
+}
