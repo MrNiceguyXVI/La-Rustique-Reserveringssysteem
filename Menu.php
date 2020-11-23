@@ -110,7 +110,11 @@
 
             <!--Reservatie Overzicht page-->
             <div class="tab-pane" id="list-Reservatie-Overzicht" role="tabpanel" aria-labelledby="list-Reservatie-Overzicht-list">
-              <div class="text-dark">Reservatie Overzicht Pagina</div>
+              <div class="row">
+                <div class="text-dark">Reservatie Overzicht Pagina</div>
+                <div class="col-3">!</div>
+                <div class="col-9">!</div>
+              </div>
             </div>
 
             <!--Plekken-->
