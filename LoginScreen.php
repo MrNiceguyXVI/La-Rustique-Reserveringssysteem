@@ -17,13 +17,13 @@
         <form>
           <div class="form-group">
             <label for="Username">Gebruikersnaam</label>
-            <input type="text" class="form-control" id="Gebruikersnaam" aria-describedby="Gebruikersnaam">
+            <input type="text" class="form-control form-control-sm" id="Gebruikersnaam" aria-describedby="Gebruikersnaam">
           </div>
           <div class="form-group">
             <label for="Password">Wachtwoord</label>
-            <input type="password" class="form-control" id="Wachtwoord" aria-describedby="Wachtwoord">
+            <input type="password" class="form-control form-control-sm" id="Wachtwoord" aria-describedby="Wachtwoord">
           </div>
-          <button type="submit" class="btn btn-success">Inloggen</button>
+          <button type="submit" class="btn btn-sm btn-success">Inloggen</button>
         </form>
       </div>
     </div>

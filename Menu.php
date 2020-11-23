@@ -1,4 +1,5 @@
 <?php
+include 'Connection.php';
 ?>
 
 <!doctype HTML>
@@ -56,13 +57,11 @@
         <!--Menu-->
         <div class="col-2 bg-dark" id="menu">
           <div class="list-group" id="list-tab" role="tablist">
-            <a class="list-group-item list-group-item-action  mt-2" id="list-Reserveren-list" data-toggle="list" href="#list-Reserveren" role="tab" aria-controls="Reserveren" onclick="titleReservatie()">
-              <div class="">
+            <a class="list-group-item list-group-item-action mt-2" id="list-Reserveren-list" data-toggle="list" href="#list-Reserveren" role="tab" aria-controls="Reserveren" onclick="titleReservatie()">
                 <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-calendar2-plus-fill mr-2 mb-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 3.5c0-.276.244-.5.545-.5h10.91c.3 0 .545.224.545.5v1c0 .276-.244.5-.546.5H2.545C2.245 5 2 4.776 2 4.5v-1zm6.5 5a.5.5 0 0 0-1 0V10H6a.5.5 0 0 0 0 1h1.5v1.5a.5.5 0 0 0 1 0V11H10a.5.5 0 0 0 0-1H8.5V8.5z"/>
                 </svg>
                 Reserveren
-              </div>
             </a>
 
             <a class="list-group-item list-group-item-action " id="list-Reservatie-Overzicht-list" data-toggle="list" href="#list-Reservatie-Overzicht" role="tab" aria-controls="Reservatie-Overzicht" onclick="titleReservatieOverzicht()">
@@ -105,36 +104,195 @@
 
             <!--Reserveren page-->
             <div class="tab-pane" id="list-Reserveren" role="tabpanel" aria-labelledby="list-Reserveren-list">
-              <div class="text-dark">Reservatie Pagina</div>
+              <div class="container-fluid">
+              <form>
+                <div class="row mt-3">
+                  
+                  <div class="col-4">
+                    <div class="mb-5">
+                      <div class="h5">Terugkomende klant</div>
+                      <div class="form-group form-inline">
+                        <label for="Bestaande klant" class="mr-5">Selecteer Klant gegevens</label>
+                        <select class="form-control form-control-sm">
+                          <?php
+                            $sqlQuery = "SELECT KNaam, KTel, KEmail FROM klanten";
+                            $result = mysqli_query($con, $sqlQuery);
+                            while($row = mysqli_fetch_array($result)){
+                              echo "
+                              <option>".$row['KNaam'].", ".$row['KTel'].", ".$row['KEmail']."</option>
+                              ";
+                            }
+                          ?>
+                        </select>
+                        <button type="button" class="btn btn-sm btn-secondary ml-1 px-3">Kies</button>
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <div class="h5">Nieuwe klant</div>
+                      <div class="form-group">
+                        <label for="KlantNaam">naam</label>
+                        <input type="text" class="form-control form-control-sm" id="" aria-describedby="KlantNaam">
+                      </div>
+                      <div class="form-group">
+                        <label for="KlantEmail">Email</label>
+                        <input type="email" class="form-control form-control-sm" id="" aria-describedby="klantEmail">
+                      </div>
+                      <div class="form-group">
+                        <label for="KlantTel">Telefoonnummer</label>
+                        <input type="text" class="form-control form-control-sm" id="" aria-describedby="KlantTel">
+                      </div>
+
+
+                      <div class="form-group">
+                        <label for="VeldFormaat">Formaat</label>
+                        <select class="form-control form-control-sm">
+                          <option>Groot</option>
+                          <option>Klein</option>
+                        </select>
+                      </div>
+                      <button type="button" class="btn btn-sm btn-dark">Beschikbaarheid controleren</button>                   
+                    </div>
+                  </div>
+                  <div class="col-5">
+                    <div>
+                      <div class="h5">Details</div>
+                      <div class="form-group">
+                        <label for="PlekNummer">Pleknummer</label>
+                        <select class="form-control form-control-sm">
+                          <!--PHP code here-->
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="Auto">Met de auto</label>
+                        <select class="form-control form-control-sm">
+                          <option>Ja</option>
+                          <option>Nee</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="SoortVerblijf">Soort verblijf</label>
+                        <select class="form-control form-control-sm">
+                          <option>Caravan</option>
+                          <option>Camper</option>
+                          <option>Tent</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="Electriciteit">Electriciteit</label>
+                        <select class="form-control form-control-sm">
+                          <option>Ja</option>
+                          <option>Nee</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="GratisDouche">Gratis Douchemuntjes</label>
+                        <select class="form-control form-control-sm">
+                          <option>Ja</option>
+                          <option>Nee</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="AantalVolwassenen">Aantal volwassenen</label>
+                        <input type="text" class="form-control form-control-sm" id="" aria-describedby="">
+                      </div>
+                      <div class="form-group">
+                        <label for="AantalKindTot4">Aantal kinderen (tot 4 jaar)</label>
+                        <input type="text" class="form-control form-control-sm" id="" aria-describedby="">
+                      </div>
+                      <div class="form-group">
+                        <label for="AantalKindTot12">Aantal kinderen (tussen 4 - 12 jaar)</label>
+                        <input type="text" class="form-control form-control-sm" id="" aria-describedby="">
+                      </div>
+                      <div class="form-group">
+                        <label for="Huisdier">Huisdier</label>
+                        <select class="form-control form-control-sm">
+                          <option>Ja</option>
+                          <option>Nee</option>
+                        </select>
+                      </div>
+                      <button type="button" class="btn btn-sm btn-success">Reservatie invoeren</button>
+                    </div>
+                  </div>
+                  
+                  
+                  <!--Tarievenlijst-->
+                  <div class="col-3">
+                    <div class="h5 pb-1">Tarievenlijst</div>
+                    <div class="d-flex border rounded shadow-sm border-top-0">
+                      <table class="table table-sm table-striped table-hover">
+                        <thead>
+                          <tr>
+                            <th scope="col">Categorie</th>
+                            <th scope="col">Prijs</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <!--PHP code to show actual prices from the database-->
+                          <?php
+                            $sqlQuery = "SELECT * FROM categorieen";
+                            $result = mysqli_query($con, $sqlQuery);
+                            while($row = mysqli_fetch_array($result)){
+                              echo "
+                                <tr>
+                                  <td>".$row['CategorieNaam']."</td>
+                                  <td>€".$row['Prijs'].",-</td>
+                                </tr>
+                              ";
+                            }
+                          ?>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                </form>
+              </div>
             </div>
 
             <!--Reservatie Overzicht page-->
             <div class="tab-pane" id="list-Reservatie-Overzicht" role="tabpanel" aria-labelledby="list-Reservatie-Overzicht-list">
-              <div class="row">
-                <div class="text-dark">Reservatie Overzicht Pagina</div>
-                <div class="col-3">!</div>
-                <div class="col-9">!</div>
+              <div class="text-dark">Reservatie Overzicht Pagina</div>
+              <div class="container-fluid">
+                <div class="row">
+                </div>
               </div>
             </div>
 
             <!--Plekken-->
             <div class="tab-pane" id="list-Plekken" role="tabpanel" aria-labelledby="list-Plekken-list">
               <div class="text-dark">Plekken Pagina</div>
+              <div class="container-fluid">
+                <div class="row">
+                </div>
+              </div>
             </div>
 
             <!--Facturen-->
             <div class="tab-pane" id="list-Facturen" role="tabpanel" aria-labelledby="list-Facturen-list">
               <div class="text-dark">Facturen Pagina</div>
+              <div class="container-fluid">
+                <div class="row">
+                </div>
+              </div>
             </div>
 
             <!--Omzet-->
             <div class="tab-pane" id="list-Omzet" role="tabpanel" aria-labelledby="list-Omzet-list">
               <div class="text-dark">Omzet Pagina</div>
+              <div class="container-fluid">
+                <div class="row">
+                </div>
+              </div>
             </div>
 
             <!--Nieuwe Gebruiker Registreren-->
             <div class="tab-pane" id="list-Registratie" role="tabpanel" aria-labelledby="list-Registratie-list">
               <div class="text-dark">Registratie Pagina</div>
+              <div class="container-fluid">
+                <div class="row">
+                </div>
+              </div>
             </div>
             
           </div>
