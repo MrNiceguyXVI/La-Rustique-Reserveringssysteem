@@ -7057,7 +7057,7 @@ function titleReservatieOverzicht(){
 }
 
 function titlePlekken(){
-  document.getElementById("PageTitle").innerHTML = "Overzicht Plekken";
+  document.getElementById("PageTitle").innerHTML = "Overzicht Plaatsen";
 }
 
 function titleFacturen(){

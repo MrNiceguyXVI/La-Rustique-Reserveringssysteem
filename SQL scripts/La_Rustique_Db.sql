@@ -365,13 +365,13 @@ CREATE TABLE Reservaties (
 
 /*Voorbeeld reservaties*/
   INSERT INTO Reservaties (PlaatsNr, KlantNr, AankomstDatum, VertrekDatum, AantalNachten)
-  VALUES (1, 1, '2021-04-13', '2021-04-23', 9);
+  VALUES (4, 1, '2020-11-13', '2020-12-05', 22);
 
   INSERT INTO Reservaties (PlaatsNr, KlantNr, AankomstDatum, VertrekDatum, AantalNachten)
-  VALUES (67, 1, '2021-06-01', '2021-06-15', 13);
+  VALUES (3, 1, '2020-11-14', '2020-11-30', 15);
 
   INSERT INTO Reservaties (PlaatsNr, KlantNr, AankomstDatum, VertrekDatum, AantalNachten)
-  VALUES (67, 2, '2021-04-10', '2021-04-22', 11);
+  VALUES (27, 2, '2020-11-10', '2020-11-30', 19);
 /*Eind voorbeeld reservaties*/
 
 CREATE TABLE Categorieen (
@@ -494,3 +494,11 @@ CREATE TABLE Reservatie_Regels (
   INSERT INTO Reservatie_Regels (ReservatieNr, CategorieNr, Aantal)
   VALUES (3, 11, 1);
 /*Eind voorbeeld reservatie regels*/
+
+CREATE TABLE Facturen (
+  FactuurNr INT,
+  ReservatieNr INT,
+  Factuur BLOB,
+  PRIMARY KEY (FactuurNr),
+  FOREIGN KEY (ReservatieNr) REFERENCES Reservaties(ReservatieNr)  
+);

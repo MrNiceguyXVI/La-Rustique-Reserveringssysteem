@@ -75,7 +75,7 @@ include 'Connection.php';
               <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-map-fill mr-2 mb-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.598-.49L10.5.99 5.598.01a.5.5 0 0 0-.196 0l-5 1A.5.5 0 0 0 0 1.5v14a.5.5 0 0 0 .598.49l4.902-.98 4.902.98a.502.502 0 0 0 .196 0l5-1A.5.5 0 0 0 16 14.5V.5zM5 14.09V1.11l.5-.1.5.1v12.98l-.402-.08a.498.498 0 0 0-.196 0L5 14.09zm5 .8V1.91l.402.08a.5.5 0 0 0 .196 0L11 1.91v12.98l-.5.1-.5-.1z"/>
               </svg>
-              Plekken
+              Plaatsen
             </a>
 
             <a class="list-group-item list-group-item-action " id="list-Facturen-list" data-toggle="list" href="#list-Facturen" role="tab" aria-controls="Facturen" onclick="titleFacturen()">
@@ -220,7 +220,7 @@ include 'Connection.php';
                   <div class="col-3">
                     <div class="h5 pb-1">Tarievenlijst</div>
                     <div class="d-flex border rounded shadow-sm border-top-0">
-                      <table class="table table-sm table-striped table-hover">
+                      <table class="table table-sm table-striped table-hover mb-0">
                         <thead>
                           <tr>
                             <th scope="col">Categorie</th>
@@ -261,18 +261,127 @@ include 'Connection.php';
 
             <!--Plekken-->
             <div class="tab-pane" id="list-Plekken" role="tabpanel" aria-labelledby="list-Plekken-list">
-              <div class="text-dark">Plekken Pagina</div>
               <div class="container-fluid">
-                <div class="row">
+                <div class="row my-3">
+                  <div class="col-6">
+                    <div class="h5">Grote Plaatsen</div>
+                    <div class="d-flex border rounded shadow-sm border-top-0">
+                      <table class="table table-sm table-hover mb-0">
+                        <thead>
+                          <tr>
+                            <th scope="col">Plaats Nummer</th>
+                            <th scope="col">Plaats Status</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <!--PHP code to show actual availability of spots for large spots-->
+                          <?php
+                            $currentDate = date("Y-m-d");                                                                                     
+                            $DateQuery = "SELECT PlaatsNr FROM reservaties WHERE '".$currentDate."' between AankomstDatum and VertrekDatum";  # Selects the spotnumbers from spots that are occupied on the current date
+                            $DateResult = mysqli_query($con, $DateQuery);                                                                     
+                            $BezetArray = [];                                                                                                 # An array that gets Filled with places that are currently occupied
+                            while($RowDate = mysqli_fetch_array($DateResult)){                                                                # Pushes the spot Number into the array if it's in the queryresult
+                              array_push($BezetArray, $RowDate['PlaatsNr']);                                                                  #
+                            }                                                                                                                 #
+                            $PlaatsQuery = "SELECT PlaatsNr FROM plaatsen WHERE PlaatsFormaat = 'GROOT'";                                     # Selects the Spot Numbers for all the big spots                                            
+                            $PlaatsResult = mysqli_query($con, $PlaatsQuery);
+                            while($RowPlaats = mysqli_fetch_array($PlaatsResult)){                                                            
+                              if(in_array($RowPlaats['PlaatsNr'],$BezetArray)){                                                               # Changes the Status text and class so                                                    
+                                $Status = "Bezet";                                                                                            # it can be automatically displayed if
+                                $StatusClass="bg-danger";                                                                                     # a spot is free or occupied. The class
+                              }else{                                                                                                          # is to change the table pane color
+                                $Status = "Vrij";                                                                                             #
+                                $StatusClass="bg-success";                                                                                    #
+                              }                                                                                                               #
+                              echo "
+                              <tr>
+                                <td>".$RowPlaats['PlaatsNr']."</td>
+                                <td class='".$StatusClass." text-white'>".$Status."</td>
+                              </tr>
+                              ";                                                            
+                            }
+                          ?>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="h5">kleine Plaatsen</div>
+                    <div class="d-flex border rounded shadow-sm border-top-0">
+                      <table class="table table-sm table-hover mb-0">
+                        <thead>
+                          <tr>
+                            <th scope="col">Plaats Nummer</th>
+                            <th scope="col">Plaats Status</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <!--PHP code to show actual availability of spots for small spots-->
+                          <?php
+                            $currentDate = date("Y-m-d");                                                                                     
+                            $DateQuery = "SELECT PlaatsNr FROM reservaties WHERE '".$currentDate."' between AankomstDatum and VertrekDatum";  # Selects the spotnumbers from spots that are occupied on the current date
+                            $DateResult = mysqli_query($con, $DateQuery);                                                                     
+                            $BezetArray = [];                                                                                                 # An array that gets Filled with places that are currently occupied
+                            while($RowDate = mysqli_fetch_array($DateResult)){                                                                # Pushes the spot Number into the array if it's in the queryresult
+                              array_push($BezetArray, $RowDate['PlaatsNr']);                                                                  #
+                            }                                                                                                                 #
+                            $PlaatsQuery = "SELECT PlaatsNr FROM plaatsen WHERE PlaatsFormaat = 'KLEIN'";                                     # Selects the Spot Numbers for all the small spots                                            
+                            $PlaatsResult = mysqli_query($con, $PlaatsQuery);
+                            while($RowPlaats = mysqli_fetch_array($PlaatsResult)){                                                            
+                              if(in_array($RowPlaats['PlaatsNr'],$BezetArray)){                                                               # Changes the Status text and class so                                                    
+                                $Status = "Bezet";                                                                                            # it can be automatically displayed if
+                                $StatusClass="bg-danger";                                                                                     # a spot is free or occupied. The class
+                              }else{                                                                                                          # is to change the table pane color
+                                $Status = "Vrij";                                                                                             #
+                                $StatusClass="bg-success";                                                                                    #
+                              }                                                                                                               #
+                              echo "
+                              <tr>
+                                <td>".$RowPlaats['PlaatsNr']."</td>
+                                <td class='".$StatusClass." text-white'>".$Status."</td>
+                              </tr>
+                              ";                                                            
+                            }
+                          ?>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
 
             <!--Facturen-->
             <div class="tab-pane" id="list-Facturen" role="tabpanel" aria-labelledby="list-Facturen-list">
-              <div class="text-dark">Facturen Pagina</div>
               <div class="container-fluid">
                 <div class="row">
+                  <div class="d-flex border rounded shadow-sm border-top-0">
+                    <table class="table table-sm table-striped table-hover mb-0">
+                      <thead>
+                        <tr>
+                          <th scope="col">Factuur Nummer</th>
+                          <th scope="col">Reservatie Nummer</th>
+                          <th scope="col">Factuur</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <!--PHP code to show actual prices from the database-->
+                        <?php
+                          $FacturenQuery = "SELECT * FROM facturen";
+                          $FacturenResult = mysqli_query($con, $FacturenQuery);
+                          while($FacturenRow = mysqli_fetch_array($FacturenResult)){
+                            echo "
+                              <tr>
+                                <td>".$FacturenRow['FactuurNr']."</td>
+                                <td>".$FacturenRow['ReservatieNr']."</td>
+                                <td>".$FacturenRow['Factuur']."</td>
+                              </tr>
+                            ";
+                          }
+                        ?>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>
