@@ -1,5 +1,6 @@
 <?php
 include 'Connection.php';
+$currentDate = date("Y-m-d"); 
 ?>
 
 <!doctype HTML>
@@ -19,7 +20,7 @@ include 'Connection.php';
 
         <!--Logo-->
         <div class="col-2 p-0" style="display:flex;align-items: center; flex-wrap: wrap;">
-          <img src="Img/Placeholder.png" class="img-fluid pointer" alt="Responsive image" onclick="home()">
+          <img src="Img/La-Rustique-Logo.png" class="img-fluid pointer" alt="Responsive image" onclick="home()">
         </div>
 
         <!--Page name-->
@@ -55,7 +56,7 @@ include 'Connection.php';
       <!--Menu and Selected page-->
       <div class="row justify-content-center" style="height:94vh">
         <!--Menu-->
-        <div class="col-2 bg-dark" id="menu">
+        <div class="col-2 bg-dark shadow" id="menu">
           <div class="list-group" id="list-tab" role="tablist">
             <a class="list-group-item list-group-item-action mt-2" id="list-Reserveren-list" data-toggle="list" href="#list-Reserveren" role="tab" aria-controls="Reserveren" onclick="titleReservatie()">
                 <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-calendar2-plus-fill mr-2 mb-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -64,11 +65,11 @@ include 'Connection.php';
                 Reserveren
             </a>
 
-            <a class="list-group-item list-group-item-action " id="list-Reservatie-Overzicht-list" data-toggle="list" href="#list-Reservatie-Overzicht" role="tab" aria-controls="Reservatie-Overzicht" onclick="titleReservatieOverzicht()">
+            <a class="list-group-item list-group-item-action " id="list-Reservaties-list" data-toggle="list" href="#list-Reservaties" role="tab" aria-controls="Reservaties" onclick="titleReservaties()">
               <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-calendar2-week-fill mr-2 mb-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 3.5c0-.276.244-.5.545-.5h10.91c.3 0 .545.224.545.5v1c0 .276-.244.5-.546.5H2.545C2.245 5 2 4.776 2 4.5v-1zM8.5 7a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zM3 10.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1z"/>
               </svg>
-              Reservatie Overzicht
+              Reservaties
             </a>
 
             <a class="list-group-item list-group-item-action " id="list-Plekken-list" data-toggle="list" href="#list-Plekken" role="tab" aria-controls="Plekken" onclick="titlePlekken()">
@@ -119,7 +120,7 @@ include 'Connection.php';
                             $result = mysqli_query($con, $sqlQuery);
                             while($row = mysqli_fetch_array($result)){
                               echo "
-                              <option>".$row['KNaam'].", ".$row['KTel'].", ".$row['KEmail']."</option>
+                              <option>".$row['KNaam'].", ".$row['KEmail'].", ".$row['KTel']."</option>
                               ";
                             }
                           ?>
@@ -131,7 +132,7 @@ include 'Connection.php';
                     <div>
                       <div class="h5">Nieuwe klant</div>
                       <div class="form-group">
-                        <label for="KlantNaam">naam</label>
+                        <label for="KlantNaam">Naam</label>
                         <input type="text" class="form-control form-control-sm" id="" aria-describedby="KlantNaam">
                       </div>
                       <div class="form-group">
@@ -251,8 +252,8 @@ include 'Connection.php';
             </div>
 
             <!--Reservatie Overzicht page-->
-            <div class="tab-pane" id="list-Reservatie-Overzicht" role="tabpanel" aria-labelledby="list-Reservatie-Overzicht-list">
-              <div class="text-dark">Reservatie Overzicht Pagina</div>
+            <div class="tab-pane" id="list-Reservaties" role="tabpanel" aria-labelledby="list-Reservaties-list">
+              <div class="text-dark">Reservaties Pagina</div>
               <div class="container-fluid">
                 <div class="row">
                 </div>
@@ -275,9 +276,8 @@ include 'Connection.php';
                         </thead>
                         <tbody>
                           <!--PHP code to show actual availability of spots for large spots-->
-                          <?php
-                            $currentDate = date("Y-m-d");                                                                                     
-                            $DateQuery = "SELECT PlaatsNr FROM reservaties WHERE '".$currentDate."' between AankomstDatum and VertrekDatum";  # Selects the spotnumbers from spots that are occupied on the current date
+                          <?php                                                                                    
+                            $DateQuery = "SELECT PlaatsNr FROM reservaties WHERE '".$currentDate."' between AankomstDatum and VertrekDatum-1";  # Selects the spotnumbers from spots that are occupied on the current date
                             $DateResult = mysqli_query($con, $DateQuery);                                                                     
                             $BezetArray = [];                                                                                                 # An array that gets Filled with places that are currently occupied
                             while($RowDate = mysqli_fetch_array($DateResult)){                                                                # Pushes the spot Number into the array if it's in the queryresult
@@ -354,34 +354,42 @@ include 'Connection.php';
             <!--Facturen-->
             <div class="tab-pane" id="list-Facturen" role="tabpanel" aria-labelledby="list-Facturen-list">
               <div class="container-fluid">
-                <div class="row">
-                  <div class="d-flex border rounded shadow-sm border-top-0">
-                    <table class="table table-sm table-striped table-hover mb-0">
-                      <thead>
-                        <tr>
-                          <th scope="col">Factuur Nummer</th>
-                          <th scope="col">Reservatie Nummer</th>
-                          <th scope="col">Factuur</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <!--PHP code to show actual prices from the database-->
-                        <?php
-                          $FacturenQuery = "SELECT * FROM facturen";
-                          $FacturenResult = mysqli_query($con, $FacturenQuery);
-                          while($FacturenRow = mysqli_fetch_array($FacturenResult)){
-                            echo "
-                              <tr>
-                                <td>".$FacturenRow['FactuurNr']."</td>
-                                <td>".$FacturenRow['ReservatieNr']."</td>
-                                <td>".$FacturenRow['Factuur']."</td>
-                              </tr>
-                            ";
-                          }
-                        ?>
-                      </tbody>
-                    </table>
+                <div class="row my-3">
+                  <div class="col-3"></div>
+                  <div class="col-6">
+                    <div class="d-flex border rounded shadow-sm border-top-0 mx-auto">
+                      <table class="table table-sm table-striped table-hover mb-0">
+                        <thead>
+                          <tr>
+                            <th scope="col">Reservatie Nummer</th>
+                            <th scope="col">Aankomst Datum</th>
+                            <th scope="col">Vertrek Datum</th>
+                            <th scope="col">Aantal Nachten</th>
+                            <th scope="col">Factuur</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <!--PHP code to show actual prices from the database-->
+                          <?php                       
+                            $FacturenQuery = "SELECT ReservatieNr, AankomstDatum, VertrekDatum, AantalNachten FROM Reservaties WHERE VertrekDatum <= '".$currentDate."'";
+                            $FacturenResult = mysqli_query($con, $FacturenQuery);
+                            while($FacturenRow = mysqli_fetch_array($FacturenResult)){
+                              echo "
+                                <tr>
+                                  <td>".$FacturenRow['ReservatieNr']."</td>
+                                  <td>".$FacturenRow['AankomstDatum']."</td>
+                                  <td>".$FacturenRow['VertrekDatum']."</td>
+                                  <td>".$FacturenRow['AantalNachten']."</td>
+                                  <td><button type='button' class='btn btn-sm btn-menu m-0'>Open</button></td> 
+                                </tr>
+                              ";
+                            }
+                          ?>
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
+                  <div class="col-3"></div>
                 </div>
               </div>
             </div>
@@ -390,16 +398,30 @@ include 'Connection.php';
             <div class="tab-pane" id="list-Omzet" role="tabpanel" aria-labelledby="list-Omzet-list">
               <div class="text-dark">Omzet Pagina</div>
               <div class="container-fluid">
-                <div class="row">
+                <div class="row my-3s">
                 </div>
               </div>
             </div>
 
             <!--Nieuwe Gebruiker Registreren-->
             <div class="tab-pane" id="list-Registratie" role="tabpanel" aria-labelledby="list-Registratie-list">
-              <div class="text-dark">Registratie Pagina</div>
               <div class="container-fluid">
-                <div class="row">
+                <div class="row my-3">
+                  <div class="col-5"></div>
+                  <div class="col-2">
+                      <form>
+                        <div class="form-group">
+                          <label for="Username">Gebruikersnaam</label>
+                          <input type="text" class="form-control form-control-sm" id="Gebruikersnaam" aria-describedby="Gebruikersnaam">
+                        </div>
+                        <div class="form-group">
+                          <label for="Password">Wachtwoord</label>
+                          <input type="password" class="form-control form-control-sm" id="Wachtwoord" aria-describedby="Wachtwoord">
+                        </div>
+                        <button type="submit" class="btn btn-sm btn-success px-2">Gebruiker Registreren</button>
+                      </form>
+                  </div>
+                  <div class="col-5"></div>
                 </div>
               </div>
             </div>

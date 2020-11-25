@@ -7036,7 +7036,7 @@ function home(){
 }
 
 function menuHide(){
-  document.getElementById('menu').classList.toggle("collapse");         //toggles the collapse class to make the menu disappear and reappear
+  document.getElementById('menu').classList.toggle("collapse");         //toggles the collapse class to make the menu disappear and re-appear  
   document.getElementById('selectedpage').classList.toggle("col-12");   //toggles the col-12 class to make sure all the space is being used
 }
 
@@ -7052,7 +7052,7 @@ function titleReservatie(){
   document.getElementById("PageTitle").innerHTML = "Reserveren";
 }
 
-function titleReservatieOverzicht(){
+function titleReservaties(){
   document.getElementById("PageTitle").innerHTML = "Overzicht Reservaties";
 }
 
