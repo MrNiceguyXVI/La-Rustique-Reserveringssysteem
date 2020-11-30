@@ -7035,11 +7035,13 @@ function home(){
   window.location.href = "http://localhost/La-Rustique-Reserveringssysteem/Menu.php";
 }
 
+//Function used to hide the menu
 function menuHide(){
   document.getElementById('menu').classList.toggle("collapse");         //toggles the collapse class to make the menu disappear and re-appear  
   document.getElementById('selectedpage').classList.toggle("col-12");   //toggles the col-12 class to make sure all the space is being used
 }
 
+//functio to add a user account to the database
 function addUser(){  
   document.getElementById("PageTitle").innerHTML = "Gebruiker Registreren";
 }
@@ -7048,23 +7050,73 @@ function logOut(){
   //To be added
 }
 
-function titleReservatie(){
-  document.getElementById("PageTitle").innerHTML = "Reserveren";
+//Function that happens when the Reservation section is loaded
+function Reservatie(){
+  document.getElementById("PageTitle").innerHTML = "Reserveren";            //Changes the page title
+
+  var KlantenDataRequest = new XMLHttpRequest();                            //Http Request to get all the existing customers into the specified element
+  KlantenDataRequest.onreadystatechange = function(){
+    if (this.readyState == 4 && this.status == 200){
+      document.getElementById('KlantenData').innerHTML = this.responseText;
+    }
+  };
+  KlantenDataRequest.open("GET", "SQLQueries/KlantenData.php", true);
+  KlantenDataRequest.send();
+
+  var TarievenRequest = new XMLHttpRequest();                               //Http Request to get all the Price values into the specified element
+  TarievenRequest.onreadystatechange = function(){
+    if (this.readyState == 4 && this.status == 200){
+      document.getElementById('Tarieven').innerHTML = this.responseText;
+    }
+  };
+  TarievenRequest.open("GET", "SQLQueries/Tarieven.php", true);
+  TarievenRequest.send();
 }
 
-function titleReservaties(){
-  document.getElementById("PageTitle").innerHTML = "Overzicht Reservaties";
+//Function that happens when the Reservation overview section is loaded
+function Reservaties(){
+  document.getElementById("PageTitle").innerHTML = "Reservaties overzicht ";//Changes the page title
 }
 
-function titlePlekken(){
-  document.getElementById("PageTitle").innerHTML = "Overzicht Plaatsen";
+//Function that happens when the Spots section is loaded
+function Plaatsen(){
+  document.getElementById("PageTitle").innerHTML = "Plaatsen overzicht ";  //Changes the page title
+
+  var GrotePlaatsenRequest = new XMLHttpRequest();                          //Http Request to get all Large spot info into the specified element
+  GrotePlaatsenRequest.onreadystatechange = function(){
+    if (this.readyState == 4 && this.status == 200){
+      document.getElementById('GrotePlaatsen').innerHTML = this.responseText;
+    }
+  };
+  GrotePlaatsenRequest.open("GET", "SQLQueries/GrotePlaatsen.php", true);
+  GrotePlaatsenRequest.send();
+  
+  var KleinePlaatsenRequest = new XMLHttpRequest();                         //Http Request to get all small spot info into the specified element
+  KleinePlaatsenRequest.onreadystatechange = function(){
+    if (this.readyState == 4 && this.status == 200){
+      document.getElementById('KleinePlaatsen').innerHTML = this.responseText;
+    }
+  };
+  KleinePlaatsenRequest.open("GET", "SQLQueries/KleinePlaatsen.php", true);
+  KleinePlaatsenRequest.send();
 }
 
-function titleFacturen(){
-  document.getElementById("PageTitle").innerHTML = "Facturen";
+//Function that happens when the invoice section is loaded
+function Facturen(){
+  document.getElementById("PageTitle").innerHTML = "Facturen";              //Changes the page title
+
+  var FacturenRequest = new XMLHttpRequest();                               //Http Request to get all invoices into the specified element
+  FacturenRequest.onreadystatechange = function(){
+    if (this.readyState == 4 && this.status == 200){
+      document.getElementById('Facturen').innerHTML = this.responseText;
+    }
+  };
+  FacturenRequest.open("GET", "SQLQueries/Facturen.php", true);
+  FacturenRequest.send();
 }
 
-function titleOmzet(){
+//Function that happens when the Revenue section is loaded
+function Omzet(){
   var d =  new Date();  
   var month =  new Array();
   month[0] = "Januari";
@@ -7080,9 +7132,10 @@ function titleOmzet(){
   month[10] = "November";
   month[11] = "December";
   var m = month[d.getMonth()];
-  document.getElementById("PageTitle").innerHTML = "Omzet van " + m;
+  document.getElementById("PageTitle").innerHTML = "Omzet van " + m;        //Changes the page title
 }
 
+//Function that happens when the User registration section is loaded
 function titleRegistratie(){
-  document.getElementById("PageTitle").innerHTML = "Gebruiker Registreren";
+  document.getElementById("PageTitle").innerHTML = "Gebruiker Registreren"; //Changes the page title
 }

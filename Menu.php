@@ -13,8 +13,8 @@ $currentDate = date("Y-m-d");
     <script src="Javascripts/bootstrap.bundle.js"></script>
     <script src="Javascripts/bootstrap-datepicker.js"></script>
     <script src="Javascripts/bootstrap-datepicker.nl.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="bootstrap.css"/>
-    <link rel="stylesheet" type="text/css" href="bootstrap-datepicker.css"/>
+    <link rel="stylesheet" type="text/css" href="CssFiles/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="CssFiles/bootstrap-datepicker.css"/>
   </head>
   <body>
     <div class="container-fluid">
@@ -61,28 +61,28 @@ $currentDate = date("Y-m-d");
         <!--Menu-->
         <div class="col-2 bg-dark shadow" id="menu">
           <div class="list-group" id="list-tab" role="tablist">
-            <a class="list-group-item list-group-item-action mt-2" id="list-Reserveren-list" data-toggle="list" href="#list-Reserveren" role="tab" aria-controls="Reserveren" onclick="titleReservatie()">
+            <a class="list-group-item list-group-item-action mt-2" id="list-Reserveren-list" data-toggle="list" href="#list-Reserveren" role="tab" aria-controls="Reserveren" onclick="Reservatie()">
                 <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-calendar2-plus-fill mr-2 mb-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 3.5c0-.276.244-.5.545-.5h10.91c.3 0 .545.224.545.5v1c0 .276-.244.5-.546.5H2.545C2.245 5 2 4.776 2 4.5v-1zm6.5 5a.5.5 0 0 0-1 0V10H6a.5.5 0 0 0 0 1h1.5v1.5a.5.5 0 0 0 1 0V11H10a.5.5 0 0 0 0-1H8.5V8.5z"/>
                 </svg>
                 Reserveren
             </a>
 
-            <a class="list-group-item list-group-item-action " id="list-Reservaties-list" data-toggle="list" href="#list-Reservaties" role="tab" aria-controls="Reservaties" onclick="titleReservaties()">
+            <a class="list-group-item list-group-item-action " id="list-Reservaties-list" data-toggle="list" href="#list-Reservaties" role="tab" aria-controls="Reservaties" onclick="Reservaties()">
               <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-calendar2-week-fill mr-2 mb-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 3.5c0-.276.244-.5.545-.5h10.91c.3 0 .545.224.545.5v1c0 .276-.244.5-.546.5H2.545C2.245 5 2 4.776 2 4.5v-1zM8.5 7a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zM3 10.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1z"/>
               </svg>
               Reservaties
             </a>
 
-            <a class="list-group-item list-group-item-action " id="list-Plekken-list" data-toggle="list" href="#list-Plekken" role="tab" aria-controls="Plekken" onclick="titlePlekken()">
+            <a class="list-group-item list-group-item-action " id="list-Plekken-list" data-toggle="list" href="#list-Plekken" role="tab" aria-controls="Plekken" onclick="Plaatsen()">
               <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-map-fill mr-2 mb-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.598-.49L10.5.99 5.598.01a.5.5 0 0 0-.196 0l-5 1A.5.5 0 0 0 0 1.5v14a.5.5 0 0 0 .598.49l4.902-.98 4.902.98a.502.502 0 0 0 .196 0l5-1A.5.5 0 0 0 16 14.5V.5zM5 14.09V1.11l.5-.1.5.1v12.98l-.402-.08a.498.498 0 0 0-.196 0L5 14.09zm5 .8V1.91l.402.08a.5.5 0 0 0 .196 0L11 1.91v12.98l-.5.1-.5-.1z"/>
               </svg>
               Plaatsen
             </a>
 
-            <a class="list-group-item list-group-item-action " id="list-Facturen-list" data-toggle="list" href="#list-Facturen" role="tab" aria-controls="Facturen" onclick="titleFacturen()">
+            <a class="list-group-item list-group-item-action " id="list-Facturen-list" data-toggle="list" href="#list-Facturen" role="tab" aria-controls="Facturen" onclick="Facturen()">
               <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-receipt mr-2 mb-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M1.92.506a.5.5 0 0 1 .434.14L3 1.293l.646-.647a.5.5 0 0 1 .708 0L5 1.293l.646-.647a.5.5 0 0 1 .708 0L7 1.293l.646-.647a.5.5 0 0 1 .708 0L9 1.293l.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .801.13l.5 1A.5.5 0 0 1 15 2v12a.5.5 0 0 1-.053.224l-.5 1a.5.5 0 0 1-.8.13L13 14.707l-.646.647a.5.5 0 0 1-.708 0L11 14.707l-.646.647a.5.5 0 0 1-.708 0L9 14.707l-.646.647a.5.5 0 0 1-.708 0L7 14.707l-.646.647a.5.5 0 0 1-.708 0L5 14.707l-.646.647a.5.5 0 0 1-.708 0L3 14.707l-.646.647a.5.5 0 0 1-.801-.13l-.5-1A.5.5 0 0 1 1 14V2a.5.5 0 0 1 .053-.224l.5-1a.5.5 0 0 1 .367-.27zm.217 1.338L2 2.118v11.764l.137.274.51-.51a.5.5 0 0 1 .707 0l.646.647.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.509.509.137-.274V2.118l-.137-.274-.51.51a.5.5 0 0 1-.707 0L12 1.707l-.646.647a.5.5 0 0 1-.708 0L10 1.707l-.646.647a.5.5 0 0 1-.708 0L8 1.707l-.646.647a.5.5 0 0 1-.708 0L6 1.707l-.646.647a.5.5 0 0 1-.708 0L4 1.707l-.646.647a.5.5 0 0 1-.708 0l-.509-.51z"/>
                 <path fill-rule="evenodd" d="M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm8-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5z"/>
@@ -90,7 +90,7 @@ $currentDate = date("Y-m-d");
               Facturen
             </a>
 
-            <a class="list-group-item list-group-item-action " id="list-Omzet-list" data-toggle="list" href="#list-Omzet" role="tab" aria-controls="Omzet" onclick="titleOmzet()">
+            <a class="list-group-item list-group-item-action " id="list-Omzet-list" data-toggle="list" href="#list-Omzet" role="tab" aria-controls="Omzet" onclick="Omzet()">
               <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-cash-stack mr-2 mb-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path d="M14 3H1a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1h-1z"/>
                 <path fill-rule="evenodd" d="M15 5H1v8h14V5zM1 4a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1H1z"/>
@@ -118,16 +118,9 @@ $currentDate = date("Y-m-d");
                       <div class="form-group">
                         <label for="Bestaande klant" class="mr-5 mb-2">Selecteer klant gegevens</label>
                         <div class=" form-inline">
-                          <select class="form-control form-control-sm px-auto">
-                            <?php
-                              $sqlQuery = "SELECT KNaam, KTel, KEmail FROM klanten";
-                              $result = mysqli_query($con, $sqlQuery);
-                              while($row = mysqli_fetch_array($result)){
-                                echo "
-                                <option>".$row['KNaam'].", ".$row['KEmail'].", ".$row['KTel']."</option>
-                                ";
-                              }
-                            ?>
+                          <select class="form-control form-control-sm px-auto" id="KlantenData">
+                            <!--Er word een AJAX request gemaakt in bootstrap.bundje.js om 
+                            de all bestaande klanten weer te geven-->
                           </select>
                           <button type="button" class="btn btn-sm btn-secondary ml-auto px-3">Kies</button>
                         </div>
@@ -240,20 +233,9 @@ $currentDate = date("Y-m-d");
                             <th scope="col">Prijs</th>
                           </tr>
                         </thead>
-                        <tbody>
-                          <!--PHP code to show actual prices from the database-->
-                          <?php
-                            $sqlQuery = "SELECT * FROM categorieen";
-                            $result = mysqli_query($con, $sqlQuery);
-                            while($row = mysqli_fetch_array($result)){
-                              echo "
-                                <tr>
-                                  <td>".$row['CategorieNaam']."</td>
-                                  <td>€".$row['Prijs'].",-</td>
-                                </tr>
-                              ";
-                            }
-                          ?>
+                        <tbody id="Tarieven">
+                          <!--Er word een AJAX request gemaakt in bootstrap.bundje.js om 
+                          de tarieven uit de database weer te geven-->
                         </tbody>
                       </table>
                     </div>
@@ -286,33 +268,9 @@ $currentDate = date("Y-m-d");
                             <th scope="col">Plaats Status</th>
                           </tr>
                         </thead>
-                        <tbody>
-                          <!--PHP code to show actual availability of spots for large spots-->
-                          <?php                                                                                    
-                            $DateQuery = "SELECT PlaatsNr FROM reservaties WHERE '".$currentDate."' between AankomstDatum and VertrekDatum-1";  # Selects the spotnumbers from spots that are occupied on the current date
-                            $DateResult = mysqli_query($con, $DateQuery);                                                                     
-                            $BezetArray = [];                                                                                                 # An array that gets Filled with places that are currently occupied
-                            while($RowDate = mysqli_fetch_array($DateResult)){                                                                # Pushes the spot Number into the array if it's in the queryresult
-                              array_push($BezetArray, $RowDate['PlaatsNr']);                                                                  #
-                            }                                                                                                                 #
-                            $PlaatsQuery = "SELECT PlaatsNr FROM plaatsen WHERE PlaatsFormaat = 'GROOT'";                                     # Selects the Spot Numbers for all the big spots                                            
-                            $PlaatsResult = mysqli_query($con, $PlaatsQuery);
-                            while($RowPlaats = mysqli_fetch_array($PlaatsResult)){                                                            
-                              if(in_array($RowPlaats['PlaatsNr'],$BezetArray)){                                                               # Changes the Status text and class so                                                    
-                                $Status = "Bezet";                                                                                            # it can be automatically displayed if
-                                $StatusClass="bg-danger";                                                                                     # a spot is free or occupied. The class
-                              }else{                                                                                                          # is to change the table pane color
-                                $Status = "Vrij";                                                                                             #
-                                $StatusClass="bg-success";                                                                                    #
-                              }                                                                                                               #
-                              echo "
-                              <tr>
-                                <td>".$RowPlaats['PlaatsNr']."</td>
-                                <td class='".$StatusClass." text-white'>".$Status."</td>
-                              </tr>
-                              ";                                                            
-                            }
-                          ?>
+                        <tbody id="GrotePlaatsen">
+                          <!--Er word een AJAX request gemaakt in bootstrap.bundje.js om 
+                          de beschikbaarheid van de grote plaatsen weer te geven-->
                         </tbody>
                       </table>
                     </div>
@@ -327,34 +285,9 @@ $currentDate = date("Y-m-d");
                             <th scope="col">Plaats Status</th>
                           </tr>
                         </thead>
-                        <tbody>
-                          <!--PHP code to show actual availability of spots for small spots-->
-                          <?php
-                            $currentDate = date("Y-m-d");                                                                                     
-                            $DateQuery = "SELECT PlaatsNr FROM reservaties WHERE '".$currentDate."' between AankomstDatum and VertrekDatum";  # Selects the spotnumbers from spots that are occupied on the current date
-                            $DateResult = mysqli_query($con, $DateQuery);                                                                     
-                            $BezetArray = [];                                                                                                 # An array that gets Filled with places that are currently occupied
-                            while($RowDate = mysqli_fetch_array($DateResult)){                                                                # Pushes the spot Number into the array if it's in the queryresult
-                              array_push($BezetArray, $RowDate['PlaatsNr']);                                                                  #
-                            }                                                                                                                 #
-                            $PlaatsQuery = "SELECT PlaatsNr FROM plaatsen WHERE PlaatsFormaat = 'KLEIN'";                                     # Selects the Spot Numbers for all the small spots                                            
-                            $PlaatsResult = mysqli_query($con, $PlaatsQuery);
-                            while($RowPlaats = mysqli_fetch_array($PlaatsResult)){                                                            
-                              if(in_array($RowPlaats['PlaatsNr'],$BezetArray)){                                                               # Changes the Status text and class so                                                    
-                                $Status = "Bezet";                                                                                            # it can be automatically displayed if
-                                $StatusClass="bg-danger";                                                                                     # a spot is free or occupied. The class
-                              }else{                                                                                                          # is to change the table pane color
-                                $Status = "Vrij";                                                                                             #
-                                $StatusClass="bg-success";                                                                                    #
-                              }                                                                                                               #
-                              echo "
-                              <tr>
-                                <td>".$RowPlaats['PlaatsNr']."</td>
-                                <td class='".$StatusClass." text-white'>".$Status."</td>
-                              </tr>
-                              ";                                                            
-                            }
-                          ?>
+                        <tbody id="KleinePlaatsen">
+                          <!--Er word een AJAX request gemaakt in bootstrap.bundje.js om 
+                          de beschikbaarheid van de kleine plaatsen weer te geven-->
                         </tbody>
                       </table>
                     </div>
@@ -380,23 +313,9 @@ $currentDate = date("Y-m-d");
                             <th scope="col">Factuur</th>
                           </tr>
                         </thead>
-                        <tbody>
-                          <!--PHP code to show actual prices from the database-->
-                          <?php                       
-                            $FacturenQuery = "SELECT ReservatieNr, AankomstDatum, VertrekDatum, AantalNachten FROM Reservaties WHERE VertrekDatum <= '".$currentDate."'";
-                            $FacturenResult = mysqli_query($con, $FacturenQuery);
-                            while($FacturenRow = mysqli_fetch_array($FacturenResult)){
-                              echo "
-                                <tr>
-                                  <td>".$FacturenRow['ReservatieNr']."</td>
-                                  <td>".$FacturenRow['AankomstDatum']."</td>
-                                  <td>".$FacturenRow['VertrekDatum']."</td>
-                                  <td>".$FacturenRow['AantalNachten']."</td>
-                                  <td><button type='button' class='btn btn-sm btn-menu m-0'>Open</button></td> 
-                                </tr>
-                              ";
-                            }
-                          ?>
+                        <tbody id="Facturen">
+                          <!--Er word een AJAX request gemaakt in bootstrap.bundje.js om 
+                          de nodige Facturen weer te geven-->
                         </tbody>
                       </table>
                     </div>
