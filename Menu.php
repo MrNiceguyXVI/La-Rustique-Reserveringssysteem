@@ -4,14 +4,17 @@ $currentDate = date("Y-m-d");
 ?>
 
 <!doctype HTML>
-<html>
+<html lang="nl">
   <head>
     <title>La Rustique Reserveringsysteem</title>
     <!--Bootstrap links (css and java)-->
     <script src="Javascripts/jquery-3.5.1.js"></script>
     <script src="Javascripts/popper.js"></script>
     <script src="Javascripts/bootstrap.bundle.js"></script>
+    <script src="Javascripts/bootstrap-datepicker.js"></script>
+    <script src="Javascripts/bootstrap-datepicker.nl.min.js"></script>
     <link rel="stylesheet" type="text/css" href="bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="bootstrap-datepicker.css"/>
   </head>
   <body>
     <div class="container-fluid">
@@ -112,24 +115,26 @@ $currentDate = date("Y-m-d");
                   <div class="col-4">
                     <div class="mb-5">
                       <div class="h5">Terugkomende klant</div>
-                      <div class="form-group form-inline">
-                        <label for="Bestaande klant" class="mr-5">Selecteer Klant gegevens</label>
-                        <select class="form-control form-control-sm">
-                          <?php
-                            $sqlQuery = "SELECT KNaam, KTel, KEmail FROM klanten";
-                            $result = mysqli_query($con, $sqlQuery);
-                            while($row = mysqli_fetch_array($result)){
-                              echo "
-                              <option>".$row['KNaam'].", ".$row['KEmail'].", ".$row['KTel']."</option>
-                              ";
-                            }
-                          ?>
-                        </select>
-                        <button type="button" class="btn btn-sm btn-secondary ml-1 px-3">Kies</button>
+                      <div class="form-group">
+                        <label for="Bestaande klant" class="mr-5 mb-2">Selecteer klant gegevens</label>
+                        <div class=" form-inline">
+                          <select class="form-control form-control-sm px-auto">
+                            <?php
+                              $sqlQuery = "SELECT KNaam, KTel, KEmail FROM klanten";
+                              $result = mysqli_query($con, $sqlQuery);
+                              while($row = mysqli_fetch_array($result)){
+                                echo "
+                                <option>".$row['KNaam'].", ".$row['KEmail'].", ".$row['KTel']."</option>
+                                ";
+                              }
+                            ?>
+                          </select>
+                          <button type="button" class="btn btn-sm btn-secondary ml-auto px-3">Kies</button>
+                        </div>
                       </div>
                     </div>
                     
-                    <div>
+                    <div class="mb-5">
                       <div class="h5">Nieuwe klant</div>
                       <div class="form-group">
                         <label for="KlantNaam">Naam</label>
@@ -143,7 +148,14 @@ $currentDate = date("Y-m-d");
                         <label for="KlantTel">Telefoonnummer</label>
                         <input type="text" class="form-control form-control-sm" id="" aria-describedby="KlantTel">
                       </div>
+                    </div>
 
+                    <div>
+                      <div class="h5">Basis Informatie</div>                      
+                      <div class="form-group ">
+                        <label for="reservatie datum" class="">Aankomst en vertrek datums</label>
+                        <input type="text" class="form-control form-control-sm" id="Dates">
+                      </div>
 
                       <div class="form-group">
                         <label for="VeldFormaat">Formaat</label>
@@ -187,7 +199,7 @@ $currentDate = date("Y-m-d");
                         </select>
                       </div>
                       <div class="form-group">
-                        <label for="GratisDouche">Gratis Douchemuntjes</label>
+                        <label for="GratisDouche">Gratis douchemuntjes</label>
                         <select class="form-control form-control-sm">
                           <option>Ja</option>
                           <option>Nee</option>
@@ -398,7 +410,8 @@ $currentDate = date("Y-m-d");
             <div class="tab-pane" id="list-Omzet" role="tabpanel" aria-labelledby="list-Omzet-list">
               <div class="text-dark">Omzet Pagina</div>
               <div class="container-fluid">
-                <div class="row my-3s">
+                <div class="row my-3">
+                  
                 </div>
               </div>
             </div>
