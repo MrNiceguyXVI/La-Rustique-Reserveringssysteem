@@ -27,4 +27,4 @@ o	Of de klant bezoekers verwacht</br>
 •	Een optie om aan te geven dat de klant bezoekers verwacht nadat de reservatie gemaakt is, deze kosten moeten ook op de factuur weergegeven worden.</br></br>
 Wensen</br>
 •	Een passend logo </br>
-•	Een kleurschema met geel of groen, die vrolijk is maar tegelijkertijd ook rustig</br>
+•	Een kleurschema met geel of groen, die vrolijk is maar tegelijkertijd ook rustig</br> 
