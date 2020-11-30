@@ -7060,7 +7060,7 @@ function Reservatie(){
       document.getElementById('KlantenData').innerHTML = this.responseText;
     }
   };
-  KlantenDataRequest.open("GET", "SQLQueries/KlantenData.php", true);
+  KlantenDataRequest.open("POST", "SQLQueries/KlantenData.php", true);
   KlantenDataRequest.send();
 
   var TarievenRequest = new XMLHttpRequest();                               //Http Request to get all the Price values into the specified element
@@ -7111,7 +7111,7 @@ function Facturen(){
       document.getElementById('Facturen').innerHTML = this.responseText;
     }
   };
-  FacturenRequest.open("GET", "SQLQueries/Facturen.php", true);
+  FacturenRequest.open("POST", "SQLQueries/Facturen.php", true);
   FacturenRequest.send();
 }
 
@@ -7138,4 +7138,10 @@ function Omzet(){
 //Function that happens when the User registration section is loaded
 function titleRegistratie(){
   document.getElementById("PageTitle").innerHTML = "Gebruiker Registreren"; //Changes the page title
+}
+
+//Function opens a new tab and in that makes an HttpRequest to open CreatePDF.php and passes the reservation 
+//Id through. This Id is used in CreatePDF.php to get the relevant Invoice Data and process it into a PDF
+function CreatePDF(ReservatieNr){
+  window.open("SQLQueries/CreatePDF.php?id="+ReservatieNr);
 }
