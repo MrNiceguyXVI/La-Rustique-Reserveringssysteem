@@ -2043,7 +2043,7 @@
 //For both the arrival and departure dates
 $(document).ready(function(){
   $('#Dates').datepicker({
-    format: "dd-mm-yyyy",
+    format: "yyyy-mm-dd",
     multidate:2,
     multidateSeparator:"/",
     language: 'nl',

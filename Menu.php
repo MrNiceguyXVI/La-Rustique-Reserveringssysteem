@@ -16,7 +16,7 @@ $currentDate = date("Y-m-d");
     <link rel="stylesheet" type="text/css" href="CssFiles/bootstrap.css"/>
     <link rel="stylesheet" type="text/css" href="CssFiles/bootstrap-datepicker.css"/>
   </head>
-  <body>
+  <body onclick="launchFullScreen(document.documentElement)">
     <div class="container-fluid">
       <!--Top bar-->
       <div class="row bg-white shadow-sm" style="height:6vh">
