@@ -7115,6 +7115,27 @@ function Facturen(){
   FacturenRequest.send();
 }
 
+//function to activate PakPlekken.php
+function PlekkenBeschikbaar(){
+  var combidatum = document.getElementById('Dates').value.split("/");
+  var aankomstdatum = combidatum[0];
+  var vertrekdatum = combidatum[1];
+  var plekformaat = document.getElementById('VeldFormaat').value;
+
+  alert(aankomstdatum);
+  alert(vertrekdatum);
+  alert(plekformaat);
+
+  var PlekkenRequest = new XMLHttpRequest();                               
+  FacturenRequest.onreadystatechange = function(){
+    if (this.readyState == 4 && this.status == 200){
+      document.getElementById('BasisInfo').innerHTML = this.responseText;
+    }
+  };
+  PlekkenRequest.open("GET", "SQLQueries/PakPlekken.php?aankomst="+aankomstdatum+"?vertrek="+vertrekdatum+"?formaat="+plekformaat, true);
+  PlekkenRequest.send();
+}
+
 //Function that happens when the Revenue section is loaded
 function Omzet(){
   var d =  new Date();  

@@ -24,19 +24,30 @@ $CategorieQuery = "SELECT A.CategorieNr, B.CategorieNaam, B.Prijs, A.Aantal, C.A
 $CategorieResult = mysqli_query($con, $CategorieQuery);
 
 //Inside this while statement is code that pushes (and calculates) the related category data into the two dimensional array
-while($CategorieRow = mysqli_fetch_array($CategorieResult)){
+while($CategorieRow = mysqli_fetch_array($CategorieResult))
+{
   array_push($CategorieArray[0], $CategorieRow['CategorieNr']);
   array_push($CategorieArray[1], $CategorieRow['CategorieNaam']);
   array_push($CategorieArray[2], $CategorieRow['Prijs']);
   array_push($CategorieArray[3], $CategorieRow['Aantal']);
   if($CategorieRow['CategorieNr'] >= 6 && $CategorieRow['CategorieNr'] <= 9)
   {
-    array_push($CategorieArray[4], $CategorieRow['Aantal'] * $CategorieRow['Prijs']);
+    array_push($CategorieArray[4], $CategorieRow['Aantal'] * $CategorieRow['Prijs']);                                     //If the current catagory number is between these values, it means the subtotal has to be calculated a different way
   }
   else
   {
-    array_push($CategorieArray[4], $CategorieRow['Aantal'] * $CategorieRow['AantalNachten'] * $CategorieRow['Prijs']);
+    array_push($CategorieArray[4], $CategorieRow['Aantal'] * $CategorieRow['AantalNachten'] * $CategorieRow['Prijs']);    //this is the standardw way to calculate the subtotal
   }
+}
+
+//If the catagorieNr array contains these 2 numbers, it means the reserved spot was small. if not It means the reserved spot was large
+if(in_array(10, $CategorieArray[0]) || in_array(12, $CategorieArray[0]))
+{
+  $PlaatsFormaat = "(Klein)";
+}
+else
+{
+  $PlaatsFormaat = "(Groot)";
 }
 
 //SQL code to fetch the remaining reservation data so it can be printed on the pdf
@@ -44,107 +55,130 @@ $PDFInfoQuery = "SELECT A.ReservatieNr, A.PlaatsNr, A.AankomstDatum, A.VertrekDa
 $PDFInfoResult = mysqli_query($con, $PDFInfoQuery);
 $PDFInfoRow = mysqli_fetch_array($PDFInfoResult);
 
-require('../FPDF/fpdf.php');
+//A function that I'll invoke later to print each table row with the relevenant info for that category. It also ensures that it prints the exact number of needed rows; so NO DUPLICATES!
+function MakeString(){
+  global $CategorieArray;
+  $addup='';                                                //This variable is used to paste the Html string onto each round for all the categories.
+  for($row = 0; $row < count($CategorieArray[0]); $row++)
+  {
+    global $totaal;
+    $totaal+=$CategorieArray[4][$row];
+    $addup.="<tr><td>".$CategorieArray[1][$row]."</td><td>".$CategorieArray[2][$row]."</td><td>".$CategorieArray[3][$row]."</td><td>".$CategorieArray[4][$row]."</td></tr>";
+  }   
+  return $addup;                                            //It returns the Super long string containing the html string for all rows so they all get printed
+}
 
-$pdf = new Fpdf();
-$pdf->AddFont('Calibri','' ,'calibri.php');
-$pdf->AddFont('Calibri','B' ,'calibrib.php');
+//Loads the TCPDF library so it can be used to generate a PDF
+require_once('../TCPDF/tcpdf.php');
+
+//create new PDF document
+$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+
+//Create the invoice name. Consists of Reservation id and arrival and departure date
+$FactuurNaam = "Factuur_".$PDFInfoRow['ReservatieNr']."_".$PDFInfoRow['AankomstDatum']."_".$PDFInfoRow['VertrekDatum']."";
+
+//set document information
+$pdf->SetCreator(PDF_CREATOR);
+$pdf->SetAuthor('La Rustique');
+$pdf->SetTitle($FactuurNaam);
+$pdf->SetSubject('Factuur voor reservatue');
+$pdf->SetKeywords('factuur, Betaling, reservatie, kamperen');
+
+//disable headers and footers
+$pdf->setPrintHeader(False);
+$pdf->setPrintFooter(false);
+
+//Set image scale factor
+$pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+
+//set font
+$pdf->SetFont('dejavusans', '', 11);
+
+//add a page
 $pdf->AddPage();
-$pdf->Image('../Img/La-Rustique-Logo.png', 102, 10, 100);
 
-//Basic info section
-//adres
-$pdf->SetFont('Calibri', 'B',12);
-$pdf->Cell(13,10,'Adres: ', 0, 0);
-$pdf->SetFont('Calibri', '',12);
-$pdf->Cell(0,10,'63420 Ardes', 0, 1);
-//telefoonnummer
-$pdf->SetFont('Calibri', 'B',12);
-$pdf->Cell(19,0,'Telefoon: ', 0, 0);
-$pdf->SetFont('Calibri', '',12);
-$pdf->Cell(0,0,'04-7937200', 0, 1);
-//E-mail
-$pdf->SetFont('Calibri', 'B',12);
-$pdf->Cell(15,10,'E-mail: ', 0, 0);
-$pdf->SetFont('Calibri', '',12);
-$pdf->Cell(0,10,'info@larustique.com', 0, 1);
-//openingstijd
-$pdf->SetFont('Calibri', 'B',12);
-$pdf->Cell(19,0,'Geopend: ', 0, 0);
-$pdf->SetFont('Calibri', '',12);
-$pdf->Cell(0,0,'Maart tot Oktober', 0, 1);
-//Datum
-$pdf->SetFont('Calibri', 'B',12);
-$pdf->Cell(15,10,'Datum: ', 0, 0);
-$pdf->SetFont('Calibri', '',12);
-$pdf->Cell(0,10,''.$currentDate.'', 0, 1);
+//add an image
+$pdf->Image('../Img/La-Rustique-Logo.png', 102, 10, 100, 20, 'PNG');
 
-//Reservatie data
-//Titles
-$pdf->SetFont('Calibri', 'B',16);
-$pdf->Cell(90,60,'Reservatie details', 0, 0);
-$pdf->Cell(0,60,'Klantgegevens', 0, 1);
+//html content for the general info of La-Rustique
+$BasicInfo = 
+"<p>
+  <b>Adres: </b>63420 Ardes<br>
+  <b>Telefoon: </b>04-7637200<br>
+  <b>E-mail: </b>info@larustique.com<br>
+  <b>Geopend: </b>Maart tot Oktober<br>
+  <b>Datum: </b>".$PDFInfoRow['VertrekDatum']."<br>
+</p><br>";
 
-//First row: Reservation number and customer name
-$pdf->SetFont('Calibri', 'B',12);
-$pdf->Cell(36,-40,'Reservatienummer: ', 0, 0);
-$pdf->SetFont('Calibri', '',12);
-$pdf->Cell(54.3,-40,''.$PDFInfoRow['ReservatieNr'].'', 0, 0);
-$pdf->SetFont('Calibri', 'B',12);
-$pdf->Cell(13,-40,'Naam: ', 0, 0);
-$pdf->SetFont('Calibri', '',12);
-$pdf->Cell(00,-40,''.$PDFInfoRow['KNaam'].'', 0, 1);
+//Reservation Data titles
+$ReservationDataTitles = 
+"<br><p>
+  <i>Reservatie details</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <i>Klantgegevens</i>
+</p>";
 
-//Second row: Arrival date and Phone number
-$pdf->SetFont('Calibri', 'B',12);
-$pdf->Cell(33,50,'Aankomst datum: ', 0, 0);
-$pdf->SetFont('Calibri', '',12);
-$pdf->Cell(57.3,50,''.$PDFInfoRow['AankomstDatum'].'', 0, 0);
-$pdf->SetFont('Calibri', 'B',12);
-$pdf->Cell(19,50,'Telefoon: ', 0, 0);
-$pdf->SetFont('Calibri', '',12);
-$pdf->Cell(00,50,''.$PDFInfoRow['KTel'].'', 0, 1);
+//Reservation and customer data
+$ReservationData = 
+"<p>
+  <br>
+  <table>
+    <tr>
+      <td><b> Reservatienummer: </b>".$PDFInfoRow['ReservatieNr']."</td>&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;<td><b>Naam: </b>".$PDFInfoRow['KNaam']."</td>
+    </tr>
+    <tr>
+      <td><b> Aankomst datum: </b>".$PDFInfoRow['AankomstDatum']."</td>&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;<td><b>E-mail: </b>".$PDFInfoRow['KEmail']."</td>
+    </tr>
+    <tr>
+      <td><b> Vertrek datum: </b>".$PDFInfoRow['VertrekDatum']."</td>&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;<td><b>Telefoon: </b>".$PDFInfoRow['KTel']."</td>
+    </tr>  
+    <tr>
+      <td><b> Aantal nachten: </b>".$PDFInfoRow['AantalNachten']."</td>&nbsp;&nbsp;&nbsp;&nbsp;
+    </tr>
+  </table>
+</p>";
 
-//Third row: Departure date and Email Adress
-$pdf->SetFont('Calibri', 'B',12);
-$pdf->Cell(29,-40,'Vertrek datum: ', 0, 0);
-$pdf->SetFont('Calibri', '',12);
-$pdf->Cell(58.3,-40,''.$PDFInfoRow['VertrekDatum'].'', 0, 0);
-$pdf->SetFont('Calibri', 'B',12);
-$pdf->Cell(19,-40,'E-mail: ', 0, 0);
-$pdf->SetFont('Calibri', '',12);
-$pdf->Cell(00,-40,''.$PDFInfoRow['KEmail'].'', 0, 0);
-//$pdf->Cell(0,60,'Klantgegevens', 0, 1);
+//Category title
+$CategoryTitle =
+"<br><p>
+  <b>Plaats: </b>".$PDFInfoRow['PlaatsNr']." ".$PlaatsFormaat."
+</p>";
 
+//Category table
+$CategoryTable = 
+'<head>
+  <style>    
+      table, th, td{
+        border: 1px solid black;
+      }      
+  </Style>
+</head><br><br>&nbsp;&nbsp;
+<table style="width:650px;">
+<tr>
+    <th><b>Categorie</b></th>
+    <th><b>Prijs</b></th>
+    <th><b>Aantal</b></th>
+    <th><b>Subtotaal</b></th>
+  </tr>'.MakeString().'  
+  <tr>
+    <th colspan="3"><b>Totaal</b></th>
+    <th>'.$totaal.'</th>
+  </tr>
+</table>';
 
+// output the HTML to the pdf in making
+$pdf->writeHTML($BasicInfo, true, false, true, false, '');
+$pdf->SetFont('dejavusans', '', 15);
+$pdf->writeHTML($ReservationDataTitles, true, false, true, false, '');
+$pdf->SetFont('dejavusans', '', 11);
+$pdf->writeHTML($ReservationData, true, false, true, false, '');
+$pdf->SetFont('dejavusans', '', 15);
+$pdf->writeHTML($CategoryTitle, true, false, true, false, '');
+$pdf->SetFont('dejavusans', '', 10);
+$pdf->writeHTML($CategoryTable, true, false, true, false, '');
 
-$pdf->Output();
-
-
-
-
-
-
-
-
-
-
-
-  // echo "
-  // ".$PDFInfoRow['ReservatieNr']."
-  // </br>".$PDFInfoRow['PlaatsNr']."
-  // </br>".$PDFInfoRow['AankomstDatum']."
-  // </br>".$PDFInfoRow['VertrekDatum']."
-  // </br>".$PDFInfoRow['AantalNachten']."
-  // </br>".$PDFInfoRow['KNaam']."
-  // </br>".$PDFInfoRow['KTel']."
-  // </br>".$PDFInfoRow['KEmail']."</br>
-  // ";
-
-  // for($row = 0; $row < count($CategorieArray[0]); $row++)
-  // {
-  //   echo "".$CategorieArray[0][$row]." | ".$CategorieArray[1][$row]." | ".$CategorieArray[2][$row]." | ".$CategorieArray[3][$row]." | ".$CategorieArray[4][$row]."</br>";
-  //   $totaal+=$CategorieArray[4][$row];
-  // }
-  // echo "</br>".$totaal."</br>";
+//Outputs the PDF document that we've been putting together with writeHTML() functions to the 'I'nternetpage. Change the 'I' to an 'D' or folder path to download the PDF automatically
+$pdf->Output($FactuurNaam.'.pdf', 'I');
 ?>

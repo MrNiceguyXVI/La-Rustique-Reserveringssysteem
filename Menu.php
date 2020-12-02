@@ -16,7 +16,7 @@ $currentDate = date("Y-m-d");
     <link rel="stylesheet" type="text/css" href="CssFiles/bootstrap.css"/>
     <link rel="stylesheet" type="text/css" href="CssFiles/bootstrap-datepicker.css"/>
   </head>
-  <body onclick="launchFullScreen(document.documentElement)">
+  <body>
     <div class="container-fluid">
       <!--Top bar-->
       <div class="row bg-white shadow-sm" style="height:6vh">
@@ -68,21 +68,21 @@ $currentDate = date("Y-m-d");
                 Reserveren
             </a>
 
-            <a class="list-group-item list-group-item-action " id="list-Reservaties-list" data-toggle="list" href="#list-Reservaties" role="tab" aria-controls="Reservaties" onclick="Reservaties()">
+            <a class="list-group-item list-group-item-action" id="list-Reservaties-list" data-toggle="list" href="#list-Reservaties" role="tab" aria-controls="Reservaties" onclick="Reservaties()">
               <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-calendar2-week-fill mr-2 mb-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 3.5c0-.276.244-.5.545-.5h10.91c.3 0 .545.224.545.5v1c0 .276-.244.5-.546.5H2.545C2.245 5 2 4.776 2 4.5v-1zM8.5 7a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zM3 10.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1z"/>
               </svg>
               Reservaties
             </a>
 
-            <a class="list-group-item list-group-item-action " id="list-Plekken-list" data-toggle="list" href="#list-Plekken" role="tab" aria-controls="Plekken" onclick="Plaatsen()">
+            <a class="list-group-item list-group-item-action" id="list-Plekken-list" data-toggle="list" href="#list-Plekken" role="tab" aria-controls="Plekken" onclick="Plaatsen()">
               <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-map-fill mr-2 mb-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.598-.49L10.5.99 5.598.01a.5.5 0 0 0-.196 0l-5 1A.5.5 0 0 0 0 1.5v14a.5.5 0 0 0 .598.49l4.902-.98 4.902.98a.502.502 0 0 0 .196 0l5-1A.5.5 0 0 0 16 14.5V.5zM5 14.09V1.11l.5-.1.5.1v12.98l-.402-.08a.498.498 0 0 0-.196 0L5 14.09zm5 .8V1.91l.402.08a.5.5 0 0 0 .196 0L11 1.91v12.98l-.5.1-.5-.1z"/>
               </svg>
               Plaatsen
             </a>
 
-            <a class="list-group-item list-group-item-action " id="list-Facturen-list" data-toggle="list" href="#list-Facturen" role="tab" aria-controls="Facturen" onclick="Facturen()">
+            <a class="list-group-item list-group-item-action" id="list-Facturen-list" data-toggle="list" href="#list-Facturen" role="tab" aria-controls="Facturen" onclick="Facturen()">
               <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-receipt mr-2 mb-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M1.92.506a.5.5 0 0 1 .434.14L3 1.293l.646-.647a.5.5 0 0 1 .708 0L5 1.293l.646-.647a.5.5 0 0 1 .708 0L7 1.293l.646-.647a.5.5 0 0 1 .708 0L9 1.293l.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .801.13l.5 1A.5.5 0 0 1 15 2v12a.5.5 0 0 1-.053.224l-.5 1a.5.5 0 0 1-.8.13L13 14.707l-.646.647a.5.5 0 0 1-.708 0L11 14.707l-.646.647a.5.5 0 0 1-.708 0L9 14.707l-.646.647a.5.5 0 0 1-.708 0L7 14.707l-.646.647a.5.5 0 0 1-.708 0L5 14.707l-.646.647a.5.5 0 0 1-.708 0L3 14.707l-.646.647a.5.5 0 0 1-.801-.13l-.5-1A.5.5 0 0 1 1 14V2a.5.5 0 0 1 .053-.224l.5-1a.5.5 0 0 1 .367-.27zm.217 1.338L2 2.118v11.764l.137.274.51-.51a.5.5 0 0 1 .707 0l.646.647.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.509.509.137-.274V2.118l-.137-.274-.51.51a.5.5 0 0 1-.707 0L12 1.707l-.646.647a.5.5 0 0 1-.708 0L10 1.707l-.646.647a.5.5 0 0 1-.708 0L8 1.707l-.646.647a.5.5 0 0 1-.708 0L6 1.707l-.646.647a.5.5 0 0 1-.708 0L4 1.707l-.646.647a.5.5 0 0 1-.708 0l-.509-.51z"/>
                 <path fill-rule="evenodd" d="M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm8-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5z"/>
@@ -90,13 +90,20 @@ $currentDate = date("Y-m-d");
               Facturen
             </a>
 
-            <a class="list-group-item list-group-item-action " id="list-Omzet-list" data-toggle="list" href="#list-Omzet" role="tab" aria-controls="Omzet" onclick="Omzet()">
+            <a class="list-group-item list-group-item-action" id="list-Omzet-list" data-toggle="list" href="#list-Omzet" role="tab" aria-controls="Omzet" onclick="Omzet()">
               <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-cash-stack mr-2 mb-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path d="M14 3H1a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1h-1z"/>
                 <path fill-rule="evenodd" d="M15 5H1v8h14V5zM1 4a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1H1z"/>
                 <path d="M13 5a2 2 0 0 0 2 2V5h-2zM3 5a2 2 0 0 1-2 2V5h2zm10 8a2 2 0 0 1 2-2v2h-2zM3 13a2 2 0 0 0-2-2v2h2zm7-4a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"/>
               </svg>
               Omzet
+            </a>
+
+            <a class="list-group-item list-group-item-action fixed-bottom mx-3 mb-1 pointer" onclick="launchFullScreen(document.documentElement)">
+              <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-fullscreen mr-2 mb-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M1.5 1a.5.5 0 0 0-.5.5v4a.5.5 0 0 1-1 0v-4A1.5 1.5 0 0 1 1.5 0h4a.5.5 0 0 1 0 1h-4zM10 .5a.5.5 0 0 1 .5-.5h4A1.5 1.5 0 0 1 16 1.5v4a.5.5 0 0 1-1 0v-4a.5.5 0 0 0-.5-.5h-4a.5.5 0 0 1-.5-.5zM.5 10a.5.5 0 0 1 .5.5v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 1 0 1h-4A1.5 1.5 0 0 1 0 14.5v-4a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v4a1.5 1.5 0 0 1-1.5 1.5h-4a.5.5 0 0 1 0-1h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 1 .5-.5z"/>
+              </svg>
+              Fullscreen
             </a>
           </div>
         </div>
@@ -131,33 +138,33 @@ $currentDate = date("Y-m-d");
                       <div class="h5">Nieuwe klant</div>
                       <div class="form-group">
                         <label for="KlantNaam">Naam</label>
-                        <input type="text" class="form-control form-control-sm" id="" aria-describedby="KlantNaam">
+                        <input type="text" class="form-control form-control-sm" id="" aria-describedby="KlantNaam" value="">
                       </div>
                       <div class="form-group">
                         <label for="KlantEmail">Email</label>
-                        <input type="email" class="form-control form-control-sm" id="" aria-describedby="klantEmail">
+                        <input type="email" class="form-control form-control-sm" id="" aria-describedby="klantEmail" value="">
                       </div>
                       <div class="form-group">
                         <label for="KlantTel">Telefoonnummer</label>
-                        <input type="text" class="form-control form-control-sm" id="" aria-describedby="KlantTel">
+                        <input type="text" class="form-control form-control-sm" id="" aria-describedby="KlantTel" value="">
                       </div>
                     </div>
 
-                    <div>
+                    <div id="BasisInfo">
                       <div class="h5">Basis Informatie</div>                      
                       <div class="form-group ">
                         <label for="reservatie datum" class="">Aankomst en vertrek datums</label>
-                        <input type="text" class="form-control form-control-sm" id="Dates">
+                        <input type="text" class="form-control form-control-sm" id="Dates" value="">
                       </div>
 
                       <div class="form-group">
                         <label for="VeldFormaat">Formaat</label>
-                        <select class="form-control form-control-sm">
-                          <option>Groot</option>
-                          <option>Klein</option>
+                        <select class="form-control form-control-sm" name="VeldFormaat" id="VeldFormaat">
+                          <option value="GROOT">Groot</option>
+                          <option value="KLEIN">Klein</option>
                         </select>
                       </div>
-                      <button type="button" class="btn btn-sm btn-dark">Beschikbaarheid controleren</button>                   
+                      <a type="button" class="btn btn-sm btn-dark" onclick="PlekkenBeschikbaar()">Beschikbaarheid controleren</a>                   
                     </div>
                   </div>
                   <div class="col-5">
