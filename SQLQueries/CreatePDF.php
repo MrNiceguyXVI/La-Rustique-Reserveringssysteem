@@ -3,7 +3,7 @@ include '../Connection.php';
 $currentDate = date("Y-m-d"); 
 
 //Gets the ID from the URL
-$id = $_GET['id'];
+$id = urldecode($_GET['id']); //Decodes variable passed through the URL
 
 //totals variable used to calculate the grand total
 $totaal = 0;

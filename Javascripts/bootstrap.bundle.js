@@ -7122,18 +7122,26 @@ function PlekkenBeschikbaar(){
   var vertrekdatum = combidatum[1];
   var plekformaat = document.getElementById('VeldFormaat').value;
 
-  alert(aankomstdatum);
-  alert(vertrekdatum);
-  alert(plekformaat);
+  //checking if dates are entered, and if they're not it cancels the operation and gives an alert
+  if(aankomstdatum == "" && vertrekdatum == undefined){
+    alert("Geen datums aangegeven");
+  } else if(vertrekdatum == undefined) {
+    alert("Geen vertrek datum aangegeven");
+  } else {
+    var PlekkenRequest = new XMLHttpRequest();                               
+    PlekkenRequest.onreadystatechange = function(){
+      if (this.readyState == 4 && this.status == 200){
+        document.getElementById('BeschikbarePlekken').innerHTML = this.responseText;
+      }
+    };
 
-  var PlekkenRequest = new XMLHttpRequest();                               
-  FacturenRequest.onreadystatechange = function(){
-    if (this.readyState == 4 && this.status == 200){
-      document.getElementById('BasisInfo').innerHTML = this.responseText;
-    }
-  };
-  PlekkenRequest.open("GET", "SQLQueries/PakPlekken.php?aankomst="+aankomstdatum+"?vertrek="+vertrekdatum+"?formaat="+plekformaat, true);
-  PlekkenRequest.send();
+    //Makes sure the extra section gets shown so the user can continue to enter data
+    //document.getElementById('Details').classList.toggle("show");
+    
+    //Use the ampersand & to glue variables together, and encoding the data
+    PlekkenRequest.open("GET", "SQLQueries/PakPlekken.php?aankomst="+encodeURI(aankomstdatum)+"&vertrek="+encodeURI(vertrekdatum)+"&formaat="+encodeURI(plekformaat), true);
+    PlekkenRequest.send();
+  }
 }
 
 //Function that happens when the Revenue section is loaded
@@ -7164,7 +7172,7 @@ function titleRegistratie(){
 //Function opens a new tab and in that makes an HttpRequest to open CreatePDF.php and passes the reservation 
 //Id through. This Id is used in CreatePDF.php to get the relevant Invoice Data and process it into a PDF
 function CreatePDF(ReservatieNr){
-  window.open("SQLQueries/CreatePDF.php?id="+ReservatieNr);
+  window.open("SQLQueries/CreatePDF.php?id="+encodeURI(ReservatieNr));
 }
 
 // Find the right method, call on correct element

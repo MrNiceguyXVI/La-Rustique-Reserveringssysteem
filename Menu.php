@@ -99,7 +99,7 @@ $currentDate = date("Y-m-d");
               Omzet
             </a>
 
-            <a class="list-group-item list-group-item-action fixed-bottom mx-3 mb-1 pointer" onclick="launchFullScreen(document.documentElement)">
+            <a class="list-group-item list-group-item-action  mb-1 pointer" onclick="launchFullScreen(document.documentElement)">
               <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-fullscreen mr-2 mb-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M1.5 1a.5.5 0 0 0-.5.5v4a.5.5 0 0 1-1 0v-4A1.5 1.5 0 0 1 1.5 0h4a.5.5 0 0 1 0 1h-4zM10 .5a.5.5 0 0 1 .5-.5h4A1.5 1.5 0 0 1 16 1.5v4a.5.5 0 0 1-1 0v-4a.5.5 0 0 0-.5-.5h-4a.5.5 0 0 1-.5-.5zM.5 10a.5.5 0 0 1 .5.5v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 1 0 1h-4A1.5 1.5 0 0 1 0 14.5v-4a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v4a1.5 1.5 0 0 1-1.5 1.5h-4a.5.5 0 0 1 0-1h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 1 .5-.5z"/>
               </svg>
@@ -150,7 +150,7 @@ $currentDate = date("Y-m-d");
                       </div>
                     </div>
 
-                    <div id="BasisInfo">
+                    <div>
                       <div class="h5">Basis Informatie</div>                      
                       <div class="form-group ">
                         <label for="reservatie datum" class="">Aankomst en vertrek datums</label>
@@ -160,19 +160,19 @@ $currentDate = date("Y-m-d");
                       <div class="form-group">
                         <label for="VeldFormaat">Formaat</label>
                         <select class="form-control form-control-sm" name="VeldFormaat" id="VeldFormaat">
-                          <option value="GROOT">Groot</option>
-                          <option value="KLEIN">Klein</option>
+                          <option value="'GROOT'">Groot</option>
+                          <option value="'KLEIN'">Klein</option>
                         </select>
                       </div>
                       <a type="button" class="btn btn-sm btn-dark" onclick="PlekkenBeschikbaar()">Beschikbaarheid controleren</a>                   
                     </div>
                   </div>
                   <div class="col-5">
-                    <div>
+                    <div id="Details">
                       <div class="h5">Details</div>
                       <div class="form-group">
                         <label for="PlekNummer">Pleknummer</label>
-                        <select class="form-control form-control-sm">
+                        <select class="form-control form-control-sm" id="BeschikbarePlekken" name="BeschikbarePlekken" value="">
                           <!--PHP code here-->
                         </select>
                       </div>
