@@ -13,6 +13,7 @@ $currentDate = date("Y-m-d");
     <script src="Javascripts/bootstrap.bundle.js"></script>
     <script src="Javascripts/bootstrap-datepicker.js"></script>
     <script src="Javascripts/bootstrap-datepicker.nl.min.js"></script>
+    <script src="Javascripts/CustomFunctions.js"></script>
     <link rel="stylesheet" type="text/css" href="CssFiles/bootstrap.css"/>
     <link rel="stylesheet" type="text/css" href="CssFiles/bootstrap-datepicker.css"/>
   </head>
@@ -116,37 +117,36 @@ $currentDate = date("Y-m-d");
             <!--Reserveren page-->
             <div class="tab-pane" id="list-Reserveren" role="tabpanel" aria-labelledby="list-Reserveren-list">
               <div class="container-fluid">
-              <form>
-                <div class="row mt-3">
-                  
+              <form id="ReserverenForm">
+                <div class="row mt-3">                  
                   <div class="col-4">
                     <div class="mb-5">
                       <div class="h5">Terugkomende klant</div>
                       <div class="form-group">
                         <label for="Bestaande klant" class="mr-5 mb-2">Selecteer klant gegevens</label>
-                        <div class=" form-inline">
+                        <div class="form-inline">
                           <select class="form-control form-control-sm px-auto" id="KlantenData">
                             <!--Er word een AJAX request gemaakt in bootstrap.bundje.js om 
                             de all bestaande klanten weer te geven-->
                           </select>
-                          <button type="button" class="btn btn-sm btn-secondary ml-auto px-3">Kies</button>
+                          <button type="button" class="btn btn-sm btn-secondary ml-auto px-3" onclick="VulKlantenInfo()">Kies</button>
                         </div>
                       </div>
                     </div>
-                    
+                    <div id="ReservatieInvoeren">f</div>
                     <div class="mb-5">
                       <div class="h5">Nieuwe klant</div>
                       <div class="form-group">
                         <label for="KlantNaam">Naam</label>
-                        <input type="text" class="form-control form-control-sm" id="" aria-describedby="KlantNaam" value="">
+                        <input type="text" class="form-control form-control-sm" name="Naam" id="Naam" aria-describedby="KlantNaam" value="" placeholder="John Doe">
                       </div>
                       <div class="form-group">
                         <label for="KlantEmail">Email</label>
-                        <input type="email" class="form-control form-control-sm" id="" aria-describedby="klantEmail" value="">
+                        <input type="email" class="form-control form-control-sm" name="Email" id="Email"  aria-describedby="klantEmail" value="" placeholder="Example@provider.com">
                       </div>
                       <div class="form-group">
                         <label for="KlantTel">Telefoonnummer</label>
-                        <input type="text" class="form-control form-control-sm" id="" aria-describedby="KlantTel" value="">
+                        <input type="tel" class="form-control form-control-sm" name="Telefoon" id="Telefoon" aria-describedby="KlantTel" value="" placeholder="+3112345678">
                       </div>
                     </div>
 
@@ -154,7 +154,7 @@ $currentDate = date("Y-m-d");
                       <div class="h5">Basis Informatie</div>                      
                       <div class="form-group ">
                         <label for="reservatie datum" class="">Aankomst en vertrek datums</label>
-                        <input type="text" class="form-control form-control-sm" id="Dates" value="">
+                        <input type="text" class="form-control form-control-sm" naam="Datums" id="Dates" value="" onkeydown="return false">
                       </div>
 
                       <div class="form-group">
@@ -172,59 +172,56 @@ $currentDate = date("Y-m-d");
                       <div class="h5">Details</div>
                       <div class="form-group">
                         <label for="PlekNummer">Pleknummer</label>
-                        <select class="form-control form-control-sm" id="BeschikbarePlekken" name="BeschikbarePlekken" value="">
+                        <select class="form-control form-control-sm" id="BeschikbarePlekken" name="BeschikbarePlekken">
                           <!--PHP code here-->
                         </select>
                       </div>
                       <div class="form-group">
                         <label for="Auto">Met de auto</label>
-                        <select class="form-control form-control-sm">
-                          <option>Ja</option>
-                          <option>Nee</option>
+                        <select class="form-control form-control-sm" name="Auto" id="Auto">
+                          <option value="Ja">Ja</option>
+                          <option value="Nee">Nee</option>
                         </select>
                       </div>
                       <div class="form-group">
                         <label for="SoortVerblijf">Soort verblijf</label>
-                        <select class="form-control form-control-sm">
-                          <option>Caravan</option>
-                          <option>Camper</option>
-                          <option>Tent</option>
+                        <select class="form-control form-control-sm" name="SoortVerblijf" id="SoortVerblijf">
+                          <option value="Caravan">Caravan/Camper</option>
+                          <option value="Tent">Tent</option>
                         </select>
                       </div>
                       <div class="form-group">
-                        <label for="Electriciteit">Electriciteit</label>
-                        <select class="form-control form-control-sm">
-                          <option>Ja</option>
-                          <option>Nee</option>
+                        <label for="Electriciteit" >Electriciteit</label>
+                        <select class="form-control form-control-sm" name="Electriciteit" id="Electriciteit">
+                          <option value="Ja">Ja</option>
+                          <option value="Nee">Nee</option>
                         </select>
+                        <small class="form-text text-muted">Bij een klein veld is Electriciteit niet mogelijk</small>
                       </div>
                       <div class="form-group">
-                        <label for="GratisDouche">Gratis douchemuntjes</label>
-                        <select class="form-control form-control-sm">
-                          <option>Ja</option>
-                          <option>Nee</option>
-                        </select>
+                        <label for="GratisDouche">Extra douchemuntjes</label>
+                        <input type="number" class="form-control form-control-sm" value="" naam="ExtraDoucheMuntjes" id="ExtraDoucheMuntjes">
                       </div>
                       <div class="form-group">
                         <label for="AantalVolwassenen">Aantal volwassenen</label>
-                        <input type="text" class="form-control form-control-sm" id="" aria-describedby="">
+                        <input type="number" class="form-control form-control-sm" value="" name="Volwassenen" id="Volwassenen">
                       </div>
                       <div class="form-group">
                         <label for="AantalKindTot4">Aantal kinderen (tot 4 jaar)</label>
-                        <input type="text" class="form-control form-control-sm" id="" aria-describedby="">
+                        <input type="number" class="form-control form-control-sm" value="" name="KinderenTot4" id="KinderenTot4">
                       </div>
                       <div class="form-group">
                         <label for="AantalKindTot12">Aantal kinderen (tussen 4 - 12 jaar)</label>
-                        <input type="text" class="form-control form-control-sm" id="" aria-describedby="">
+                        <input type="number" class="form-control form-control-sm" value="" name="KinderenTot12" id="KinderenTot12">
                       </div>
                       <div class="form-group">
                         <label for="Huisdier">Huisdier</label>
-                        <select class="form-control form-control-sm">
-                          <option>Ja</option>
-                          <option>Nee</option>
+                        <select class="form-control form-control-sm" name="Huisdier" id="Huisdier">
+                          <option value="Ja">Ja</option>
+                          <option value="Nee">Nee</option>
                         </select>
                       </div>
-                      <button type="button" class="btn btn-sm btn-success">Reservatie invoeren</button>
+                      <button type="button" class="btn btn-sm btn-success" onclick="MaakReservatie()">Reservatie invoeren</button>
                     </div>
                   </div>
                   

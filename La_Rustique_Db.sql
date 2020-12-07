@@ -345,10 +345,10 @@ CREATE TABLE Klanten (
 
 /*Voorbeeld klanten*/
   INSERT INTO Klanten (KNaam, KTel, KEmail)
-  VALUES ('Freddy Tootsierol', '06506535384', 'Freddysemail@dot.com');
+  VALUES ('Freddy Tootsierol', '+31650356575', 'Freddysemail@dot.com');
 
   INSERT INTO Klanten (KNaam, KTel, KEmail)
-  VALUES ('Jebadiah Kerman', '+31 858 975 54', 'Kerbalspace@email.com');
+  VALUES ('Jebadiah Kerman', '+3185897554', 'Kerbalspace@email.com');
 /*Eind voorbeeld klanten*/
 
 CREATE TABLE Reservaties (
