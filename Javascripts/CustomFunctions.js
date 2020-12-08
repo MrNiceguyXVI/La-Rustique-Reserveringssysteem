@@ -21,14 +21,7 @@ function logOut(){
 function Reservatie(){
   document.getElementById("PageTitle").innerHTML = "Reserveren";            //Changes the page title
 
-  var KlantenDataRequest = new XMLHttpRequest();                            //Http Request to get all the existing customers into the specified element
-  KlantenDataRequest.onreadystatechange = function(){
-    if (this.readyState == 4 && this.status == 200){
-      document.getElementById('KlantenData').innerHTML = this.responseText;
-    }
-  };
-  KlantenDataRequest.open("POST", "SQLQueries/KlantenData.php", true);
-  KlantenDataRequest.send();
+  BestaandeKlanten();
 
   var TarievenRequest = new XMLHttpRequest();                               //Http Request to get all the Price values into the specified element
   TarievenRequest.onreadystatechange = function(){
@@ -43,6 +36,18 @@ function Reservatie(){
 //Function that happens when the Reservation overview section is loaded
 function Reservaties(){
   document.getElementById("PageTitle").innerHTML = "Reservaties overzicht ";//Changes the page title
+}
+
+//function to fill the 'already existing' customer selection with the existing customers
+function BestaandeKlanten(){
+  var KlantenDataRequest = new XMLHttpRequest();                            //Http Request to get all the existing customers into the specified element
+    KlantenDataRequest.onreadystatechange = function(){
+      if (this.readyState == 4 && this.status == 200){
+        document.getElementById('KlantenData').innerHTML = this.responseText;
+      }
+    };
+    KlantenDataRequest.open("GET", "SQLQueries/KlantenData.php", true);
+    KlantenDataRequest.send();
 }
 
 //Function that happens when the Spots section is loaded
@@ -200,6 +205,10 @@ function MaakReservatie(){
     KinderenTot12 = 0;
   }
 
+  //call BestaandeKlanten Function to refresh the already existing customer selector
+  // BestaandeKlanten();
+  // BestaandeKlanten();
+
   /*checks if there are any error messages. 
   *If there are, it'll send an alert with the messages and it'll cancel the AJAX request 
   */
@@ -233,6 +242,8 @@ function MaakReservatie(){
     //Use the ampersand & to glue variables together, and encoding the data
     ReservatieRequest.open("GET", url, true);
     ReservatieRequest.send();
+
+    //document.getElementById('Dates').value = null;
   } else{
     alert(ErrorMessage);
     ErrorMessage = "Reservatie geannuleerd door fouten:\n"; //clears the error messages so they don't appear twice in the same alert

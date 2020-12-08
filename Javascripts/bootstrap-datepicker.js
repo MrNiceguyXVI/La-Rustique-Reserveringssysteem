@@ -119,8 +119,8 @@
 		}
 
 		this._buildEvents();
-		this._attachEvents();
-
+    this._attachEvents();
+    
 		if (this.isInline){
 			this.picker.addClass('datepicker-inline').appendTo(this.element);
 		}

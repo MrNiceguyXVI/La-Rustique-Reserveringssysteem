@@ -146,7 +146,7 @@ $currentDate = date("Y-m-d");
                       </div>
                       <div class="form-group">
                         <label for="KlantTel">Telefoonnummer</label>
-                        <input type="tel" class="form-control form-control-sm" name="Telefoon" id="Telefoon" aria-describedby="KlantTel" value="" placeholder="+3112345678">
+                        <input type="text" class="form-control form-control-sm" name="Telefoon" id="Telefoon" aria-describedby="KlantTel" value="" placeholder="+3112345678">
                       </div>
                     </div>
 

@@ -63,7 +63,7 @@ function MakeString(){
   {
     global $totaal;
     $totaal+=$CategorieArray[4][$row];
-    $addup.="<tr><td>".$CategorieArray[1][$row]."</td><td>".$CategorieArray[2][$row]."</td><td>".$CategorieArray[3][$row]."</td><td>".$CategorieArray[4][$row]."</td></tr>";
+    $addup.="<tr><td>".$CategorieArray[1][$row]."</td><td>€".$CategorieArray[2][$row].",-</td><td>".$CategorieArray[3][$row]."</td><td>€".$CategorieArray[4][$row].",-</td></tr>";
   }   
   return $addup;                                            //It returns the Super long string containing the html string for all rows so they all get printed
 }
@@ -164,7 +164,7 @@ $CategoryTable =
   </tr>'.MakeString().'  
   <tr>
     <th colspan="3"><b>Totaal</b></th>
-    <th>'.$totaal.'</th>
+    <th>€'.$totaal.',-</th>
   </tr>
 </table>';
 
