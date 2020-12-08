@@ -115,7 +115,7 @@ function PlekkenBeschikbaar(){
     };
     
     //Use the ampersand & to glue variables together, and encoding the data
-    PlekkenRequest.open("GET", "SQLQueries/PakPlekken.php?aankomst="+encodeURIComponent(aankomstdatum)+"&vertrek="+encodeURIComponent(vertrekdatum)+"&formaat="+encodeURIComponent(plekformaat), true);
+    PlekkenRequest.open("GET", "SQLQueries/PakPlekken.php?aankomst="+encodeURI(aankomstdatum)+"&vertrek="+encodeURI(vertrekdatum)+"&formaat="+encodeURI(plekformaat), true);
     PlekkenRequest.send();
   }
 }

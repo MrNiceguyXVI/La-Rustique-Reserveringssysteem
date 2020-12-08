@@ -47,7 +47,7 @@ while($PakKlantNrRow = mysqli_fetch_array($PakKlantNrResult)){
 //Query for inserting a new record into the 'reservaties' table with the accurate information
 $InsertReservatieQuery = "
           INSERT INTO reservaties (PlaatsNr, KlantNr, AankomstDatum, VertrekDatum, AantalNachten)
-          VALUES (".$Plek.", ".$KlantNr.", ".$AankomstDatum.", ".$VertrekDatum.", ".$AantalNachten.")
+          VALUES (".$Plek.", ".$KlantNr.", '".$AankomstDatum."', '".$VertrekDatum."', ".$AantalNachten.")
 ";
 $InsertReservatieResult = mysqli_query($con, $InsertReservatieQuery);
 ?>
