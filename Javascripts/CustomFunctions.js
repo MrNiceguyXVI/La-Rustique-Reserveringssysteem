@@ -205,9 +205,9 @@ function MaakReservatie(){
     KinderenTot12 = 0;
   }
 
-  //call BestaandeKlanten Function to refresh the already existing customer selector
-  // BestaandeKlanten();
-  // BestaandeKlanten();
+  //call Plekken Beschikbaar Function to refresh the already existing customer selector
+  PlekkenBeschikbaar();
+  PlekkenBeschikbaar();
 
   /*checks if there are any error messages. 
   *If there are, it'll send an alert with the messages and it'll cancel the AJAX request 
@@ -243,8 +243,10 @@ function MaakReservatie(){
     ReservatieRequest.open("GET", url, true);
     ReservatieRequest.send();
 
-    PlekkenBeschikbaar();
-    PlekkenBeschikbaar();
+    //Refreshes the customer selector
+    BestaandeKlanten();
+    BestaandeKlanten();
+    
     //document.getElementById('Dates').value = null;
   } else{
     alert(ErrorMessage);

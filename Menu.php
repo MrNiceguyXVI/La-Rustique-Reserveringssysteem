@@ -133,7 +133,7 @@ $currentDate = date("Y-m-d");
                         </div>
                       </div>
                     </div>
-                    <div id="ReservatieInvoeren">f</div>
+                    <div id="ReservatieInvoeren"></div>
                     <div class="mb-5">
                       <div class="h5">Nieuwe klant</div>
                       <div class="form-group">
