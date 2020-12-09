@@ -243,6 +243,8 @@ function MaakReservatie(){
     ReservatieRequest.open("GET", url, true);
     ReservatieRequest.send();
 
+    PlekkenBeschikbaar();
+    PlekkenBeschikbaar();
     //document.getElementById('Dates').value = null;
   } else{
     alert(ErrorMessage);
