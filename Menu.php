@@ -7,15 +7,35 @@ $currentDate = date("Y-m-d");
 <html lang="nl">
   <head>
     <title>La Rustique Reserveringsysteem</title>
+    <link rel="icon" href="Img/La-Rustique-Logo-Icon.png">
     <!--Bootstrap links (css and java)-->
     <script src="Javascripts/jquery-3.5.1.js"></script>
+    <script src="Javascripts/moment.js"></script>
     <script src="Javascripts/popper.js"></script>
     <script src="Javascripts/bootstrap.bundle.js"></script>
     <script src="Javascripts/bootstrap-datepicker.js"></script>
     <script src="Javascripts/bootstrap-datepicker.nl.min.js"></script>
     <script src="Javascripts/CustomFunctions.js"></script>
+    <script src="fullcalendar/main.js"></script>
+    <script src="fullcalendar/locales/nl.js"></script>
     <link rel="stylesheet" type="text/css" href="CssFiles/bootstrap.css"/>
     <link rel="stylesheet" type="text/css" href="CssFiles/bootstrap-datepicker.css"/>
+    <link rel="stylesheet" type="text/css" href="fullcalendar/main.css"/>
+    <script>
+
+      document.addEventListener('DOMContentLoaded', function() {
+      
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: 'dayGridMonth',
+          height:600,
+          locale: 'nl'
+        });
+        calendar.render();
+      });
+    
+    
+    </script>
   </head>
   <body>
     <div class="container-fluid">
@@ -41,10 +61,10 @@ $currentDate = date("Y-m-d");
           <!--actual page name-->                  
           <div class="text-black" id="PageTitle">Welkom!</div>
 
-          <!--Button to Add user-->
-          <button type="button" class="btn btn-addUser p-0 mr-2 ml-auto" id="list-Registratie-list" data-toggle="list" href="#list-Registratie" role="tab" aria-controls="Registratie" onclick="addUser()">
-            <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-person-plus-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm7.5-3a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+          <!--Button to open account interface-->
+          <button type="button" class="btn btn-addUser p-0 mr-2 ml-auto" id="list-Gebruiker-list" data-toggle="list" href="#list-Gebruiker" role="tab" aria-controls="Gebruiker" onclick="openUserInterface()">
+            <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-person-lines-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm7 1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm2 9a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
             </svg>
           </button>
 
@@ -126,7 +146,7 @@ $currentDate = date("Y-m-d");
                         <label for="Bestaande klant" class="mr-5 mb-2">Selecteer klant gegevens</label>
                         <div class="form-inline">
                           <select class="form-control form-control-sm px-auto" id="KlantenData">
-                            <!--Er word een AJAX request gemaakt in bootstrap.bundje.js om 
+                            <!--Er word een AJAX request gemaakt in CustomFunctions.js om 
                             de all bestaande klanten weer te geven-->
                           </select>
                           <button type="button" class="btn btn-sm btn-secondary ml-auto px-3" onclick="VulKlantenInfo()">Kies</button>
@@ -171,7 +191,7 @@ $currentDate = date("Y-m-d");
                     <div id="Details">
                       <div class="h5">Details</div>
                       <div class="form-group">
-                        <label for="PlekNummer">Pleknummer</label>
+                        <label for="PlekNummer">Plaatsnummer</label>
                         <select class="form-control form-control-sm" id="BeschikbarePlekken" name="BeschikbarePlekken">
                           <!--PHP code here-->
                         </select>
@@ -238,7 +258,7 @@ $currentDate = date("Y-m-d");
                           </tr>
                         </thead>
                         <tbody id="Tarieven">
-                          <!--Er word een AJAX request gemaakt in bootstrap.bundje.js om 
+                          <!--Er word een AJAX request gemaakt in CustomFunctions.js om 
                           de tarieven uit de database weer te geven-->
                         </tbody>
                       </table>
@@ -251,9 +271,15 @@ $currentDate = date("Y-m-d");
 
             <!--Reservatie Overzicht page-->
             <div class="tab-pane" id="list-Reservaties" role="tabpanel" aria-labelledby="list-Reservaties-list">
-              <div class="text-dark">Reservaties Pagina</div>
               <div class="container-fluid">
-                <div class="row">
+                <div class="row my-3" id="calendar">
+                    <div></div>
+                  
+                  
+                </div>
+                <div class="row my-3">
+                  
+                  asdasd
                 </div>
               </div>
             </div>
@@ -273,7 +299,7 @@ $currentDate = date("Y-m-d");
                           </tr>
                         </thead>
                         <tbody id="GrotePlaatsen">
-                          <!--Er word een AJAX request gemaakt in bootstrap.bundje.js om 
+                          <!--Er word een AJAX request gemaakt in CustomFunctions.js om 
                           de beschikbaarheid van de grote plaatsen weer te geven-->
                         </tbody>
                       </table>
@@ -290,7 +316,7 @@ $currentDate = date("Y-m-d");
                           </tr>
                         </thead>
                         <tbody id="KleinePlaatsen">
-                          <!--Er word een AJAX request gemaakt in bootstrap.bundje.js om 
+                          <!--Er word een AJAX request gemaakt in CustomFunctions.js om 
                           de beschikbaarheid van de kleine plaatsen weer te geven-->
                         </tbody>
                       </table>
@@ -318,7 +344,7 @@ $currentDate = date("Y-m-d");
                           </tr>
                         </thead>
                         <tbody id="Facturen">
-                          <!--Er word een AJAX request gemaakt in bootstrap.bundje.js om 
+                          <!--Er word een AJAX request gemaakt in CustomFunctions.js om 
                           de nodige Facturen weer te geven-->
                         </tbody>
                       </table>
@@ -340,28 +366,90 @@ $currentDate = date("Y-m-d");
             </div>
 
             <!--Nieuwe Gebruiker Registreren-->
-            <div class="tab-pane" id="list-Registratie" role="tabpanel" aria-labelledby="list-Registratie-list">
+            <div class="tab-pane" id="list-Gebruiker" role="tabpanel" aria-labelledby="list-Gebruiker-list">
               <div class="container-fluid">
                 <div class="row my-3">
                   <div class="col-5"></div>
                   <div class="col-2">
-                      <form>
-                        <div class="form-group">
-                          <label for="Username">Gebruikersnaam</label>
-                          <input type="text" class="form-control form-control-sm" id="Gebruikersnaam" aria-describedby="Gebruikersnaam">
-                        </div>
-                        <div class="form-group">
-                          <label for="Password">Wachtwoord</label>
-                          <input type="password" class="form-control form-control-sm" id="Wachtwoord" aria-describedby="Wachtwoord">
-                        </div>
-                        <button type="submit" class="btn btn-sm btn-success px-2">Gebruiker Registreren</button>
-                      </form>
+                    <button class="btn btn-success" data-toggle='modal' data-target='#ToevoegenModal'>Nieuwe Account Registreren</button>
                   </div>
                   <div class="col-5"></div>
                 </div>
+                <div class="row my-3" >
+                  <div class="col-2"></div>
+                  <div class="col-8">
+                    <table class="table table-sm table-striped table-hover border rounded shadow-sm">
+                      <thead>
+                        <tr>
+                          <th scope="col">Gebruikersnaam</th>
+                          <th scope="col">Wachtwoord</th>
+                          <th scope="col">Eigenaar rechten</th>
+                          <th scope="col">Aanpassen</th>
+                        </tr>
+                      </thead>
+                      <tbody id="GebruikerAccounts">
+                        <!--Er word een AJAX request gemaakt in CustomFunctions.js om 
+                        de bestaande accounts uit de database weer te geven-->
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="col-2"></div>
+
+                  <div class="modal fade" id="AanpassenModal" tabindex="-1" role="dialog" aria-labelledby="Aanpassen/verwijderenModal" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Acccount aanpassen/verwijderen</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body" id="FillAccountForm">
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuleren</button>
+                          <button type="button" class="btn btn-danger">Account verwijderen</button>     
+                          <button type="button" class="btn btn-primary">Aanpassingen doorvoeren</button>                                            
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="modal fade" id="ToevoegenModal" tabindex="-1" role="dialog" aria-labelledby="ToevoegenModal" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Acccount aanpassen/verwijderen</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body" id="FillAccountForm">
+                          <form>
+                            <div class="form-group">
+                              <label for="Username">Gebruikersnaam</label>
+                              <input type="text" class="form-control form-control-sm" id="Gebruikersnaam" aria-describedby="Gebruikersnaam" value="">
+                            </div>
+                            <div class="form-group">
+                              <label for="Password">Wachtwoord</label>
+                              <input type="password" class="form-control form-control-sm" id="Wachtwoord" aria-describedby="Wachtwoord" value="">
+                            </div>
+                            <div class="form-check">
+                              <input type="checkbox" class="form-check-input" id="AdminCheckBox">
+                              <label class="form-check-label" for="exampleCheck1">Admin</label>
+                            </div>
+                          </form>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuleren</button>  
+                          <button type="button" class="btn btn-success">Account toevoegen</button>                                            
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-            
           </div>
         </div>
       </div>

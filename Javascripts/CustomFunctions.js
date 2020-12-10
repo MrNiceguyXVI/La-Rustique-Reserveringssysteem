@@ -8,9 +8,29 @@ function menuHide(){
   document.getElementById('selectedpage').classList.toggle("col-12");   //toggles the col-12 class to make sure all the space is being used
 }
 
-//functio to add a user account to the database
-function addUser(){  
-  document.getElementById("PageTitle").innerHTML = "Gebruiker Registreren";
+//function to display all users from the database
+function openUserInterface(){  
+  document.getElementById("PageTitle").innerHTML = "Overzicht accounts";
+  var GebruikerAccounts = new XMLHttpRequest();                               //Http Request to open GebruikerAccounts.php
+  GebruikerAccounts.onreadystatechange = function(){
+    if (this.readyState == 4 && this.status == 200){
+      document.getElementById('GebruikerAccounts').innerHTML = this.responseText;
+    }
+  };
+  GebruikerAccounts.open("GET", "SQLQueries/GebruikerAccounts.php", true);
+  GebruikerAccounts.send();
+}
+
+//function to display the accurate form info for the choses user
+function GetAccountInfo(AccountNr){
+  var FillAccountInfo = new XMLHttpRequest();                               //Http Request to open FillAccountInfo.php
+  FillAccountInfo.onreadystatechange = function(){
+    if (this.readyState == 4 && this.status == 200){
+      document.getElementById('FillAccountForm').innerHTML = this.responseText;
+    }
+  };
+  FillAccountInfo.open("GET", "SQLQueries/FillAccountInfo.php?AccountNr="+encodeURIComponent(AccountNr), true);
+  FillAccountInfo.send();
 }
 
 function logOut(){
@@ -36,6 +56,7 @@ function Reservatie(){
 //Function that happens when the Reservation overview section is loaded
 function Reservaties(){
   document.getElementById("PageTitle").innerHTML = "Reservaties overzicht ";//Changes the page title
+  
 }
 
 //function to fill the 'already existing' customer selection with the existing customers

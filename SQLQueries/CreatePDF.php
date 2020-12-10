@@ -181,4 +181,5 @@ $pdf->writeHTML($CategoryTable, true, false, true, false, '');
 
 //Outputs the PDF document that we've been putting together with writeHTML() functions to the 'I'nternetpage. Change the 'I' to an 'D' or folder path to download the PDF automatically
 $pdf->Output($FactuurNaam.'.pdf', 'I');
+
 ?>
