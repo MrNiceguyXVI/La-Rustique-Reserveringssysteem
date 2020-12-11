@@ -27,6 +27,8 @@ $currentDate = date("Y-m-d");
       
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
+          events: 'SQLQueries/ReservatieFeed.php',
+          color: 'green',
           initialView: 'dayGridMonth',
           height:600,
           locale: 'nl'
