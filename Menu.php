@@ -30,8 +30,9 @@ $currentDate = date("Y-m-d");
           events: 'SQLQueries/ReservatieFeed.php',
           color: 'green',
           initialView: 'dayGridMonth',
-          height:600,
-          locale: 'nl'
+          height:570,
+          locale: 'nl',
+          displayEventTime: false
         });
         calendar.render();
       });
@@ -274,14 +275,54 @@ $currentDate = date("Y-m-d");
             <!--Reservatie Overzicht page-->
             <div class="tab-pane" id="list-Reservaties" role="tabpanel" aria-labelledby="list-Reservaties-list">
               <div class="container-fluid">
-                <div class="row my-3" id="calendar">
-                    <div></div>
-                  
-                  
+                <div class="row my-3" id="calendar"></div>
+                <div class="row my-3">
+                  <div class="h5 col-12">Reservatie aanpassen</div>
                 </div>
                 <div class="row my-3">
-                  
-                  asdasd
+                  <div class="col-4">
+                    <div class="form-group">
+                      <label for="Bestaande reservaties" class="mr-5 mb-2">Selecteer Reservatie</label>
+                      <select class="form-control form-control-sm px-auto" id="BestaandeReservatieData" onchange="VulReservatieAanpassenData()">
+                        <!--Er word een AJAX request gemaakt in CustomFunctions.js om 
+                        de juiste bestaande reservaties weer te geven-->
+                      </select>
+                      <div class="form-inline my-2">
+                        <button type="button" class="btn btn-sm btn-danger mr-2 px-3" onclick="">Verwijder Reservatie</button>
+                        <button type="button" class="btn btn-sm btn-success mr-2 px-3" onclick="VulReservatieInfo()">Aanpassingen doorvoeren</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="form-group">
+                      <label for="VertrekDatum aanpassen" class="">Vertrek datum</label>
+                      <input type="text" class="form-control form-control-sm" naam="AanpassenVertrekDatum" id="AanpassenVertrekDatum" value="" onkeydown="return false" onchange="FunctiontocheckSpotAvailability()">
+                    </div>
+                    <div class="form-group">
+                      <label for="VertrekDatum aanpassen" class="">Doucemuntes</label>
+                      <input type="number" class="form-control form-control-sm" value="" id="">
+                    </div>
+                    <div class="form-group">
+                      <label for="VertrekDatum aanpassen" class="">Was beurten</label>
+                      <input type="number" class="form-control form-control-sm" value="" id="">
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="form-group">
+                      <label for="VertrekDatum aanpassen" class="">Plaats nummer</label>
+                      <select class="form-control form-control-sm" id="AanpassenPlekNummer">
+
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="VertrekDatum aanpassen" class="">Bezoekers</label>
+                      <input type="number" class="form-control form-control-sm" value="" id="">
+                    </div>
+                    <div class="form-group">
+                      <label for="VertrekDatum aanpassen" class="">Droog beurten</label>
+                      <input type="number" class="form-control form-control-sm" value="" id="">
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

@@ -56,7 +56,15 @@ function Reservatie(){
 //Function that happens when the Reservation overview section is loaded
 function Reservaties(){
   document.getElementById("PageTitle").innerHTML = "Reservaties overzicht ";//Changes the page title
-  
+
+  var ReservatieDataRequest = new XMLHttpRequest();                            //Http Request to get all the existing customers into the specified element
+    ReservatieDataRequest.onreadystatechange = function(){
+      if (this.readyState == 4 && this.status == 200){
+        document.getElementById('BestaandeReservatieData').innerHTML = this.responseText;
+      }
+    };
+    ReservatieDataRequest.open("GET", "SQLQueries/ReservatieData.php", true);
+    ReservatieDataRequest.send();
 }
 
 //function to fill the 'already existing' customer selection with the existing customers
@@ -69,6 +77,10 @@ function BestaandeKlanten(){
     };
     KlantenDataRequest.open("GET", "SQLQueries/KlantenData.php", true);
     KlantenDataRequest.send();
+}
+
+function VulReservatieInfo(){
+  
 }
 
 //Function that happens when the Spots section is loaded
@@ -280,6 +292,17 @@ function VulKlantenInfo(){
   var Naam = document.getElementById('Naam').value = KDataArray[0];
   var Email = document.getElementById('Email').value = KDataArray[1];
   var Telefoon = document.getElementById('Telefoon').value = KDataArray[2];
+}
+
+function VulReservatieAanpassenData(){
+  var PlaatsNr = document.getElementById('AanpassenPlekNummer'); 
+
+  var RDataArray = document.getElementById('BestaandeReservatieData').value.split("|");
+  var VertrekDatum = document.getElementById('AanpassenVertrekDatum').value = RDataArray[0];
+  opt = document.createElement('option');
+  opt.appendChild(document.createTextNode(RDataArray[1]));
+  opt.value = RDataArray[1];
+  PlaatsNr.appendChild(opt);
 }
 
 //Function that happens when the Revenue section is loaded

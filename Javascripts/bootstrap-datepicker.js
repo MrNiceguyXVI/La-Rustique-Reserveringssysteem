@@ -2044,9 +2044,18 @@
 $(document).ready(function(){
   $('#Dates').datepicker({
     format: "yyyy-mm-dd",
-    multidate:2,
-    multidateSeparator:"/",
+    multidate: 2,
+    multidateSeparator: "/",
     language: 'nl',
-    todayHighlight:true
+    todayHighlight: true
+  })
+})
+
+$(document).ready(function(){
+  $('#AanpassenVertrekDatum').datepicker({
+    format: "yyyy-mm-dd",
+    language: 'nl',
+    todayHighlight: true,
+    autoclose: true
   })
 })
