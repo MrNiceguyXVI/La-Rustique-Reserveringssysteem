@@ -142,18 +142,19 @@ $currentDate = date("Y-m-d");
               <div class="container-fluid">
               <form id="ReserverenForm">
                 <div class="row mt-3">                  
-                  <div class="col-4">
+                  <div class="col-5">
                     <div class="mb-5">
                       <div class="h5">Terugkomende klant</div>
                       <div class="form-group">
                         <label for="Bestaande klant" class="mr-5 mb-2">Selecteer klant gegevens</label>
-                        <div class="form-inline">
-                          <select class="form-control form-control-sm px-auto" id="KlantenData">
+                        <!-- <div class="form-inline"> -->
+                          <select class="form-control form-control-sm px-auto" id="KlantenData" onchange="VulKlantenInfo()">
                             <!--Er word een AJAX request gemaakt in CustomFunctions.js om 
                             de all bestaande klanten weer te geven-->
                           </select>
-                          <button type="button" class="btn btn-sm btn-secondary ml-auto px-3" onclick="VulKlantenInfo()">Kies</button>
-                        </div>
+                          <!-- <button type="button" class="btn btn-sm btn-danger ml-2" onclick="VerwijderKlant()">Klant Verwijderen</button>
+                          <div id="DeleteKlant">d</div> -->
+                        <!-- </div> -->
                       </div>
                     </div>
                     <div id="ReservatieInvoeren"></div>
@@ -190,7 +191,7 @@ $currentDate = date("Y-m-d");
                       <a type="button" class="btn btn-sm btn-dark" onclick="PlekkenBeschikbaar()">Beschikbaarheid controleren</a>                   
                     </div>
                   </div>
-                  <div class="col-5">
+                  <div class="col-4">
                     <div id="Details">
                       <div class="h5">Details</div>
                       <div class="form-group">
@@ -223,19 +224,19 @@ $currentDate = date("Y-m-d");
                       </div>
                       <div class="form-group">
                         <label for="GratisDouche">Extra douchemuntjes</label>
-                        <input type="number" class="form-control form-control-sm" value="" naam="ExtraDoucheMuntjes" id="ExtraDoucheMuntjes">
+                        <input type="number" class="form-control form-control-sm" value="" naam="ExtraDoucheMuntjes" id="ExtraDoucheMuntjes" placeholder="0">
                       </div>
                       <div class="form-group">
                         <label for="AantalVolwassenen">Aantal volwassenen</label>
-                        <input type="number" class="form-control form-control-sm" value="" name="Volwassenen" id="Volwassenen">
+                        <input type="number" class="form-control form-control-sm" value="" name="Volwassenen" id="Volwassenen" placeholder="1">
                       </div>
                       <div class="form-group">
                         <label for="AantalKindTot4">Aantal kinderen (tot 4 jaar)</label>
-                        <input type="number" class="form-control form-control-sm" value="" name="KinderenTot4" id="KinderenTot4">
+                        <input type="number" class="form-control form-control-sm" value="" name="KinderenTot4" id="KinderenTot4" placeholder="0">
                       </div>
                       <div class="form-group">
                         <label for="AantalKindTot12">Aantal kinderen (tussen 4 - 12 jaar)</label>
-                        <input type="number" class="form-control form-control-sm" value="" name="KinderenTot12" id="KinderenTot12">
+                        <input type="number" class="form-control form-control-sm" value="" name="KinderenTot12" id="KinderenTot12" placeholder="0">
                       </div>
                       <div class="form-group">
                         <label for="Huisdier">Huisdier</label>
@@ -288,9 +289,9 @@ $currentDate = date("Y-m-d");
                         de juiste bestaande reservaties weer te geven-->
                       </select>
                       <div class="form-inline my-2">
-                        <button type="button" class="btn btn-sm btn-danger mr-2 px-3" onclick="">Verwijder Reservatie</button>
-                        <button type="button" class="btn btn-sm btn-success mr-2 px-3" onclick="VulReservatieInfo()">Aanpassingen doorvoeren</button>
-                      </div>
+                        <button type="button" class="btn btn-sm btn-danger mr-2 px-3" onclick="VerwijderReservatie()">Verwijder Reservatie</button>
+                        <button type="button" class="btn btn-sm btn-success mr-2 px-3" onclick="AanpassingDoorvoeren()">Aanpassingen doorvoeren</button>
+                      </div>                      
                     </div>
                   </div>
                   <div class="col-4">
@@ -299,28 +300,28 @@ $currentDate = date("Y-m-d");
                       <input type="text" class="form-control form-control-sm" naam="AanpassenVertrekDatum" id="AanpassenVertrekDatum" value="" onkeydown="return false" onchange="FunctiontocheckSpotAvailability()">
                     </div>
                     <div class="form-group">
-                      <label for="VertrekDatum aanpassen" class="">Doucemuntes</label>
-                      <input type="number" class="form-control form-control-sm" value="" id="">
+                      <label for="VertrekDatum aanpassen" class="">Douchemuntjes</label>
+                      <input type="number" class="form-control form-control-sm" value="" id="AanpassenDoucheMuntjes">
                     </div>
                     <div class="form-group">
                       <label for="VertrekDatum aanpassen" class="">Was beurten</label>
-                      <input type="number" class="form-control form-control-sm" value="" id="">
+                      <input type="number" class="form-control form-control-sm" value="" id="AanpassenWassen">
                     </div>
                   </div>
                   <div class="col-4">
                     <div class="form-group">
                       <label for="VertrekDatum aanpassen" class="">Plaats nummer</label>
                       <select class="form-control form-control-sm" id="AanpassenPlekNummer">
-
+                        <option id="OrigineelPlaatsNummer"></option>
                       </select>
                     </div>
                     <div class="form-group">
                       <label for="VertrekDatum aanpassen" class="">Bezoekers</label>
-                      <input type="number" class="form-control form-control-sm" value="" id="">
+                      <input type="number" class="form-control form-control-sm" value="" id="AanpassenBezoekers">
                     </div>
                     <div class="form-group">
                       <label for="VertrekDatum aanpassen" class="">Droog beurten</label>
-                      <input type="number" class="form-control form-control-sm" value="" id="">
+                      <input type="number" class="form-control form-control-sm" value="" id="AanpassenDrogen">
                     </div>
                   </div>
                 </div>

@@ -79,7 +79,7 @@ function BestaandeKlanten(){
     KlantenDataRequest.send();
 }
 
-function VulReservatieInfo(){
+function AanpassingDoorvoeren(){
   
 }
 
@@ -238,9 +238,9 @@ function MaakReservatie(){
     KinderenTot12 = 0;
   }
 
-  //call Plekken Beschikbaar Function to refresh the already existing customer selector
-  PlekkenBeschikbaar();
-  PlekkenBeschikbaar();
+  //call bestaande klanten Function to refresh the already existing customer selector
+  BestaandeKlanten();
+  BestaandeKlanten();
 
   /*checks if there are any error messages. 
   *If there are, it'll send an alert with the messages and it'll cancel the AJAX request 
@@ -277,8 +277,6 @@ function MaakReservatie(){
     ReservatieRequest.send();
 
     //Refreshes the customer selector
-    BestaandeKlanten();
-    BestaandeKlanten();
     
     //document.getElementById('Dates').value = null;
   } else{
@@ -294,15 +292,67 @@ function VulKlantenInfo(){
   var Telefoon = document.getElementById('Telefoon').value = KDataArray[2];
 }
 
-function VulReservatieAanpassenData(){
-  var PlaatsNr = document.getElementById('AanpassenPlekNummer'); 
+// function VerwijderKlant() {
+//   var verwijderen = confirm("Weet je zeker dat je deze klant wilt verwijderen?\nDruk op OK om de klant te verwijderen");
+//   if(verwijderen == true){
+//     var Message = "Klant wordt verwijderd";
+//     var KDataArray = document.getElementById('KlantenData').value.split("|");
+//     var DNaam = document.getElementById('Naam').value = KDataArray[0];
+//     var DEmail = document.getElementById('Email').value = KDataArray[1];
+//     var DTelefoon = document.getElementById('Telefoon').value = KDataArray[2];
 
+//     var KlantenVerwijderRequest = new XMLHttpRequest();                            //Http Request to delete the customer via php
+//     KlantenVerwijderRequest.onreadystatechange = function(){
+//       if (this.readyState == 4 && this.status == 200){
+//         document.getElementById('DeleteKlant').innerHTML = this.responseText;
+//       }
+//     };
+//     KlantenVerwijderRequest.open("GET", "SQLQueries/DeleteKlant.php?naam="+encodeURIComponent(DNaam)+"&email="+encodeURIComponent(DEmail)+"&telefoon="+encodeURIComponent(DTelefoon), true);
+//     KlantenVerwijderRequest.send();
+
+//   }else{
+//     var Message = "Verwijderen geannuleerd";
+//   }
+//   alert(Message);
+
+// }
+
+function VulReservatieAanpassenData(){
   var RDataArray = document.getElementById('BestaandeReservatieData').value.split("|");
   var VertrekDatum = document.getElementById('AanpassenVertrekDatum').value = RDataArray[0];
-  opt = document.createElement('option');
-  opt.appendChild(document.createTextNode(RDataArray[1]));
-  opt.value = RDataArray[1];
-  PlaatsNr.appendChild(opt);
+  var PlaatsNr = document.getElementById('OrigineelPlaatsNummer').value = placeholder = RDataArray[1];
+  var PlaatsNr = document.getElementById('OrigineelPlaatsNummer').innerHTML = placeholder = RDataArray[1];
+  //if there are showercoins already added to the reservation it finds them and enters them into the input, and if not it'll enter 0
+  if(RDataArray[2] == ''){
+    var DoucheMuntjes = document.getElementById('AanpassenDoucheMuntjes').value = 0;
+  } else {
+    var DoucheMuntjes = document.getElementById('AanpassenDoucheMuntjes').value = RDataArray[2];
+  }
+
+  //if there are visitors already added to the reservation it finds them and enters them into the input, and if not it'll enter 0 
+  if(RDataArray[3] == ''){
+    var Bezoekers = document.getElementById('AanpassenBezoekers').value = 0;
+  } else {
+    var Bezoekers = document.getElementById('AanpassenBezoekers').value = RDataArray[3];
+  }
+
+  //if there are cleaning cycles already added to the reservation it finds them and enters them into the input, and if not it'll enter 0 
+  if(RDataArray[4] == ''){
+    var WasBeurten = document.getElementById('AanpassenWassen').value = 0;
+  } else {
+    var WasBeurten = document.getElementById('AanpassenWassen').value = RDataArray[4];
+  }
+
+  //if there are drying cycles already added to the reservation it finds them and enters them into the input, and if not it'll enter 0 
+  if(RDataArray[5] == ''){
+    var DroogBeurten = document.getElementById('AanpassenDrogen').value = 0;
+  } else {
+    var DroogBeurten = document.getElementById('AanpassenDrogen').value = RDataArray[5];
+  }
+}
+
+function VerwijderReservatie() {
+
 }
 
 //Function that happens when the Revenue section is loaded
