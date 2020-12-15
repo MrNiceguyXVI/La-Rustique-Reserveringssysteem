@@ -22,9 +22,7 @@ $currentDate = date("Y-m-d");
     <link rel="stylesheet" type="text/css" href="CssFiles/bootstrap-datepicker.css"/>
     <link rel="stylesheet" type="text/css" href="fullcalendar/main.css"/>
     <script>
-
       document.addEventListener('DOMContentLoaded', function() {
-      
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
           events: 'SQLQueries/ReservatieFeed.php',
@@ -35,9 +33,7 @@ $currentDate = date("Y-m-d");
           displayEventTime: false
         });
         calendar.render();
-      });
-    
-    
+      });    
     </script>
   </head>
   <body>
@@ -92,7 +88,7 @@ $currentDate = date("Y-m-d");
                 Reserveren
             </a>
 
-            <a class="list-group-item list-group-item-action" id="list-Reservaties-list" data-toggle="list" href="#list-Reservaties" role="tab" aria-controls="Reservaties" onclick="Reservaties()">
+            <a class="list-group-item list-group-item-action" id="list-Reservaties-list" data-toggle="list" href="#list-Reservaties" role="tab" aria-controls="Reservaties" onclick="Reservaties(); fullCalendar('refetchEvents');">
               <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-calendar2-week-fill mr-2 mb-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 3.5c0-.276.244-.5.545-.5h10.91c.3 0 .545.224.545.5v1c0 .276-.244.5-.546.5H2.545C2.245 5 2 4.776 2 4.5v-1zM8.5 7a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zM3 10.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1z"/>
               </svg>
@@ -151,6 +147,7 @@ $currentDate = date("Y-m-d");
                           <select class="form-control form-control-sm px-auto" id="KlantenData" onchange="VulKlantenInfo()">
                             <!--Er word een AJAX request gemaakt in CustomFunctions.js om 
                             de all bestaande klanten weer te geven-->
+                            <option>---Selecteer een optie---</option>
                           </select>
                           <!-- <button type="button" class="btn btn-sm btn-danger ml-2" onclick="VerwijderKlant()">Klant Verwijderen</button>
                           <div id="DeleteKlant">d</div> -->
@@ -184,8 +181,8 @@ $currentDate = date("Y-m-d");
                       <div class="form-group">
                         <label for="VeldFormaat">Formaat</label>
                         <select class="form-control form-control-sm" name="VeldFormaat" id="VeldFormaat">
-                          <option value="'GROOT'">Groot</option>
-                          <option value="'KLEIN'">Klein</option>
+                          <option value="GROOT">Groot</option>
+                          <option value="KLEIN">Klein</option>
                         </select>
                       </div>
                       <a type="button" class="btn btn-sm btn-dark" onclick="PlekkenBeschikbaar()">Beschikbaarheid controleren</a>                   
@@ -198,6 +195,7 @@ $currentDate = date("Y-m-d");
                         <label for="PlekNummer">Plaatsnummer</label>
                         <select class="form-control form-control-sm" id="BeschikbarePlekken" name="BeschikbarePlekken">
                           <!--PHP code here-->
+                          <option>---Selecteer een optie---</option>
                         </select>
                       </div>
                       <div class="form-group">
@@ -291,13 +289,14 @@ $currentDate = date("Y-m-d");
                       <div class="form-inline my-2">
                         <button type="button" class="btn btn-sm btn-danger mr-2 px-3" onclick="VerwijderReservatie()">Verwijder Reservatie</button>
                         <button type="button" class="btn btn-sm btn-success mr-2 px-3" onclick="AanpassingDoorvoeren()">Aanpassingen doorvoeren</button>
-                      </div>                      
+                      </div> 
+                      <div id="DeleteReservatie"></div>                     
                     </div>
                   </div>
                   <div class="col-4">
                     <div class="form-group">
                       <label for="VertrekDatum aanpassen" class="">Vertrek datum</label>
-                      <input type="text" class="form-control form-control-sm" naam="AanpassenVertrekDatum" id="AanpassenVertrekDatum" value="" onkeydown="return false" onchange="FunctiontocheckSpotAvailability()">
+                      <input type="text" class="form-control form-control-sm" naam="AanpassenVertrekDatum" id="AanpassenVertrekDatum" value="" onkeydown="return false" onchange="CheckAanpassenPlekken()">
                     </div>
                     <div class="form-group">
                       <label for="VertrekDatum aanpassen" class="">Douchemuntjes</label>
@@ -312,7 +311,7 @@ $currentDate = date("Y-m-d");
                     <div class="form-group">
                       <label for="VertrekDatum aanpassen" class="">Plaats nummer</label>
                       <select class="form-control form-control-sm" id="AanpassenPlekNummer">
-                        <option id="OrigineelPlaatsNummer"></option>
+                        <option id="OrigineelPlaatsNummer">---Selecteer een optie---</option>
                       </select>
                     </div>
                     <div class="form-group">

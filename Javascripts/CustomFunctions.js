@@ -56,15 +56,18 @@ function Reservatie(){
 //Function that happens when the Reservation overview section is loaded
 function Reservaties(){
   document.getElementById("PageTitle").innerHTML = "Reservaties overzicht ";//Changes the page title
+  BestaandeReservaties();
+}
 
+function BestaandeReservaties(){
   var ReservatieDataRequest = new XMLHttpRequest();                            //Http Request to get all the existing customers into the specified element
-    ReservatieDataRequest.onreadystatechange = function(){
-      if (this.readyState == 4 && this.status == 200){
-        document.getElementById('BestaandeReservatieData').innerHTML = this.responseText;
-      }
-    };
-    ReservatieDataRequest.open("GET", "SQLQueries/ReservatieData.php", true);
-    ReservatieDataRequest.send();
+  ReservatieDataRequest.onreadystatechange = function(){
+    if (this.readyState == 4 && this.status == 200){
+      document.getElementById('BestaandeReservatieData').innerHTML = this.responseText;
+    }
+  };
+  ReservatieDataRequest.open("GET", "SQLQueries/ReservatieData.php", true);
+  ReservatieDataRequest.send();
 }
 
 //function to fill the 'already existing' customer selection with the existing customers
@@ -124,12 +127,16 @@ function Facturen(){
 var ErrorMessage = "Reservatie geannuleerd door fouten:\n";
 
 //function to activate PakPlekken.php
-function PlekkenBeschikbaar(){
+function PlekkenBeschikbaar(aankomstdatum, vertrekdatum, plekformaat){
   var combidatum = document.getElementById('Dates').value.split("/");
   var aankomstdatum = combidatum[0];
   var vertrekdatum = combidatum[1];
   var plekformaat = document.getElementById('VeldFormaat').value;
 
+  ReservatiePlekkenCheck(aankomstdatum, vertrekdatum, plekformaat, "BeschikbarePlekken", 0); 
+}
+
+function ReservatiePlekkenCheck(aankomstdatum, vertrekdatum, plekformaat, ElementId, Aanpassen){
   //checking if dates are entered, and if they're not it cancels the operation and gives an alert
   if(aankomstdatum == "" && vertrekdatum == undefined){
     ErrorMessage+="Aankomst en Vertrek datums niet ingevoerd\n";
@@ -143,12 +150,11 @@ function PlekkenBeschikbaar(){
     var PlekkenRequest = new XMLHttpRequest();                               
     PlekkenRequest.onreadystatechange = function(){
       if (this.readyState == 4 && this.status == 200){
-        document.getElementById('BeschikbarePlekken').innerHTML = this.responseText;
+        document.getElementById(ElementId).innerHTML = this.responseText;
       }
     };
-    
     //Use the ampersand & to glue variables together, and encoding the data
-    PlekkenRequest.open("GET", "SQLQueries/PakPlekken.php?aankomst="+encodeURI(aankomstdatum)+"&vertrek="+encodeURI(vertrekdatum)+"&formaat="+encodeURI(plekformaat), true);
+    PlekkenRequest.open("GET", "SQLQueries/PakPlekken.php?aankomst="+encodeURI(aankomstdatum)+"&vertrek="+encodeURI(vertrekdatum)+"&formaat="+encodeURI(plekformaat)+"&pleknr="+encodeURI(Aanpassen), true);
     PlekkenRequest.send();
   }
 }
@@ -349,10 +355,39 @@ function VulReservatieAanpassenData(){
   } else {
     var DroogBeurten = document.getElementById('AanpassenDrogen').value = RDataArray[5];
   }
+  CheckAanpassenPlekken();
 }
 
 function VerwijderReservatie() {
+  var verwijderen = confirm("Weet je zeker dat je deze reservatie wilt verwijderen?\nDruk op OK om de reservatie te verwijderen");
+  if(verwijderen == true){
+    var Message = "Reservatie wordt verwijderd";
+    var RDataArray = document.getElementById('BestaandeReservatieData').value.split("|");
+    var ReservatieNr = RDataArray[6];
 
+    var ReservatieVerwijderRequest = new XMLHttpRequest();                            //Http Request to delete the customer via php
+    ReservatieVerwijderRequest.onreadystatechange = function(){
+      if (this.readyState == 4 && this.status == 200){
+        document.getElementById('DeleteReservatie').innerHTML = this.responseText;
+      }
+    };
+    ReservatieVerwijderRequest.open("GET", "SQLQueries/DeleteReservatie.php?ReservatieNr="+encodeURIComponent(ReservatieNr)+ true);
+    ReservatieVerwijderRequest.send();
+    BestaandeReservaties();
+  }else{
+    var Message = "Verwijderen geannuleerd";
+  }
+  alert(Message);
+  BestaandeReservaties();
+}
+
+function CheckAanpassenPlekken(){
+  var RDataArray = document.getElementById('BestaandeReservatieData').value.split("|");
+  var Aankomst = RDataArray[7]; 
+  var Vertrek = document.getElementById('AanpassenVertrekDatum').value;
+  var PlekFormaat = RDataArray[8];
+  var PlekNr = RDataArray[1];
+  ReservatiePlekkenCheck(Aankomst, Vertrek, PlekFormaat, "AanpassenPlekNummer", PlekNr); 
 }
 
 //Function that happens when the Revenue section is loaded

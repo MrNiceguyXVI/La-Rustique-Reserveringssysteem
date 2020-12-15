@@ -348,7 +348,7 @@ CREATE TABLE Klanten (
   VALUES ('Freddy Tootsierol', '+31650356575', 'Freddysemail@dot.com');
 
   INSERT INTO Klanten (KNaam, KTel, KEmail)
-  VALUES ('Jebadiah Kerman', '+3185897554', 'Kerbalspace@email.com');
+  VALUES ('Jebadiah Kerman', '+31685897554', 'Kerbalspace@email.com');
 /*Eind voorbeeld klanten*/
 
 CREATE TABLE Reservaties (
@@ -429,7 +429,7 @@ CREATE TABLE Reservatie_Regels (
   ReservatieNr INT,
   CategorieNr INT,
   Aantal INT,
-  FOREIGN KEY (ReservatieNr) REFERENCES Reservaties(ReservatieNr),
+  FOREIGN KEY (ReservatieNr) REFERENCES Reservaties(ReservatieNr) ON DELETE CASCADE,
   FOREIGN KEY (CategorieNr) REFERENCES Categorieen(CategorieNr)  
 );
 

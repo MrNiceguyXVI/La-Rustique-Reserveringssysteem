@@ -42,6 +42,17 @@ function DrogenCheck($RNr, $con){
   }
 }
 
+function PakPlekFormaat($PNr, $con){
+  $sql = "SELECT PlaatsFormaat FROM plaatsen WHERE PlaatsNr = ".$PNr."";
+  $result = mysqli_query($con, $sql);
+  while($row = mysqli_fetch_array($result)){
+    $PlaatsFormaat = $row['PlaatsFormaat'];
+    return $PlaatsFormaat;
+  }
+}
+
+echo "<option>---Selecteer een optie---</option>";
+
 $ReservatiesQuery = "SELECT ReservatieNr, PlaatsNr, AankomstDatum, VertrekDatum FROM reservaties WHERE VertrekDatum > '$currentDate'";
 $ReservatiesResult = mysqli_query($con, $ReservatiesQuery);
 while($ReservatiesRow = mysqli_fetch_array($ReservatiesResult)){
@@ -49,8 +60,9 @@ while($ReservatiesRow = mysqli_fetch_array($ReservatiesResult)){
     $Bezoekers = Bezoekerscheck($ReservatiesRow['ReservatieNr'], $con);
     $WasBeurten = WassenCheck($ReservatiesRow['ReservatieNr'], $con);
     $DroogBeurten = DrogenCheck($ReservatiesRow['ReservatieNr'], $con);
+    $PlaatsFormaat = PakPlekFormaat($ReservatiesRow['PlaatsNr'], $con);
 
-    echo '<option value="'.$ReservatiesRow['VertrekDatum'].'|'.$ReservatiesRow['PlaatsNr'].'|'.$DoucheMuntjes.'|'.$Bezoekers.'|'.$WasBeurten.'|'.$DroogBeurten.'">ReservatieNr: '.$ReservatiesRow['ReservatieNr'].', PlaatsNr: '.$ReservatiesRow['PlaatsNr'].', Aankomst: '.$ReservatiesRow['AankomstDatum'].', Vertrek: '.$ReservatiesRow['VertrekDatum'].'</option>';
+    echo '<option value="'.$ReservatiesRow['VertrekDatum'].'|'.$ReservatiesRow['PlaatsNr'].'|'.$DoucheMuntjes.'|'.$Bezoekers.'|'.$WasBeurten.'|'.$DroogBeurten.'|'.$ReservatiesRow['ReservatieNr'].'|'.$ReservatiesRow['AankomstDatum'].'|'.$PlaatsFormaat.'">ReservatieNr: '.$ReservatiesRow['ReservatieNr'].', PlaatsNr: '.$ReservatiesRow['PlaatsNr'].', Aankomst: '.$ReservatiesRow['AankomstDatum'].', Vertrek: '.$ReservatiesRow['VertrekDatum'].'</option>';
 
 }
 
