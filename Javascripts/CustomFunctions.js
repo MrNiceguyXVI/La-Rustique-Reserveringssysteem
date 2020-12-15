@@ -82,9 +82,7 @@ function BestaandeKlanten(){
     KlantenDataRequest.send();
 }
 
-function AanpassingDoorvoeren(){
-  
-}
+
 
 //Function that happens when the Spots section is loaded
 function Plaatsen(){
@@ -298,31 +296,6 @@ function VulKlantenInfo(){
   var Telefoon = document.getElementById('Telefoon').value = KDataArray[2];
 }
 
-// function VerwijderKlant() {
-//   var verwijderen = confirm("Weet je zeker dat je deze klant wilt verwijderen?\nDruk op OK om de klant te verwijderen");
-//   if(verwijderen == true){
-//     var Message = "Klant wordt verwijderd";
-//     var KDataArray = document.getElementById('KlantenData').value.split("|");
-//     var DNaam = document.getElementById('Naam').value = KDataArray[0];
-//     var DEmail = document.getElementById('Email').value = KDataArray[1];
-//     var DTelefoon = document.getElementById('Telefoon').value = KDataArray[2];
-
-//     var KlantenVerwijderRequest = new XMLHttpRequest();                            //Http Request to delete the customer via php
-//     KlantenVerwijderRequest.onreadystatechange = function(){
-//       if (this.readyState == 4 && this.status == 200){
-//         document.getElementById('DeleteKlant').innerHTML = this.responseText;
-//       }
-//     };
-//     KlantenVerwijderRequest.open("GET", "SQLQueries/DeleteKlant.php?naam="+encodeURIComponent(DNaam)+"&email="+encodeURIComponent(DEmail)+"&telefoon="+encodeURIComponent(DTelefoon), true);
-//     KlantenVerwijderRequest.send();
-
-//   }else{
-//     var Message = "Verwijderen geannuleerd";
-//   }
-//   alert(Message);
-
-// }
-
 function VulReservatieAanpassenData(){
   var RDataArray = document.getElementById('BestaandeReservatieData').value.split("|");
   var VertrekDatum = document.getElementById('AanpassenVertrekDatum').value = RDataArray[0];
@@ -388,6 +361,38 @@ function CheckAanpassenPlekken(){
   var PlekFormaat = RDataArray[8];
   var PlekNr = RDataArray[1];
   ReservatiePlekkenCheck(Aankomst, Vertrek, PlekFormaat, "AanpassenPlekNummer", PlekNr); 
+}
+
+
+function AanpassingDoorvoeren(){
+  var RDataArray = document.getElementById('BestaandeReservatieData').value.split("|");
+  var ReservatieNr = RDataArray[6];
+  var AangepastVertrekDatum = document.getElementById('AanpassenVertrekDatum').value;
+  var AangepastPlaatsNr = document.getElementById('AanpassenPlekNummer').value;
+  var AangepastDoucheMuntjes = document.getElementById('AanpassenDoucheMuntjes').value;
+  var AangepastBezoekers = document.getElementById('AanpassenBezoekers').value;
+  var AangepastWasBeurten = document.getElementById('AanpassenWassen').value;
+  var AangepastDroogBeurten = document.getElementById('AanpassenDrogen').value;
+
+  if(AangepastVertrekDatum == ''){
+    alert("Aanpassen geannuleerd door fouten:\nGeen VertrekDatum ingevoerd\n");
+  }else {
+    var AanpassingDoorvoerenRequest = new XMLHttpRequest();                            //Http Request to delete the customer via php
+    AanpassingDoorvoerenRequest.onreadystatechange = function(){
+      if (this.readyState == 4 && this.status == 200){
+        document.getElementById('AanpassingDoorvoeren').innerHTML = this.responseText;
+      }
+    };
+    AanpassingDoorvoerenRequest.open("GET", "SQLQueries/AanpassingenDoorvoeren.php?ReservatieNr="+encodeURIComponent(ReservatieNr)+
+    "&AangepastVertrekDatum="+encodeURIComponent(AangepastVertrekDatum)+
+    "&AangepastPlaatsNr="+encodeURIComponent(AangepastPlaatsNr)+
+    "&AangepastDoucheMuntjes="+encodeURIComponent(AangepastDoucheMuntjes)+
+    "&AangepastBezoekers="+encodeURIComponent(AangepastBezoekers)+
+    "&AangepastWasBeurten="+encodeURIComponent(AangepastWasBeurten)+
+    "&AangepastDroogBeurten="+encodeURIComponent(AangepastDroogBeurten), true);
+    AanpassingDoorvoerenRequest.send();
+  }
+
 }
 
 //Function that happens when the Revenue section is loaded

@@ -290,7 +290,8 @@ $currentDate = date("Y-m-d");
                         <button type="button" class="btn btn-sm btn-danger mr-2 px-3" onclick="VerwijderReservatie()">Verwijder Reservatie</button>
                         <button type="button" class="btn btn-sm btn-success mr-2 px-3" onclick="AanpassingDoorvoeren()">Aanpassingen doorvoeren</button>
                       </div> 
-                      <div id="DeleteReservatie"></div>                     
+                      <div id="DeleteReservatie"></div>  
+                      <div id="AanpassingDoorvoeren"></div>                    
                     </div>
                   </div>
                   <div class="col-4">
