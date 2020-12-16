@@ -301,34 +301,43 @@ function VulReservatieAanpassenData(){
   var VertrekDatum = document.getElementById('AanpassenVertrekDatum').value = RDataArray[0];
   var PlaatsNr = document.getElementById('OrigineelPlaatsNummer').value = placeholder = RDataArray[1];
   var PlaatsNr = document.getElementById('OrigineelPlaatsNummer').innerHTML = placeholder = RDataArray[1];
+
+  var DoucheMuntjes = document.getElementById('AanpassenDoucheMuntjes');
+  var Bezoekers = document.getElementById('AanpassenBezoekers');
+  var WasBeurten = document.getElementById('AanpassenWassen');
+  var DroogBeurten = document.getElementById('AanpassenDrogen');
+
   //if there are showercoins already added to the reservation it finds them and enters them into the input, and if not it'll enter 0
   if(RDataArray[2] == ''){
-    var DoucheMuntjes = document.getElementById('AanpassenDoucheMuntjes').value = 0;
+    DoucheMuntjes.value = 0;
   } else {
-    var DoucheMuntjes = document.getElementById('AanpassenDoucheMuntjes').value = RDataArray[2];
+    DoucheMuntjes.value = RDataArray[2];
   }
 
   //if there are visitors already added to the reservation it finds them and enters them into the input, and if not it'll enter 0 
   if(RDataArray[3] == ''){
-    var Bezoekers = document.getElementById('AanpassenBezoekers').value = 0;
+    Bezoekers.value = 0;
   } else {
-    var Bezoekers = document.getElementById('AanpassenBezoekers').value = RDataArray[3];
+    Bezoekers.value = RDataArray[3];
   }
 
   //if there are cleaning cycles already added to the reservation it finds them and enters them into the input, and if not it'll enter 0 
   if(RDataArray[4] == ''){
-    var WasBeurten = document.getElementById('AanpassenWassen').value = 0;
+    WasBeurten.value = 0;
   } else {
-    var WasBeurten = document.getElementById('AanpassenWassen').value = RDataArray[4];
+    WasBeurten.value = RDataArray[4];
   }
 
   //if there are drying cycles already added to the reservation it finds them and enters them into the input, and if not it'll enter 0 
   if(RDataArray[5] == ''){
-    var DroogBeurten = document.getElementById('AanpassenDrogen').value = 0;
+    DroogBeurten.value = 0;
   } else {
-    var DroogBeurten = document.getElementById('AanpassenDrogen').value = RDataArray[5];
+    DroogBeurten.value = RDataArray[5];
   }
-  CheckAanpassenPlekken();
+
+  if(vertrekdatum != '' && PlaatsNr != '' && DoucheMuntjes != '' && Bezoekers != '' && WasBeurten != '' && DroogBeurten != ''){
+    CheckAanpassenPlekken();
+  }
 }
 
 function VerwijderReservatie() {
@@ -374,25 +383,32 @@ function AanpassingDoorvoeren(){
   var AangepastWasBeurten = document.getElementById('AanpassenWassen').value;
   var AangepastDroogBeurten = document.getElementById('AanpassenDrogen').value;
 
-  if(AangepastVertrekDatum == ''){
-    alert("Aanpassen geannuleerd door fouten:\nGeen VertrekDatum ingevoerd\n");
-  }else {
-    var AanpassingDoorvoerenRequest = new XMLHttpRequest();                            //Http Request to delete the customer via php
-    AanpassingDoorvoerenRequest.onreadystatechange = function(){
-      if (this.readyState == 4 && this.status == 200){
-        document.getElementById('AanpassingDoorvoeren').innerHTML = this.responseText;
+  if(AangepastDoucheMuntjes == '' || AangepastBezoekers == '' || AangepastWasBeurten == '' ||AangepastDroogBeurten == ''){
+    alert("Aanpassen geannuleerd door fouten:\nNiet alle velden zijn ingevuld\n");
+  }else{
+    if(AangepastVertrekDatum == ''){
+      alert("Aanpassen geannuleerd door fouten:\nGeen VertrekDatum ingevoerd\n");
+    }else {
+      var AanpassingDoorvoerenRequest = new XMLHttpRequest();                            //Http Request to delete the customer via php
+      AanpassingDoorvoerenRequest.onreadystatechange = function(){
+        if (this.readyState == 4 && this.status == 200){
+          document.getElementById('AanpassingDoorvoeren').innerHTML = this.responseText;
+        }
+      };
+      AanpassingDoorvoerenRequest.open("GET", "SQLQueries/AanpassingenDoorvoeren.php?ReservatieNr="+encodeURIComponent(ReservatieNr)+
+      "&AangepastVertrekDatum="+encodeURIComponent(AangepastVertrekDatum)+
+      "&AangepastPlaatsNr="+encodeURIComponent(AangepastPlaatsNr)+
+      "&AangepastDoucheMuntjes="+encodeURIComponent(AangepastDoucheMuntjes)+
+      "&AangepastBezoekers="+encodeURIComponent(AangepastBezoekers)+
+      "&AangepastWasBeurten="+encodeURIComponent(AangepastWasBeurten)+
+      "&AangepastDroogBeurten="+encodeURIComponent(AangepastDroogBeurten), true);
+      AanpassingDoorvoerenRequest.send();
+      if(1 == 1){
+        BestaandeReservaties();
+        BestaandeReservaties();
       }
-    };
-    AanpassingDoorvoerenRequest.open("GET", "SQLQueries/AanpassingenDoorvoeren.php?ReservatieNr="+encodeURIComponent(ReservatieNr)+
-    "&AangepastVertrekDatum="+encodeURIComponent(AangepastVertrekDatum)+
-    "&AangepastPlaatsNr="+encodeURIComponent(AangepastPlaatsNr)+
-    "&AangepastDoucheMuntjes="+encodeURIComponent(AangepastDoucheMuntjes)+
-    "&AangepastBezoekers="+encodeURIComponent(AangepastBezoekers)+
-    "&AangepastWasBeurten="+encodeURIComponent(AangepastWasBeurten)+
-    "&AangepastDroogBeurten="+encodeURIComponent(AangepastDroogBeurten), true);
-    AanpassingDoorvoerenRequest.send();
+    }
   }
-
 }
 
 //Function that happens when the Revenue section is loaded

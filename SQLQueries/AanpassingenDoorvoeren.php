@@ -12,12 +12,9 @@ $WasBeurten = urldecode($_GET['AangepastWasBeurten']);
 $DroogBeurten = urldecode($_GET['AangepastDroogBeurten']);
 
 //for testing if all the data passes through
-echo $VertrekDatum."|".$PlaatsNr."|".$DoucheMuntjes."|".$Bezoekers."|".$WasBeurten."|".$DroogBeurten."|".$ReservatieNr;
-
+// echo $VertrekDatum."|".$PlaatsNr."|".$DoucheMuntjes."|".$Bezoekers."|".$WasBeurten."|".$DroogBeurten."|".$ReservatieNr;
 
 /* TO DO LIST
-* Add checks for douchemuntjes, Bezoekers, Was Beurten and Droog Beurten respectively to check: if the entered value is 0 it should delete the that row from reservatie_regels if it exists, if not then do nothing.
-* if that entered value is above 0, update the row in reservatie_regels if it already exists for that category and insert a row if it does not.
 *
 * add another check: if the entered leave date is the same as it was, just change the spot number if it is any different from what it was.
 * if the leave date is different check the following:
@@ -26,4 +23,37 @@ echo $VertrekDatum."|".$PlaatsNr."|".$DoucheMuntjes."|".$Bezoekers."|".$WasBeurt
 * if there exists a record it means theres already a reservation in between those dates on the entered spot, and it must alert the user and discontinue any data altering/entering/deleting
 *
 */
+
+
+if($DoucheMuntjes == 0){
+  $ExistDoucheQuery = "DELETE FROM reservatie_regels WHERE ReservatieNr = ".$ReservatieNr." AND CategorieNr = 7";
+  $ExistDoucheResult = mysqli_query($con, $ExistDoucheQuery);
+}elseif($DoucheMuntjes > 0){
+  $ExistDoucheQuery = "INSERT INTO reservatie_regels (ReservatieNr, CategorieNr, Aantal) VALUES (".$ReservatieNr.", 7, ".$DoucheMuntjes.") ON DUPLICATE KEY UPDATE Aantal = ".$DoucheMuntjes."";
+  $ExistDoucheResult = mysqli_query($con, $ExistDoucheQuery);
+}
+
+if($Bezoekers == 0){
+  $ExistBezoekersQuery = "DELETE FROM reservatie_regels WHERE ReservatieNr = ".$ReservatieNr." AND CategorieNr = 6";
+  $ExistBezoekersResult = mysqli_query($con, $ExistBezoekersQuery);
+}elseif($Bezoekers > 0){
+  $ExistBezoekersQuery = "INSERT INTO reservatie_regels (ReservatieNr, CategorieNr, Aantal) VALUES (".$ReservatieNr.", 6, ".$Bezoekers.") ON DUPLICATE KEY UPDATE Aantal = ".$Bezoekers."";
+  $ExistBezoekersResult = mysqli_query($con, $ExistBezoekersQuery);
+}
+
+if($WasBeurten == 0){
+  $ExistWasBeurtQuery = "DELETE FROM reservatie_regels WHERE ReservatieNr = ".$ReservatieNr." AND CategorieNr = 8";
+  $ExistWasBeurtResult = mysqli_query($con, $ExistWasBeurtQuery);
+}elseif($WasBeurten > 0){
+  $ExistWasBeurtQuery = "INSERT INTO reservatie_regels (ReservatieNr, CategorieNr, Aantal) VALUES (".$ReservatieNr.", 8, ".$WasBeurten.") ON DUPLICATE KEY UPDATE Aantal = ".$WasBeurten."";
+  $ExistWasBeurtResult = mysqli_query($con, $ExistWasBeurtQuery);
+}
+
+if($DroogBeurten == 0){
+  $ExistDroogBeurtQuery = "DELETE FROM reservatie_regels WHERE ReservatieNr = ".$ReservatieNr." AND CategorieNr = 9";
+  $ExistDroogBeurtResult = mysqli_query($con, $ExistDroogBeurtQuery);
+}elseif($DroogBeurten > 0){
+  $ExistDroogBeurtQuery = "INSERT INTO reservatie_regels (ReservatieNr, CategorieNr, Aantal) VALUES (".$ReservatieNr.", 9, ".$DroogBeurten.") ON DUPLICATE KEY UPDATE Aantal = ".$DroogBeurten."";
+  $ExistDroogBeurtResult = mysqli_query($con, $ExistDroogBeurtQuery);
+}           
 ?>

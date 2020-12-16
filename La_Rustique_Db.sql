@@ -429,6 +429,7 @@ CREATE TABLE Reservatie_Regels (
   ReservatieNr INT,
   CategorieNr INT,
   Aantal INT,
+  PRIMARY KEY (ReservatieNr, CategorieNr),
   FOREIGN KEY (ReservatieNr) REFERENCES Reservaties(ReservatieNr) ON DELETE CASCADE,
   FOREIGN KEY (CategorieNr) REFERENCES Categorieen(CategorieNr)  
 );
