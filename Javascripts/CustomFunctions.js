@@ -376,6 +376,7 @@ function CheckAanpassenPlekken(){
 function AanpassingDoorvoeren(){
   var RDataArray = document.getElementById('BestaandeReservatieData').value.split("|");
   var ReservatieNr = RDataArray[6];
+  var Aankomst = RDataArray[7];
   var AangepastVertrekDatum = document.getElementById('AanpassenVertrekDatum').value;
   var AangepastPlaatsNr = document.getElementById('AanpassenPlekNummer').value;
   var AangepastDoucheMuntjes = document.getElementById('AanpassenDoucheMuntjes').value;
@@ -397,6 +398,7 @@ function AanpassingDoorvoeren(){
       };
       AanpassingDoorvoerenRequest.open("GET", "SQLQueries/AanpassingenDoorvoeren.php?ReservatieNr="+encodeURIComponent(ReservatieNr)+
       "&AangepastVertrekDatum="+encodeURIComponent(AangepastVertrekDatum)+
+      "&AankomstDatum="+encodeURIComponent(Aankomst)+
       "&AangepastPlaatsNr="+encodeURIComponent(AangepastPlaatsNr)+
       "&AangepastDoucheMuntjes="+encodeURIComponent(AangepastDoucheMuntjes)+
       "&AangepastBezoekers="+encodeURIComponent(AangepastBezoekers)+

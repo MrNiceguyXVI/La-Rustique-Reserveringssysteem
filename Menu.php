@@ -33,7 +33,16 @@ $currentDate = date("Y-m-d");
           displayEventTime: false
         });
         calendar.render();
-      });    
+      }); 
+      
+      //function for dislaying a certain alert within an Ajax called document
+      function VerkeerdeDatum(){
+        alert("Aanpassen geannuleerd door fouten:\nDe vertrek datum mag niet voor of op vandaag zijn, en ook niet voor of op de aankomst datum\n");
+      }
+      
+      function PlekAlBezet(){
+        alert("Aanpassen geannuleerd door fouten:\nDe gekozen Plek is al bezet om deze datums");
+      }
     </script>
   </head>
   <body>
@@ -270,7 +279,6 @@ $currentDate = date("Y-m-d");
                 </form>
               </div>
             </div>
-
             <!--Reservatie Overzicht page-->
             <div class="tab-pane" id="list-Reservaties" role="tabpanel" aria-labelledby="list-Reservaties-list">
               <div class="container-fluid">
