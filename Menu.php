@@ -43,6 +43,15 @@ $currentDate = date("Y-m-d");
       function PlekAlBezet(){
         alert("Aanpassen geannuleerd door fouten:\nDe gekozen Plek is al bezet om deze datums");
       }
+
+      function mouseoverPass(AccountId) {
+        var obj = document.getElementById(AccountId);
+        obj.type = "text";
+      }
+      function mouseoutPass(AccountId) {
+        var obj = document.getElementById(AccountId);
+        obj.type = "password";
+      }
     </script>
   </head>
   <body>
@@ -416,7 +425,7 @@ $currentDate = date("Y-m-d");
               </div>
             </div>
 
-            <!--Nieuwe Gebruiker Registreren-->
+            <!--Gebruiker opties-->
             <div class="tab-pane" id="list-Gebruiker" role="tabpanel" aria-labelledby="list-Gebruiker-list">
               <div class="container-fluid">
                 <div class="row my-3">
@@ -446,54 +455,62 @@ $currentDate = date("Y-m-d");
                   </div>
                   <div class="col-2"></div>
 
+                  <!--Gebruiker aanpassen/verwijdered-->
                   <div class="modal fade" id="AanpassenModal" tabindex="-1" role="dialog" aria-labelledby="Aanpassen/verwijderenModal" aria-hidden="true">
                     <div class="modal-dialog modal-lg" role="document">
                       <div class="modal-content">
                         <div class="modal-header">
                           <h5 class="modal-title" id="exampleModalLabel">Acccount aanpassen/verwijderen</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="openUserInterface()">
                             <span aria-hidden="true">&times;</span>
                           </button>
                         </div>
                         <div class="modal-body" id="FillAccountForm">
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuleren</button>
-                          <button type="button" class="btn btn-danger">Account verwijderen</button>     
-                          <button type="button" class="btn btn-primary">Aanpassingen doorvoeren</button>                                            
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="openUserInterface()">Annuleren</button>
+                          <button type="button" class="btn btn-danger" onclick="AccountVerwijderen()">Account verwijderen</button>     
+                          <button type="button" class="btn btn-primary" onclick="AccountAanpassen()">Aanpassingen doorvoeren</button>                                            
                         </div>
+                        <div id="DeleteAccount"></div>
                       </div>
                     </div>
                   </div>
 
+                  <!--Gebruiker registrered-->
                   <div class="modal fade" id="ToevoegenModal" tabindex="-1" role="dialog" aria-labelledby="ToevoegenModal" aria-hidden="true">
                     <div class="modal-dialog modal-lg" role="document">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Acccount aanpassen/verwijderen</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <h5 class="modal-title" id="exampleModalLabel">Acccount toevoegen</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="openUserInterface()">
                             <span aria-hidden="true">&times;</span>
                           </button>
                         </div>
-                        <div class="modal-body" id="FillAccountForm">
+                        <div class="modal-body">
                           <form>
                             <div class="form-group">
                               <label for="Username">Gebruikersnaam</label>
-                              <input type="text" class="form-control form-control-sm" id="Gebruikersnaam" aria-describedby="Gebruikersnaam" value="">
+                              <input type="text" class="form-control form-control-sm pr-0" id="GebruikersnaamToevoegen" aria-describedby="Gebruikersnaam" value="">
                             </div>
                             <div class="form-group">
                               <label for="Password">Wachtwoord</label>
-                              <input type="password" class="form-control form-control-sm" id="Wachtwoord" aria-describedby="Wachtwoord" value="">
+                              <input type="password" class="form-control form-control-sm" id="WachtwoordToevoegen" aria-describedby="Wachtwoord" value="" onmouseover="mouseoverPass('WachtwoordToevoegen');" onmouseout="mouseoutPass('WachtwoordToevoegen');">
+                            </div>
+                            <div class="form-group">
+                              <label for="Password">Wachtwoord opnieuw invoeren</label>
+                              <input type="password" class="form-control form-control-sm" id="WachtwoordOpnieuwToevoegen" aria-describedby="Wachtwoord" value="" onmouseover="mouseoverPass('WachtwoordOpnieuwToevoegen');" onmouseout="mouseoutPass('WachtwoordOpnieuwToevoegen');">
                             </div>
                             <div class="form-check">
                               <input type="checkbox" class="form-check-input" id="AdminCheckBox">
-                              <label class="form-check-label" for="exampleCheck1">Admin</label>
+                              <label class="form-check-label" for="Admin rights">Admin</label>
                             </div>
                           </form>
                         </div>
+                        <div id="AccountToevoegen"></div>
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuleren</button>  
-                          <button type="button" class="btn btn-success">Account toevoegen</button>                                            
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="openUserInterface()">Annuleren</button>  
+                          <button type="button" class="btn btn-success" onclick="GebruikerAccountToevoegen()">Account toevoegen</button>                                            
                         </div>
                       </div>
                     </div>

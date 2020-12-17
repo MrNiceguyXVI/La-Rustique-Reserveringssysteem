@@ -21,7 +21,7 @@ function openUserInterface(){
   GebruikerAccounts.send();
 }
 
-//function to display the accurate form info for the choses user
+//function to display the accurate form info for the chosen user
 function GetAccountInfo(AccountNr){
   var FillAccountInfo = new XMLHttpRequest();                               //Http Request to open FillAccountInfo.php
   FillAccountInfo.onreadystatechange = function(){
@@ -33,6 +33,73 @@ function GetAccountInfo(AccountNr){
   FillAccountInfo.send();
 }
 
+//function to call GebruikerToevoegen.php
+function GebruikerAccountToevoegen(){
+  var Gebruikersnaam = document.getElementById('GebruikersnaamToevoegen').value;
+  var Wachtwoord = document.getElementById('WachtwoordToevoegen').value;
+  var WachtwoordOpnieuw = document.getElementById('WachtwoordOpnieuwToevoegen').value;
+  var Admin = document.getElementById('AdminCheckBox').checked;
+
+  if(Gebruikersnaam == '' || Wachtwoord == '' || WachtwoordOpnieuw == ''){
+    alert("Niet alle velden zijn ingevoerd");
+  } else if(Wachtwoord != WachtwoordOpnieuw){
+    alert("Wachtwoorden komen niet overeen");
+  } else {
+    var AccountToevoegenRequest = new XMLHttpRequest();                               //Http Request to open GebruikerToevoegen.php
+    AccountToevoegenRequest.onreadystatechange = function(){
+      if (this.readyState == 4 && this.status == 200){
+        document.getElementById('AccountToevoegen').innerHTML = this.responseText;
+      }
+    };
+    AccountToevoegenRequest.open("GET", "SQLQueries/GebruikerToevoegen.php?gebruikersnaam="+encodeURIComponent(Gebruikersnaam)+"&wachtwoord="+encodeURIComponent(Wachtwoord)+"&admin="+encodeURIComponent(Admin), true);
+    AccountToevoegenRequest.send();
+  }
+}
+
+function AccountAanpassen() {
+  var Gebruikersnaam = document.getElementById('GebruikersnaamAanpassen').value;
+  var Wachtwoord = document.getElementById('WachtwoordAanpassen').value;
+  var Admin = document.getElementById('AdminCheckBoxAanpassen').checked;
+  var AccountNr = document.getElementById('AccountIdAanpassen').value;
+
+  if(Gebruikersnaam == '' || Wachtwoord == '' || AccountNr == ''){
+    alert("Aanpassen geannuleerd door fouten:\nNiet alle velden zijn ingevuld\n");
+  }else{
+    var AccountAanpassenRequest = new XMLHttpRequest();                            
+    AccountAanpassenRequest.onreadystatechange = function(){
+      if (this.readyState == 4 && this.status == 200){
+        document.getElementById('DeleteAccount').innerHTML = this.responseText;
+      }
+    };
+    AccountAanpassenRequest.open("GET", "SQLQueries/AccountAanpassen.php?AccountNr="+encodeURIComponent(AccountNr)+
+    "&Gebruikersnaam="+encodeURIComponent(Gebruikersnaam)+
+    "&Wachtwoord="+encodeURIComponent(Wachtwoord)+
+    "&Admin="+encodeURIComponent(Admin), true);
+    AccountAanpassenRequest.send();
+  }  
+}
+
+function AccountVerwijderen(){
+  var Averwijderen = confirm("Weet je zeker dat je dit account wilt verwijderen?\nDruk op OK om de reservatie te verwijderen");
+  if(Averwijderen == true){
+    var Message = "Reservatie wordt verwijderd";
+    var AccountId = document.getElementById('AccountIdAanpassen').value;
+
+    var AccountVerwijderRequest = new XMLHttpRequest();                            //Http Request to delete the customer via php
+    AccountVerwijderRequest.onreadystatechange = function(){
+      if (this.readyState == 4 && this.status == 200){
+        document.getElementById('DeleteAccount').innerHTML = this.responseText;
+      }
+    };
+    AccountVerwijderRequest.open("GET", "SQLQueries/DeleteAccount.php?AccountNr="+encodeURIComponent(AccountId)+ true);
+    AccountVerwijderRequest.send();
+    openUserInterface();
+  }else{
+    var Message = "Verwijderen geannuleerd";
+  }
+  alert(Message);
+}
+  
 function logOut(){
   //To be added
 }

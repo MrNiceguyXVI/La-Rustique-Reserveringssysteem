@@ -8,7 +8,7 @@ while($PakAccountsRow = mysqli_fetch_array($PakAccountsResult)){
   echo "
       <tr>
         <td>".$PakAccountsRow['ANaam']."</td>
-        <td>".$PakAccountsRow['AWachtwoord']."</td>
+        <td><input type='password' value='".$PakAccountsRow['AWachtwoord']."' id='".$PakAccountsRow['AccountNr']."'disabled style='border:none;'></input> <img src='Img/eye-fill.svg' onmouseover='mouseoverPass(".$PakAccountsRow['AccountNr'].");' onmouseout='mouseoutPass(".$PakAccountsRow['AccountNr'].");'/></td>
         <td>".$PakAccountsRow['AAdmin']."</td>
         <td><button type='button' class='btn btn-sm btn-success' data-toggle='modal' data-target='#AanpassenModal' onclick='GetAccountInfo(".$PakAccountsRow['AccountNr'].")'>Aanpassen</button></td>
       </tr>
