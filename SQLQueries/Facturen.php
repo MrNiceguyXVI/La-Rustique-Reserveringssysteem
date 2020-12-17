@@ -3,7 +3,7 @@ include '../Connection.php';
 $currentDate = date("Y-m-d"); 
 ?>
 <?php                       
-  $FacturenQuery = "SELECT ReservatieNr, AankomstDatum, VertrekDatum, AantalNachten FROM Reservaties WHERE VertrekDatum <= '".$currentDate."'";
+  $FacturenQuery = "SELECT ReservatieNr, AankomstDatum, VertrekDatum, AantalNachten FROM reservaties WHERE VertrekDatum <= '".$currentDate."'";
   $FacturenResult = mysqli_query($con, $FacturenQuery);
   while($FacturenRow = mysqli_fetch_array($FacturenResult)){
     echo "
