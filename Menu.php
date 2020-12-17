@@ -409,10 +409,9 @@ $currentDate = date("Y-m-d");
 
             <!--Omzet-->
             <div class="tab-pane" id="list-Omzet" role="tabpanel" aria-labelledby="list-Omzet-list">
-              <div class="text-dark">Omzet Pagina</div>
               <div class="container-fluid">
-                <div class="row my-3">
-                  
+                <div class="row my-4">
+                  <div id="OmzetPrint" class="ml-3 bg-success border border-success rounded p-3 text-white shadow"></div>
                 </div>
               </div>
             </div>

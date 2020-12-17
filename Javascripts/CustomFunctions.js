@@ -431,6 +431,15 @@ function Omzet(){
   month[11] = "December";
   var m = month[d.getMonth()];
   document.getElementById("PageTitle").innerHTML = "Omzet van " + m;        //Changes the page title
+
+  var OmzetRequest = new XMLHttpRequest();                         //Http Request to get all small spot info into the specified element
+  OmzetRequest.onreadystatechange = function(){
+    if (this.readyState == 4 && this.status == 200){
+      document.getElementById('OmzetPrint').innerHTML = this.responseText;
+    }
+  };
+  OmzetRequest.open("GET", "SQLQueries/OmzetPrint.php", true);
+  OmzetRequest.send();
 }
 
 //Function that happens when the User registration section is loaded
