@@ -2,6 +2,22 @@ function home(){
   window.location.href = "http://localhost/La-Rustique-Reserveringssysteem/Menu.php";
 }
 
+//For redirecting the user while within php to the log in screen
+function RedirectlogIn(){
+  location.href = "http://localhost/La-Rustique-Reserveringssysteem/loginScreen.php";
+}
+
+function logOut(){
+  var LogOutRequest = new XMLHttpRequest();                               //Http Request to open GebruikerAccounts.php
+  LogOutRequest.onreadystatechange = function(){
+    if (this.readyState == 4 && this.status == 200){
+      document.getElementById('LogOut').innerHTML = this.responseText;
+    }
+  };
+  LogOutRequest.open("GET", "SQLQueries/LogOut.php", true);
+  LogOutRequest.send();
+}
+
 //Function used to hide the menu
 function menuHide(){
   document.getElementById('menu').classList.toggle("collapse");         //toggles the collapse class to make the menu disappear and re-appear  
@@ -98,10 +114,6 @@ function AccountVerwijderen(){
     var Message = "Verwijderen geannuleerd";
   }
   alert(Message);
-}
-  
-function logOut(){
-  //To be added
 }
 
 //Function that happens when the Reservation section is loaded
