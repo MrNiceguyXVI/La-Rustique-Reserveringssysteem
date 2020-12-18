@@ -8,8 +8,9 @@ $currentDate = date("Y-m-d");
   $BezetArray = [];                                                                                                   # An array that gets Filled with places that are currently occupied
   while($RowDate = mysqli_fetch_array($DateResult))
   {                                                                                                                   # Pushes the spot Number into the array if it's in the queryresult
-    array_push($BezetArray, $RowDate['PlaatsNr']);                                                                    #
-  }                                                                                                                   #
+    array_push($BezetArray, $RowDate['PlaatsNr']);                                                                    
+  }
+  
   $PlaatsQuery = "SELECT PlaatsNr FROM plaatsen WHERE PlaatsFormaat = 'GROOT'";                                       # Selects the Spot Numbers for all the big spots                                            
   $PlaatsResult = mysqli_query($con, $PlaatsQuery);
   while($RowPlaats = mysqli_fetch_array($PlaatsResult))
@@ -21,9 +22,9 @@ $currentDate = date("Y-m-d");
     }
     else
     {                                                                                                                 # is to change the table pane color
-      $Status = "Vrij";                                                                                               #
-      $StatusClass="bg-success";                                                                                      #
-    }                                                                                                                 #
+      $Status = "Vrij";                                                                                               
+      $StatusClass="bg-success";                                                                                      
+    }                                                                                                                 
     echo "
     <tr>
       <td>".$RowPlaats['PlaatsNr']."</td>

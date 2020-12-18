@@ -7,7 +7,24 @@ $ReservatieNrs = array(
   array()                 //AantalNachten
 );
 
-function BerekenSubTotaal($CNr, $AantalItems, $AantalNachten, $Prijs){
+//initialising variables
+$Volwassenen = 0;
+$KinderenTot4 = 0; 
+$KinderenTot12 = 0;
+$Huisdier = 0;
+$Elektriciteit = 0;
+$Bezoekers = 0;
+$Douche = 0; 
+$Wasmachine = 0;
+$Wasdroger = 0;
+$CaravanG = 0;
+$CaravanK = 0;
+$TentG = 0;
+$TentK = 0;
+$Auto = 0;
+
+function BerekenSubTotaal($CNr, $AantalItems, $AantalNachten, $Prijs)
+{
   //Making all the needed variables global so I can use them
   global $Volwassenen;
   global $KinderenTot4; 
@@ -24,7 +41,8 @@ function BerekenSubTotaal($CNr, $AantalItems, $AantalNachten, $Prijs){
   global $TentK;
   global $Auto;
 
-  switch($CNr){
+  switch($CNr)
+  {
     case 1:
       $Volwassenen +=($AantalItems * $AantalNachten * $Prijs);
       break;
@@ -72,12 +90,14 @@ function BerekenSubTotaal($CNr, $AantalItems, $AantalNachten, $Prijs){
 
 $PakReservatieNrQuery = "SELECT ReservatieNr, AantalNachten FROM reservaties WHERE MONTH(VertrekDatum) = ".$currentMonth." AND VertrekDatum <= '".$currentDate."'";
 $PakReservatieNrResult = mysqli_query($con, $PakReservatieNrQuery);
-while($PakReservatieNrRow = mysqli_fetch_array($PakReservatieNrResult)){
+while($PakReservatieNrRow = mysqli_fetch_array($PakReservatieNrResult))
+{
   array_push($ReservatieNrs[0], $PakReservatieNrRow['ReservatieNr']);
   array_push($ReservatieNrs[1], $PakReservatieNrRow['AantalNachten']);
 }
 
-for($Nr = 0;$Nr < (count($ReservatieNrs[0])); $Nr++){
+for($Nr = 0;$Nr < (count($ReservatieNrs[0])); $Nr++)
+{
   //SQL query to fetch all the needed category data that's related to the current reservation number
   $CategorieQuery = "SELECT A.CategorieNr, A.Aantal, B.Prijs FROM reservatie_regels A, categorieen B WHERE A.ReservatieNr = ".$ReservatieNrs[0][$Nr]." AND B.CategorieNr = A.CategorieNr";
   $CategorieResult = mysqli_query($con, $CategorieQuery);
@@ -89,6 +109,7 @@ for($Nr = 0;$Nr < (count($ReservatieNrs[0])); $Nr++){
   } 
 
 }
+
 //Adding all the subtotals up for the total revenue for the current month
 $Totaal = $Volwassenen+$KinderenTot4+$KinderenTot12+$Huisdier+$Elektriciteit+$Bezoekers+$Douche+$Wasmachine+$Wasdroger+$CaravanG+$CaravanK+$TentG+$TentK+$Auto;
 

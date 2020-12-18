@@ -24,7 +24,8 @@ $currentDate = date("Y-m-d");
     <link rel="stylesheet" type="text/css" href="fullcalendar/main.css"/>
     <!--PHP code that checks if the user is logged in, if not they immediately get redirected to the log in screen-->
     <?php 
-      if(isset($_SESSION['Admin']) == false){
+      if(isset($_SESSION['Admin']) == false)
+      {
         echo "<style onload='RedirectlogIn();'></style>";
       }
     ?>
@@ -87,7 +88,8 @@ $currentDate = date("Y-m-d");
 
           <!--php code to print buttons appropriate for this user's rights-->    
           <?php
-          if($_SESSION['Admin'] == "YES"){
+          if($_SESSION['Admin'] == "YES")
+          {
             echo '<!--Button to open account interface-->
           <button type="button" class="btn btn-addUser p-0 mr-2 ml-auto" id="list-Gebruiker-list" data-toggle="list" href="#list-Gebruiker" role="tab" aria-controls="Gebruiker" onclick="openUserInterface()">
             <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-person-lines-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -100,7 +102,9 @@ $currentDate = date("Y-m-d");
               <path fill-rule="evenodd" d="M1.5 15a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2.5A1.5 1.5 0 0 0 11.5 1H11V.5a.5.5 0 0 0-.57-.495l-7 1A.5.5 0 0 0 3 1.5V15H1.5zM11 2v13h1V2.5a.5.5 0 0 0-.5-.5H11zm-2.5 8c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z"/>
             </svg>
           </button>';
-          } else {
+          } 
+          else 
+          {
             echo '<!--Button to log out-->
           <button type="button" class="btn btn-logOut p-0 mx-3 ml-auto" id="menubtn" onclick="logOut()">
             <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-door-open-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -139,7 +143,8 @@ $currentDate = date("Y-m-d");
             </a>
 
             <?php
-            if($_SESSION['Admin'] == "YES"){
+            if($_SESSION['Admin'] == "YES")
+            {
               echo '
               <a class="list-group-item list-group-item-action" id="list-Facturen-list" data-toggle="list" href="#list-Facturen" role="tab" aria-controls="Facturen" onclick="Facturen()">
                 <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-receipt mr-2 mb-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -408,7 +413,7 @@ $currentDate = date("Y-m-d");
                 </div>
               </div>
             </div>
-
+            
             <!--Facturen-->
             <div class="tab-pane" id="list-Facturen" role="tabpanel" aria-labelledby="list-Facturen-list">
               <div class="container-fluid">

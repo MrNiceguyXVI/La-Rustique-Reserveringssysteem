@@ -7,8 +7,9 @@ function RedirectlogIn(){
   location.href = "http://localhost/La-Rustique-Reserveringssysteem/loginScreen.php";
 }
 
+//opens LogOut.php inside of the div with the id 'LogOut'
 function logOut(){
-  var LogOutRequest = new XMLHttpRequest();                               //Http Request to open GebruikerAccounts.php
+  var LogOutRequest = new XMLHttpRequest();                               
   LogOutRequest.onreadystatechange = function(){
     if (this.readyState == 4 && this.status == 200){
       document.getElementById('LogOut').innerHTML = this.responseText;
@@ -72,6 +73,7 @@ function GebruikerAccountToevoegen(){
   }
 }
 
+//opens AccountAanpassen.php inside of the div with the id 'DeleteAccount'
 function AccountAanpassen() {
   var Gebruikersnaam = document.getElementById('GebruikersnaamAanpassen').value;
   var Wachtwoord = document.getElementById('WachtwoordAanpassen').value;
@@ -95,6 +97,7 @@ function AccountAanpassen() {
   }  
 }
 
+//opens DeleteAccount.php inside of the div with the id 'DeleteAccount'
 function AccountVerwijderen(){
   var Averwijderen = confirm("Weet je zeker dat je dit account wilt verwijderen?\nDruk op OK om de reservatie te verwijderen");
   if(Averwijderen == true){
@@ -116,7 +119,7 @@ function AccountVerwijderen(){
   alert(Message);
 }
 
-//Function that happens when the Reservation section is loaded
+//Function that happens when the Reservation button is clicked, it fetches the existing customers and the rates via php
 function Reservatie(){
   document.getElementById("PageTitle").innerHTML = "Reserveren";            //Changes the page title
 
@@ -138,8 +141,9 @@ function Reservaties(){
   BestaandeReservaties();
 }
 
+//function to get all the existing reservation into the specified element
 function BestaandeReservaties(){
-  var ReservatieDataRequest = new XMLHttpRequest();                            //Http Request to get all the existing customers into the specified element
+  var ReservatieDataRequest = new XMLHttpRequest(); 
   ReservatieDataRequest.onreadystatechange = function(){
     if (this.readyState == 4 && this.status == 200){
       document.getElementById('BestaandeReservatieData').innerHTML = this.responseText;
@@ -151,7 +155,7 @@ function BestaandeReservaties(){
 
 //function to fill the 'already existing' customer selection with the existing customers
 function BestaandeKlanten(){
-  var KlantenDataRequest = new XMLHttpRequest();                            //Http Request to get all the existing customers into the specified element
+  var KlantenDataRequest = new XMLHttpRequest();                           
     KlantenDataRequest.onreadystatechange = function(){
       if (this.readyState == 4 && this.status == 200){
         document.getElementById('KlantenData').innerHTML = this.responseText;
@@ -161,11 +165,9 @@ function BestaandeKlanten(){
     KlantenDataRequest.send();
 }
 
-
-
-//Function that happens when the Spots section is loaded
+//Function that happens when the Spots menu button is clicked, to load the spots page
 function Plaatsen(){
-  document.getElementById("PageTitle").innerHTML = "Plaatsen overzicht ";  //Changes the page title
+  document.getElementById("PageTitle").innerHTML = "Plaatsen overzicht ";  
 
   var GrotePlaatsenRequest = new XMLHttpRequest();                          //Http Request to get all Large spot info into the specified element
   GrotePlaatsenRequest.onreadystatechange = function(){
@@ -186,9 +188,9 @@ function Plaatsen(){
   KleinePlaatsenRequest.send();
 }
 
-//Function that happens when the invoice section is loaded
+//Function that happens when the invoice menu button is clicked, loads the Invoice page
 function Facturen(){
-  document.getElementById("PageTitle").innerHTML = "Facturen";              //Changes the page title
+  document.getElementById("PageTitle").innerHTML = "Facturen";              
 
   var FacturenRequest = new XMLHttpRequest();                               //Http Request to get all invoices into the specified element
   FacturenRequest.onreadystatechange = function(){
@@ -200,19 +202,10 @@ function Facturen(){
   FacturenRequest.send();
 }
 
-//var to collect all error codes
+//var to collect all error codes for making a reservation
 var ErrorMessage = "Reservatie geannuleerd door fouten:\n";
 
-//function to activate PakPlekken.php
-function PlekkenBeschikbaar(aankomstdatum, vertrekdatum, plekformaat){
-  var combidatum = document.getElementById('Dates').value.split("/");
-  var aankomstdatum = combidatum[0];
-  var vertrekdatum = combidatum[1];
-  var plekformaat = document.getElementById('VeldFormaat').value;
-
-  ReservatiePlekkenCheck(aankomstdatum, vertrekdatum, plekformaat, "BeschikbarePlekken", 0); 
-}
-
+//function to fetch al free spots for the entered arrival and departure date, and chosen spot size
 function ReservatiePlekkenCheck(aankomstdatum, vertrekdatum, plekformaat, ElementId, Aanpassen){
   //checking if dates are entered, and if they're not it cancels the operation and gives an alert
   if(aankomstdatum == "" && vertrekdatum == undefined){
@@ -236,6 +229,17 @@ function ReservatiePlekkenCheck(aankomstdatum, vertrekdatum, plekformaat, Elemen
   }
 }
 
+//this function calls the Spot checker function for use on the reservation creation page
+function PlekkenBeschikbaar(aankomstdatum, vertrekdatum, plekformaat){
+  var combidatum = document.getElementById('Dates').value.split("/");
+  var aankomstdatum = combidatum[0];
+  var vertrekdatum = combidatum[1];
+  var plekformaat = document.getElementById('VeldFormaat').value;
+
+  ReservatiePlekkenCheck(aankomstdatum, vertrekdatum, plekformaat, "BeschikbarePlekken", 0); 
+}
+
+//Function to fetch and process all the entered relevant data needed for inserting a reservation
 function MaakReservatie(){
   //fetching all the entered data from the form
   var CombiDatum = document.getElementById('Dates').value.split("/");
@@ -273,6 +277,7 @@ function MaakReservatie(){
   {
     ErrorMessage+="Email niet ingevoerd\n";
   }
+
   //checks if the email has the right format for email adresses
   if(/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/.test(Email) == false)    
   {
@@ -358,16 +363,13 @@ function MaakReservatie(){
     //Use the ampersand & to glue variables together, and encoding the data
     ReservatieRequest.open("GET", url, true);
     ReservatieRequest.send();
-
-    //Refreshes the customer selector
-    
-    //document.getElementById('Dates').value = null;
   } else{
     alert(ErrorMessage);
     ErrorMessage = "Reservatie geannuleerd door fouten:\n"; //clears the error messages so they don't appear twice in the same alert
   }
 }
 
+//function to fill input fields with relevant customer data, for auto entering certain values
 function VulKlantenInfo(){
   var KDataArray = document.getElementById('KlantenData').value.split("|");
   var Naam = document.getElementById('Naam').value = KDataArray[0];
@@ -375,6 +377,7 @@ function VulKlantenInfo(){
   var Telefoon = document.getElementById('Telefoon').value = KDataArray[2];
 }
 
+//function to fill input fields with relevant reservation data, for auto entering certain values
 function VulReservatieAanpassenData(){
   var RDataArray = document.getElementById('BestaandeReservatieData').value.split("|");
   var VertrekDatum = document.getElementById('AanpassenVertrekDatum').value = RDataArray[0];
@@ -419,6 +422,7 @@ function VulReservatieAanpassenData(){
   }
 }
 
+//function used for deleting the selected reservation
 function VerwijderReservatie() {
   var verwijderen = confirm("Weet je zeker dat je deze reservatie wilt verwijderen?\nDruk op OK om de reservatie te verwijderen");
   if(verwijderen == true){
@@ -442,6 +446,7 @@ function VerwijderReservatie() {
   BestaandeReservaties();
 }
 
+//Function that fetches the entered spot data anc checks what spots are free when updating a reservation
 function CheckAanpassenPlekken(){
   var RDataArray = document.getElementById('BestaandeReservatieData').value.split("|");
   var Aankomst = RDataArray[7]; 
@@ -451,7 +456,7 @@ function CheckAanpassenPlekken(){
   ReservatiePlekkenCheck(Aankomst, Vertrek, PlekFormaat, "AanpassenPlekNummer", PlekNr); 
 }
 
-
+//Function for updating the relevant reservation en potentially adding or removing reservation_lines from reservatie_regels
 function AanpassingDoorvoeren(){
   var RDataArray = document.getElementById('BestaandeReservatieData').value.split("|");
   var ReservatieNr = RDataArray[6];
@@ -492,7 +497,7 @@ function AanpassingDoorvoeren(){
   }
 }
 
-//Function that happens when the Revenue section is loaded
+//Function to calculate the revenue made for this current month
 function Omzet(){
   var d =  new Date();  
   var month =  new Array();
@@ -509,9 +514,9 @@ function Omzet(){
   month[10] = "November";
   month[11] = "December";
   var m = month[d.getMonth()];
-  document.getElementById("PageTitle").innerHTML = "Omzet van " + m;        //Changes the page title
+  document.getElementById("PageTitle").innerHTML = "Omzet van " + m;        
 
-  var OmzetRequest = new XMLHttpRequest();                         //Http Request to get all small spot info into the specified element
+  var OmzetRequest = new XMLHttpRequest();
   OmzetRequest.onreadystatechange = function(){
     if (this.readyState == 4 && this.status == 200){
       document.getElementById('OmzetPrint').innerHTML = this.responseText;
@@ -521,7 +526,7 @@ function Omzet(){
   OmzetRequest.send();
 }
 
-//Function that happens when the User registration section is loaded
+//Changes the page title when registering a new user
 function titleRegistratie(){
   document.getElementById("PageTitle").innerHTML = "Gebruiker Registreren"; //Changes the page title
 }

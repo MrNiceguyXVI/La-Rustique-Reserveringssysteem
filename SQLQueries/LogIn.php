@@ -8,13 +8,17 @@ $CheckInlogGegevensQuery = "SELECT AAdmin FROM accounts WHERE ANAAM = '".$Gebrui
 $CheckInlogGegevensResult = mysqli_query($con, $CheckInlogGegevensQuery);
 
 //checks if there's any user with that account
-if(mysqli_num_rows($CheckInlogGegevensResult)!=0){
+if(mysqli_num_rows($CheckInlogGegevensResult)!=0)
+{
   session_start();
-  while($CheckInlogGegevensRow = mysqli_fetch_array($CheckInlogGegevensResult)){
+  while($CheckInlogGegevensRow = mysqli_fetch_array($CheckInlogGegevensResult))
+  {
     $_SESSION["Admin"] = $CheckInlogGegevensRow["AAdmin"];
   }
   echo "<style onload='RedirectMenu();'></style>";
-} else {
+} 
+else 
+{
   echo "<style onload='UserNonExistent();'></style>";
 }
 ?>

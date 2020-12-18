@@ -4,9 +4,12 @@ $Gebruikersnaam = urldecode($_GET['gebruikersnaam']);
 $Wachtwoord = urldecode($_GET['wachtwoord']); 
 
 //Checks to see if The admin option should be YES or NO
-if(urldecode($_GET['admin']) == "true"){
+if(urldecode($_GET['admin']) == "true")
+{
   $Admin = "YES";
-} else {
+} 
+else 
+{
   $Admin = "NO";
 }
  

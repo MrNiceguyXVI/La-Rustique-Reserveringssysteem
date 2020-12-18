@@ -10,7 +10,8 @@ $PlekkenCheckQuery = "SELECT PlaatsNr FROM plaatsen WHERE PlaatsFormaat = '".$fo
 
 $PlekkenCheckResult = mysqli_query($con, $PlekkenCheckQuery);
 
-if($pleknr != 0){
+if($pleknr != 0)
+{
   echo '
     <option value="'.$pleknr.'">'.$pleknr.'</option>
     ';

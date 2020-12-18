@@ -5,13 +5,15 @@ $id = urldecode($_GET['AccountNr']); //Decodes variable passed through the URL
 //for fetching the relevant account info and inserting that into the text fields
 $PakAccountQuery = "SELECT * FROM accounts WHERE AccountNr = ".$id."";
 $PakAccountResult = mysqli_query($con, $PakAccountQuery);
-while($PakAccountRow = mysqli_fetch_array($PakAccountResult)){
+while($PakAccountRow = mysqli_fetch_array($PakAccountResult))
+{
   $AccountNaam = $PakAccountRow['ANaam'];
   $OudWachtwoord = $PakAccountRow['AWachtwoord'];
   $Admin = $PakAccountRow['AAdmin'];
 }
 
-switch($Admin){
+switch($Admin)
+{
   case "YES":
     $AdminVal = "CHECKED";
     break;
@@ -37,5 +39,4 @@ echo '
   <input type="number" hidden id="AccountIdAanpassen" value="'.$id.'">
 </form>
 ';
-
 ?>

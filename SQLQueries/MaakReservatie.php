@@ -19,12 +19,13 @@ $Telefoon = str_replace(' ', '', "+".$Tel);
 
 //Query that only inserts the entered customer details into the 'klanten' table if there's no record containing the same name, email and phone number; this avoids precise duplicates
 $InsertKlantQuery = "
-            INSERT INTO klanten (KNaam, KEmail, KTel)
-            SELECT * FROM (SELECT '".$Naam."', '".$Email."', '".$Telefoon."') AS tmp
-            WHERE NOT EXISTS (
-                SELECT KNaam, KEmail, KTel FROM klanten WHERE KNaam = '".$Naam."' AND KEmail = '".$Email."' AND KTel = '".$Telefoon."'
-            ) LIMIT 1
+  INSERT INTO klanten (KNaam, KEmail, KTel)
+  SELECT * FROM (SELECT '".$Naam."', '".$Email."', '".$Telefoon."') AS tmp
+  WHERE NOT EXISTS (
+      SELECT KNaam, KEmail, KTel FROM klanten WHERE KNaam = '".$Naam."' AND KEmail = '".$Email."' AND KTel = '".$Telefoon."'
+  ) LIMIT 1
 ";
+
 //executes the query
 $InsertKlantResult = mysqli_query($con, $InsertKlantQuery);
 
@@ -68,31 +69,36 @@ $InsertVolwassenenQuery = "INSERT INTO reservatie_regels (ReservatieNr, Categori
 $InsertVolwassenenResult = mysqli_query($con, $InsertVolwassenenQuery);
 
 //Insert Kinderen tot 4
-if($KinderenTot4 > 0){
+if($KinderenTot4 > 0)
+{
   $InsertKinderenTot4Query = "INSERT INTO reservatie_regels (ReservatieNr, CategorieNr, Aantal) VALUES (".$ReservatieNr.", 2, ".$KinderenTot4.")";
   $InsertKinderenTot4Result = mysqli_query($con, $InsertKinderenTot4Query);
 }
 
 //Insert Kinderen tot 12
-if($KinderenTot12 > 0){
+if($KinderenTot12 > 0)
+{
   $InsertKinderenTot12Query = "INSERT INTO reservatie_regels (ReservatieNr, CategorieNr, Aantal) VALUES (".$ReservatieNr.", 3, ".$KinderenTot12.")";
   $InsertKinderenTot12Result = mysqli_query($con, $InsertKinderenTot12Query);
 }
 
 //Insert hond
-if($Huisdier == "Ja"){
+if($Huisdier == "Ja")
+{
   $InsertHondQuery = "INSERT INTO reservatie_regels (ReservatieNr, CategorieNr, Aantal) VALUES (".$ReservatieNr.", 4, 1)";
   $InsertHondResult = mysqli_query($con, $InsertHondQuery);
 }
 
 //Insert electriciteit
-if($Electriciteit == "Ja"){
+if($Electriciteit == "Ja")
+{
   $InsertElectraQuery = "INSERT INTO reservatie_regels (ReservatieNr, CategorieNr, Aantal) VALUES (".$ReservatieNr.", 5, 1)";
   $InsertElectraResult = mysqli_query($con, $InsertElectraQuery);
 }
 
 //Insert extra douchemuntjes
-if($ExtraDoucheMuntjes > 0){
+if($ExtraDoucheMuntjes > 0)
+{
   $InsertDoucheMuntjesQuery = "INSERT INTO reservatie_regels (ReservatieNr, CategorieNr, Aantal) VALUES (".$ReservatieNr.", 7, ".$ExtraDoucheMuntjes.")";
   $InsertDoucheMuntjesResult = mysqli_query($con, $InsertDoucheMuntjesQuery);
 }
@@ -100,6 +106,7 @@ if($ExtraDoucheMuntjes > 0){
 //For fetching the most accurate spot size
 $PakPlekFormaatQuery = "SELECT PlaatsFormaat FROM plaatsen WHERE PlaatsNr = ".$Plek."";
 $PakPlekFormaatResult = mysqli_query($con, $PakPlekFormaatQuery);
+
 //Executing the query and saving the value
 while($PakPlekFormaatRow = mysqli_fetch_array($PakPlekFormaatResult))
 {
@@ -114,19 +121,22 @@ if($PlaatsFormaat == "GROOT")
   {
     $InsertCaravanGrootQuery = "INSERT INTO reservatie_regels (ReservatieNr, CategorieNr, Aantal) VALUES (".$ReservatieNr.", 11, 1)";
     $InsertCaravanGrootResult = mysqli_query($con, $InsertCaravanGrootQuery);
-  } else if ($SoortVerblijf == "Tent")
+  } 
+  else if ($SoortVerblijf == "Tent")
   {
     $InsertTentGrootQuery = "INSERT INTO reservatie_regels (ReservatieNr, CategorieNr, Aantal) VALUES (".$ReservatieNr.", 13, 1)";
     $InsertTentGrootResult = mysqli_query($con, $InsertTentGrootQuery);
   }
-} else if ($PlaatsFormaat == "KLEIN")
+} 
+else if ($PlaatsFormaat == "KLEIN")
 {
   //For inserting the spot type
   if($SoortVerblijf == "Caravan")
   {
     $InsertCaravanKleinQuery = "INSERT INTO reservatie_regels (ReservatieNr, CategorieNr, Aantal) VALUES (".$ReservatieNr.", 10, 1)";
     $InsertCaravanKleinResult = mysqli_query($con, $InsertCaravanKleinQuery);
-  } else if ($SoortVerblijf == "Tent")
+  } 
+  else if ($SoortVerblijf == "Tent")
   {
     $InsertTentKleinQuery = "INSERT INTO reservatie_regels (ReservatieNr, CategorieNr, Aantal) VALUES (".$ReservatieNr.", 12, 1)";
     $InsertTentKleinResult = mysqli_query($con, $InsertTentKleinQuery);

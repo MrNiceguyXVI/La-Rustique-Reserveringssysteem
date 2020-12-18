@@ -6,6 +6,7 @@ include 'Connection.php';
 <html id="logInDiv">
   <head>
     <title>La Rustique Reserveringsysteem</title>
+    <link rel="icon" href="Img/La-Rustique-Logo-Icon.png">
     <!--Bootstrap links (css and java)-->
     <script src="Javascripts/jquery-3.5.1.js"></script>
     <script src="Javascripts/popper.js"></script>
