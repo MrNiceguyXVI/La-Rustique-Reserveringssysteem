@@ -363,6 +363,25 @@ function MaakReservatie(){
     //Use the ampersand & to glue variables together, and encoding the data
     ReservatieRequest.open("GET", url, true);
     ReservatieRequest.send();
+
+    //For notifying the user that the reservation has been inserted
+    alert("Reservatie ingevoerd!");
+
+    //For emptying/resetting the form fields
+    document.getElementById('BeschikbarePlekken').value = null;
+    document.getElementById('Dates').value = null;
+    document.getElementById('VeldFormaat').value = "GROOT";
+    document.getElementById('Naam').value = null;
+    document.getElementById('Email').value = null;
+    document.getElementById('Telefoon').value = null;
+    document.getElementById('Auto').value = "Ja";
+    document.getElementById('SoortVerblijf').value = "Caravan";
+    document.getElementById('Electriciteit').value = "Ja";
+    document.getElementById('ExtraDoucheMuntjes').value = null;
+    document.getElementById('Volwassenen').value = null;
+    vdocument.getElementById('KinderenTot4').value = null;
+    document.getElementById('KinderenTot12').value = null;  
+    document.getElementById('Huisdier').value = "Ja"; 
   } else{
     alert(ErrorMessage);
     ErrorMessage = "Reservatie geannuleerd door fouten:\n"; //clears the error messages so they don't appear twice in the same alert
