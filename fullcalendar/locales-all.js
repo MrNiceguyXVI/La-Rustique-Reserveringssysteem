@@ -976,8 +976,8 @@
   var l47 = {
     code: 'nl',
     week: {
-      dow: 1, // Monday is the first day of the week.
-      doy: 4, // The week that contains Jan 4th is the first week of the year.
+      dow: 1, // Maandag is de eerste dag van de week
+      doy: 4, // de week die waarin Januari 4 plaatsneemt is de eerste week van het jaar
     },
     buttonText: {
       prev: 'Voorgaand',

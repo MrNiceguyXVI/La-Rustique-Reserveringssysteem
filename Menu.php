@@ -38,7 +38,8 @@ $currentDate = date("Y-m-d");
           initialView: 'dayGridMonth',
           height:570,
           locale: 'nl',
-          displayEventTime: false
+          dayMaxEventRows: 1,
+          displayEventTime: false     
         });
         calendar.render();
       }); 
