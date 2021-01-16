@@ -220,12 +220,12 @@ $currentDate = date("Y-m-d");
                       <div class="h5">Basis Informatie</div>                      
                       <div class="form-group ">
                         <label for="reservatie datum" class="">Aankomst en vertrek datums</label>
-                        <input type="text" class="form-control form-control-sm" naam="Datums" id="Dates" value="" onkeydown="return false">
+                        <input type="text" class="form-control form-control-sm" naam="Datums" id="Dates" value="" onkeydown="return false"  onchange="ReservatieTotaal()">
                       </div>
 
                       <div class="form-group">
                         <label for="VeldFormaat">Formaat</label>
-                        <select class="form-control form-control-sm" name="VeldFormaat" id="VeldFormaat">
+                        <select class="form-control form-control-sm" name="VeldFormaat" id="VeldFormaat" onchange="ReservatieTotaal()">
                           <option value="GROOT">Groot</option>
                           <option value="KLEIN">Klein</option>
                         </select>
@@ -245,21 +245,21 @@ $currentDate = date("Y-m-d");
                       </div>
                       <div class="form-group">
                         <label for="Auto">Met de auto</label>
-                        <select class="form-control form-control-sm" name="Auto" id="Auto">
+                        <select class="form-control form-control-sm" name="Auto" id="Auto" onchange="ReservatieTotaal()">
                           <option value="Ja">Ja</option>
                           <option value="Nee">Nee</option>
                         </select>
                       </div>
                       <div class="form-group">
                         <label for="SoortVerblijf">Soort verblijf</label>
-                        <select class="form-control form-control-sm" name="SoortVerblijf" id="SoortVerblijf">
+                        <select class="form-control form-control-sm" name="SoortVerblijf" id="SoortVerblijf" onchange="ReservatieTotaal()">
                           <option value="Caravan">Caravan/Camper</option>
                           <option value="Tent">Tent</option>
                         </select>
                       </div>
                       <div class="form-group">
                         <label for="Electriciteit" >Electriciteit</label>
-                        <select class="form-control form-control-sm" name="Electriciteit" id="Electriciteit">
+                        <select class="form-control form-control-sm" name="Electriciteit" id="Electriciteit" onchange="ReservatieTotaal()">
                           <option value="Ja">Ja</option>
                           <option value="Nee">Nee</option>
                         </select>
@@ -267,23 +267,23 @@ $currentDate = date("Y-m-d");
                       </div>
                       <div class="form-group">
                         <label for="GratisDouche">Extra douchemuntjes</label>
-                        <input type="number" class="form-control form-control-sm" value="" naam="ExtraDoucheMuntjes" id="ExtraDoucheMuntjes" placeholder="0">
+                        <input type="number" class="form-control form-control-sm" value="" naam="ExtraDoucheMuntjes" id="ExtraDoucheMuntjes" placeholder="0" onchange="ReservatieTotaal()">
                       </div>
                       <div class="form-group">
                         <label for="AantalVolwassenen">Aantal volwassenen</label>
-                        <input type="number" class="form-control form-control-sm" value="" name="Volwassenen" id="Volwassenen" placeholder="1">
+                        <input type="number" class="form-control form-control-sm" value="" name="Volwassenen" id="Volwassenen" placeholder="1" onchange="ReservatieTotaal()">
                       </div>
                       <div class="form-group">
                         <label for="AantalKindTot4">Aantal kinderen (tot 4 jaar)</label>
-                        <input type="number" class="form-control form-control-sm" value="" name="KinderenTot4" id="KinderenTot4" placeholder="0">
+                        <input type="number" class="form-control form-control-sm" value="" name="KinderenTot4" id="KinderenTot4" placeholder="0" onchange="ReservatieTotaal()">
                       </div>
                       <div class="form-group">
                         <label for="AantalKindTot12">Aantal kinderen (tussen 4 - 12 jaar)</label>
-                        <input type="number" class="form-control form-control-sm" value="" name="KinderenTot12" id="KinderenTot12" placeholder="0">
+                        <input type="number" class="form-control form-control-sm" value="" name="KinderenTot12" id="KinderenTot12" placeholder="0" onchange="ReservatieTotaal()">
                       </div>
                       <div class="form-group">
                         <label for="Huisdier">Huisdier</label>
-                        <select class="form-control form-control-sm" name="Huisdier" id="Huisdier">
+                        <select class="form-control form-control-sm" name="Huisdier" id="Huisdier" onchange="ReservatieTotaal()">
                           <option value="Ja">Ja</option>
                           <option value="Nee">Nee</option>
                         </select>
@@ -310,6 +310,7 @@ $currentDate = date("Y-m-d");
                         </tbody>
                       </table>
                     </div>
+                    <div class="h5 pt-3" id="TotaalReservatie">Totaal: €0,-</div>
                   </div>
                 </div>
                 </form>

@@ -165,6 +165,89 @@ function BestaandeKlanten(){
     KlantenDataRequest.send();
 }
 
+//Function to calculate the total when creating a reservation
+function ReservatieTotaal(){
+  var CombiDatum = document.getElementById('Dates').value.split("/");
+
+  var AankomstDatum = new Date(CombiDatum[0]);
+  var VertrekDatum = new Date(CombiDatum[1]);
+  var PlekFormaat = document.getElementById('VeldFormaat').value;
+  var SoortVerblijf = document.getElementById('SoortVerblijf').value;
+  var Auto = document.getElementById('Auto').value;
+  var ExtraDoucheMuntjes = document.getElementById('ExtraDoucheMuntjes').value;
+  var Volwassenen = document.getElementById('Volwassenen').value;
+  var KinderenTot4 = document.getElementById('KinderenTot4').value;
+  var KinderenTot12 = document.getElementById('KinderenTot12').value;  
+  var Huisdier = document.getElementById('Huisdier').value; 
+  const TijdVerschil = Math.abs(VertrekDatum-AankomstDatum);
+  const AantalDagen = Math.ceil(TijdVerschil / (1000*60*60*24));
+
+  Totaal = 0;
+  //For determining the correct price for the spot 
+  if(PlekFormaat == "KLEIN" && SoortVerblijf == "Caravan")
+  {
+    var PlekTarief = 2
+  } 
+  else if (PlekFormaat == "GROOT" && SoortVerblijf == "Caravan") 
+  {
+    var PlekTarief = 4
+  }
+  else if (PlekFormaat == "KLEIN" && SoortVerblijf == "Tent") 
+  {
+    var PlekTarief = 3
+  }
+  else if (PlekFormaat == "GROOT" && SoortVerblijf == "Tent") 
+  {
+    var PlekTarief = 5
+  } 
+  else 
+  {
+    var PlekTarief = 0;
+  }
+
+  //small spots don't offer electricity, so it's programmed to set it to no if the spot size is small
+  if(PlekFormaat == "'KLEIN'")
+  {
+    Electriciteit = "Nee";
+  } else
+  {
+    var Electriciteit = document.getElementById('Electriciteit').value;
+  }
+
+  //Here we calculate the total based on the information that's already input
+  if(Auto == "Ja"){
+    Totaal+= AantalDagen*3;
+  }
+
+  Totaal+=AantalDagen*PlekTarief;
+
+  if(Electriciteit == "Ja"){
+    Totaal+= AantalDagen*2;
+  }
+
+  if(ExtraDoucheMuntjes > 0){
+    Totaal+=ExtraDoucheMuntjes*0.5;
+  }
+
+  if(Volwassenen > 0){
+    Totaal+=Volwassenen*AantalDagen*5;
+  }
+
+  if(KinderenTot12 > 0){
+    Totaal+=KinderenTot12*AantalDagen*4;
+  }
+
+  if(Huisdier == "Ja"){
+    Totaal+= AantalDagen*2;
+  }
+
+  if(isNaN(Totaal) == false){
+    document.getElementById('TotaalReservatie').innerHTML = "Totaal: €";
+    document.getElementById('TotaalReservatie').innerHTML += Totaal;
+    document.getElementById('TotaalReservatie').innerHTML += ",-";
+  }  
+}
+
 //Function that happens when the Spots menu button is clicked, to load the spots page
 function Plaatsen(){
   document.getElementById("PageTitle").innerHTML = "Plaatsen overzicht ";  
@@ -379,9 +462,12 @@ function MaakReservatie(){
     document.getElementById('Electriciteit').value = "Ja";
     document.getElementById('ExtraDoucheMuntjes').value = null;
     document.getElementById('Volwassenen').value = null;
-    vdocument.getElementById('KinderenTot4').value = null;
+    document.getElementById('KinderenTot4').value = null;
     document.getElementById('KinderenTot12').value = null;  
     document.getElementById('Huisdier').value = "Ja"; 
+
+    //Resetting the total
+    document.getElementById('TotaalReservatie').innerHTML = "Totaal: €0,-";
   } else{
     alert(ErrorMessage);
     ErrorMessage = "Reservatie geannuleerd door fouten:\n"; //clears the error messages so they don't appear twice in the same alert
